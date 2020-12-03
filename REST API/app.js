@@ -20,7 +20,8 @@ mongoose.connect(config.dbConnectionUrl, {
     console.log('Database is setup and running!');
 });
 
-//require('./config/express')(app);
+// Configuring the app, so that it uses modules
+require('./config/express')(app);
 
 // Binds and listens for connections on the specific port
 app.listen(config.PORT, console.log(`REST API is listening on http://localhost:${config.PORT}`));
