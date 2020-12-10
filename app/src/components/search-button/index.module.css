@@ -1,0 +1,27 @@
+.btn {
+    color: #61dafb;
+    font-size: 1.1rem;
+    border: 2px solid #61dafb;
+    border-radius: 5px;
+    padding: 5% 10%;
+    background: none;
+
+    transition: .5s all;
+}
+
+.btn:hover {
+    color: white;
+    border-color: #059dc7;
+    background-color: #059dc7;
+}
+
+.btn:disabled {
+    color: gray;
+    font-size: 1.1rem;
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 5% 10%;
+    background: none;
+
+    transition: .5s all;
+}
