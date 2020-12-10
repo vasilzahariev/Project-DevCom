@@ -1,0 +1,13 @@
+.badge {
+    color: #61dafb; /* #61dafb */
+    border-radius: 75%;
+    padding: 15% 25% 35% 25%;
+    transition: .5s all;
+}
+
+.badge:hover {
+    color: #282c34; /* #282c34 */
+    background-color: #61dafb; /* #059dc7 */
+    cursor: pointer;
+    transition: .5s all;
+}
