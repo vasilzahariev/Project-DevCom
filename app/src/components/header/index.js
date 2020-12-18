@@ -5,10 +5,14 @@ import HeaderBase from '../header-base';
 import HeaderUserGuest from '../header-user-guest';
 import HeaderUser from '../header-user';
 import HeaderSearch from '../header-search';
+import { useContext } from 'react';
+import UserContext from '../../UserContext';
 
 const Header = () => {
+    const userContext = useContext(UserContext);
+
     return (
-        <header className={true ? '' : styles.header}> {/* TODO: Change depending on if the user is logged */}
+        <header className={ userContext.user.loggedIn ? '' : styles.header }>
             <Grid container justify='space-between' alignItems='center'>
                 <Grid item xs={3}>
                     <HeaderBase />
@@ -17,10 +21,7 @@ const Header = () => {
                     <HeaderSearch />
                 </Grid>
                 <Grid item xs={3}>
-                    {/* TODO: Add user verification which checks if there is a user in the user context and show the proper User Header Part */}
-                    {/* <HeaderUserGuest /> */}
-                    {/* <HeaderUser /> */}
-                    <HeaderUser />
+                    { userContext.user.loggedIn ? <HeaderUser /> : <HeaderUserGuest /> }
                 </Grid>
             </Grid>
         </header>

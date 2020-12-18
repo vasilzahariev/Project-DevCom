@@ -2,34 +2,44 @@ const mongoose = require('mongoose');
 
 const UserLinksSchema = new mongoose.Schema({
     websiteUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     gitHubUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     gitLabUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     linkedInUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     stackOverflowUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     youTubeUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     twitterUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     twitchUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     facebookUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     instagramUrl: {
-        type: String
+        type: String,
+        default: ''
     }
 });
 
