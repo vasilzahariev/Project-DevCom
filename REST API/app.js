@@ -3,6 +3,7 @@ const env = process.env.NODE_ENV || 'development';
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('./config/config')[env];
+const authRouter = require('./routers/authRouter');
 
 const app = express();
 
@@ -22,6 +23,8 @@ mongoose.connect(config.dbConnectionUrl, {
 
 // Configuring the app, so that it uses modules
 require('./config/express')(app);
+
+app.use('/auth', authRouter);
 
 // Binds and listens for connections on the specific port
 app.listen(config.PORT, console.log(`REST API is listening on http://localhost:${config.PORT}`));

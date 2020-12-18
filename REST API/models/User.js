@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
+        unique: true,
         required: true,
-        unique: true
     },
     email: {
         type: String,
@@ -22,14 +22,17 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     birthDate: {
-        type: Date
+        type: Date,
+        default: undefined
     },
     bio: {
-        type: String
+        type: String,
+        default: ''
     },
     // TODO: Add default value here:
     profilePictureUrl: {
-        type: String
+        type: String,
+        default: ''
     },
     isAdmin: {
         type: Boolean,
@@ -53,7 +56,8 @@ const UserSchema = new mongoose.Schema({
     },
     userLinksId: {
         type: 'ObjectId',
-        ref: 'UserLinks'
+        ref: 'UserLinks',
+        default: undefined
     }
 });
 

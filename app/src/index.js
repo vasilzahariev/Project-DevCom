@@ -8,9 +8,11 @@ import Navigation from './navigation';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Navigation/>
-		</BrowserRouter>
+		<App>
+			<BrowserRouter>
+				<Navigation />
+			</BrowserRouter>
+		</App>
 	</React.StrictMode>,
 	document.getElementById('root')
 );
