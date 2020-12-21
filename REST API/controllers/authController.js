@@ -40,6 +40,10 @@ const register = async body => {
         password
     } = body;
 
+    const userLinks = new UserLinks();
+
+    await userLinks.save();
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -48,7 +52,8 @@ const register = async body => {
             username,
             email,
             password: hashedPassword,
-            fullName
+            fullName,
+            userLinksId: userLinks._id
         });
 
         const userObj = await user.save();
