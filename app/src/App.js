@@ -9,9 +9,9 @@ function App(props) {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true)
 
-	const login = (userObj) => {
+	const login = (user) => {
 		setUser({
-			...userObj,
+			...user,
 			loggedIn: true
 		});
 

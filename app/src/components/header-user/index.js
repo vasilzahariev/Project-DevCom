@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styles from './index.module.css';
 import { Grid, Badge } from '@material-ui/core';
 import HeaderUserMenuItem from '../header-user-menu-item';
@@ -6,8 +8,20 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import HeaderUserAvatar from '../header-user-avatar';
 import HeaderLinkBadge from '../header-link-badge';
+import UserContext from '../../UserContext';
 
 const HeaderUser = () => {
+    const userContext = useContext(UserContext);
+    const history = useHistory();
+
+    const onLogoutClick = (e) => {
+        e.preventDefault();
+
+        userContext.logout();
+
+        history.push('/');
+    }
+
     return (
         <Grid container justify='flex-end' alignItems='center' spacing={3}>
             <Grid item>
@@ -19,9 +33,9 @@ const HeaderUser = () => {
             <Grid item>
                 <HeaderUserAvatar>
                     {/* TODO: Once proper authentication is added change the link */}
-                    <HeaderUserMenuItem to='/username'>Profile</HeaderUserMenuItem>
+                    <HeaderUserMenuItem to={`/${userContext.user.username}`}>Profile</HeaderUserMenuItem>
                     <HeaderUserMenuItem to='/settings'>Settings</HeaderUserMenuItem>
-                    <HeaderUserMenuItem to='/auth/logout'>Log out</HeaderUserMenuItem>
+                    <HeaderUserMenuItem onClick={onLogoutClick} to='/auth/logout'>Log out</HeaderUserMenuItem>
                 </HeaderUserAvatar>
             </Grid>
         </Grid >

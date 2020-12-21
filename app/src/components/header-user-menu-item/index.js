@@ -12,7 +12,7 @@ const HeaderUserMenuItem = (props) => {
     }
 
     return (
-        <MenuItem onClick={onClick}>{props.children}</MenuItem>
+        <MenuItem onClick={props.onClick ? props.onClick : onClick}>{props.children}</MenuItem>
     );
 }
 
