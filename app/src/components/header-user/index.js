@@ -8,7 +8,7 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import HeaderUserAvatar from '../header-user-avatar';
 import HeaderLinkBadge from '../header-link-badge';
-import UserContext from '../../UserContext';
+import UserContext from '../../contexts/UserContext';
 
 const HeaderUser = () => {
     const userContext = useContext(UserContext);

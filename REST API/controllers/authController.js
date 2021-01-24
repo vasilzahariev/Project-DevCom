@@ -18,7 +18,7 @@ const createUserToken = userObj => {
 const verifyToken = async (token) => {
     try {
         const decoded = jwt.decode(token, config.privateKey);
-        const user = await User.find({ _id: decoded.userId });
+        const user = await User.findById(decoded.userId);
 
         return {
             user

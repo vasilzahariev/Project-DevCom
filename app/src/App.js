@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import UserContext from './UserContext';
+import UserContext from './contexts/UserContext';
 import { useState, useEffect, useContext } from 'react';
 import getCookie from './utils/cookie';
-import ConfigContext from './ConfigContext';
+import ConfigContext from './contexts/ConfigContext';
 
 function App(props) {
 	const [user, setUser] = useState(null);
@@ -34,6 +34,7 @@ function App(props) {
 			return;
 		}
 
+		// TODO: Change
 		fetch(`http://localhost:3001/auth/verifyToken`, {
 			method: 'GET',
 			headers: {

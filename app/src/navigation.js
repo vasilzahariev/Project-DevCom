@@ -2,8 +2,10 @@ import { useContext } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import HomeGuest from './pages/home-guest';
 import Register from './pages/register';
-import UserContext from './UserContext';
+import UserContext from './contexts/UserContext';
 import Login from './pages/login';
+import News from './pages/news';
+import CreateArticle from './pages/create-article';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -16,6 +18,10 @@ const Navigation = () => {
             </Route>
             <Route exact path='/auth/login'>
                 {userContext.user.loggedIn ? <Redirect to='/' /> : <Login />}
+            </Route>
+            <Route exact path='/news' component={News} />
+            <Route exact path='/news/create'>
+                {userContext.user.loggedIn && (userContext.user.isJournalist || userContext.user.isAdmin) ? <CreateArticle /> : <Redirect to='/news'/>}
             </Route>
             {/* TODO: Insert 404 page here when created */}
         </Switch>

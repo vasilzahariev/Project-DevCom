@@ -1,0 +1,29 @@
+.btns {
+    margin-bottom: 1%;
+}
+
+.btn {
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 1.3rem;
+    padding: 0 1%;
+
+    transition: .5s all;
+}
+
+.btn:hover {
+    cursor: pointer;
+    border-bottom: 1px solid white;
+}
+
+.currentTab {
+    color: rgb(0, 255, 0);
+
+    transition: .5s all;
+}
+
+.currentTab:hover {
+    border-bottom: 1px solid rgb(0, 255, 0);
+}
+

@@ -5,8 +5,8 @@ import { useState, useContext } from 'react';
 import SubmitBtn from '../submit-btn';
 import InputFieldsDiv from '../input-fiels-div';
 import HeaderLink from '../header-link';
-import ConfigContext from '../../ConfigContext';
-import UserContext from '../../UserContext';
+import ConfigContext from '../../contexts/ConfigContext';
+import UserContext from '../../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
 
 const LoginCard = () => {
