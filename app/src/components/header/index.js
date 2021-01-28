@@ -6,7 +6,7 @@ import HeaderUserGuest from '../header-user-guest';
 import HeaderUser from '../header-user';
 import HeaderSearch from '../header-search';
 import { useContext } from 'react';
-import UserContext from '../../UserContext';
+import UserContext from '../../contexts/UserContext';
 
 const Header = () => {
     const userContext = useContext(UserContext);

@@ -8,7 +8,7 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import HeaderUserAvatar from '../header-user-avatar';
 import HeaderLinkBadge from '../header-link-badge';
-import UserContext from '../../UserContext';
+import UserContext from '../../contexts/UserContext';
 
 const HeaderUser = () => {
     const userContext = useContext(UserContext);
@@ -35,6 +35,7 @@ const HeaderUser = () => {
                     {/* TODO: Once proper authentication is added change the link */}
                     <HeaderUserMenuItem to={`/${userContext.user.username}`}>Profile</HeaderUserMenuItem>
                     <HeaderUserMenuItem to='/settings'>Settings</HeaderUserMenuItem>
+                    <HeaderUserMenuItem to='/drafts'>Drafts</HeaderUserMenuItem>
                     <HeaderUserMenuItem onClick={onLogoutClick} to='/auth/logout'>Log out</HeaderUserMenuItem>
                 </HeaderUserAvatar>
             </Grid>

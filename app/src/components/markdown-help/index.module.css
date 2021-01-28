@@ -1,0 +1,11 @@
+.container {
+    font-size: .7rem;
+    text-align: justify;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.inline {
+    display: inline;
+}

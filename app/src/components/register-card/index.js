@@ -5,9 +5,9 @@ import Input from '../input';
 import { useState, useContext } from 'react';
 import SubmitBtn from '../submit-btn';
 import HeaderLink from '../header-link';
-import ConfigContext from '../../ConfigContext';
+import ConfigContext from '../../contexts/ConfigContext';
 import { useHistory } from 'react-router-dom';
-import UserContext from '../../UserContext';
+import UserContext from '../../contexts/UserContext';
 import InputFieldsDiv from '../input-fiels-div';
 
 const RegisterCard = () => {

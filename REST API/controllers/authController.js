@@ -18,7 +18,7 @@ const createUserToken = userObj => {
 const verifyToken = async (token) => {
     try {
         const decoded = jwt.decode(token, config.privateKey);
-        const user = await User.find({ _id: decoded.userId });
+        const user = await User.findById(decoded.userId);
 
         return {
             user
@@ -107,8 +107,13 @@ const login = async body => {
     }
 }
 
+const getUserById = async id => {
+    return await User.findById(id);
+}
+
 module.exports = {
     register,
     login,
-    verifyToken
+    verifyToken,
+    getUserById
 }
