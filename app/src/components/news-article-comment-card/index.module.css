@@ -1,0 +1,22 @@
+.card {
+    border-bottom: 1px solid white;
+    margin-bottom: 10px;
+}
+
+.comment {
+    margin-top: 10px;
+}
+
+.replyDiv {
+    margin-bottom: 5px;
+    text-align: right;
+}
+
+.reply {
+    color: gray;
+    font-size: 1rem;
+}
+
+.reply:hover {
+    cursor: pointer;
+}

@@ -107,8 +107,13 @@ const login = async body => {
     }
 }
 
+const getUserById = async id => {
+    return await User.findById(id);
+}
+
 module.exports = {
     register,
     login,
-    verifyToken
+    verifyToken,
+    getUserById
 }

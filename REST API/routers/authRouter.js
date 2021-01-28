@@ -2,7 +2,8 @@ const express = require('express');
 const {
     register,
     login,
-    verifyToken
+    verifyToken,
+    getUserById
 } = require('../controllers/authController');
 
 const router = express();
@@ -25,6 +26,13 @@ router.get(`/verifyToken`, async (req, res) => {
     const result = await verifyToken(token);
 
     res.send(result);
-})
+});
+
+router.get('/u/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await getUserById(id);
+
+    res.send(result);
+});
 
 module.exports = router;

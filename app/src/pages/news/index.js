@@ -6,6 +6,7 @@ import PageDiv from '../../components/page-div';
 import HeaderLink from '../../components/header-link';
 import UserContext from '../../contexts/UserContext';
 import Header from '../../components/header';
+import NewsRenderer from '../../components/news-renderer';
 
 const News = () => {
     const configContext = useContext(ConfigContext);
@@ -23,7 +24,9 @@ const News = () => {
         }).then(promise => {
             return promise.json();
         }).then(response => {
-            setNews(response);
+            const newsArr = response.filter(elem => { if (!elem.isDraft) { return elem; } });
+
+            setNews(newsArr);
             setEnded(true);
         })
     }, []);
@@ -41,10 +44,10 @@ const News = () => {
     return (
         <Layout>
             <PageDiv>
+                <h1>Latest News</h1>
                 {userContext.user.loggedIn && (userContext.user.isJournalist || userContext.user.isAdmin) ? <HeaderLink to='/news/create'>Write an Article</HeaderLink> : <span></span>}
-                {news.length === 0 ? <p>Seems kinda empty</p> : <p>Render news</p>}
-                <p>TODO: Render articles</p>
             </PageDiv>
+            {news.length === 0 ? <p>Seems kinda empty</p> : <NewsRenderer news={news} />}
         </Layout>
     );
 }

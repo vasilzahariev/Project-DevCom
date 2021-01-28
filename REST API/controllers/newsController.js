@@ -1,16 +1,30 @@
 const NewsArticle = require('../models/NewsArticle');
 const NewsComment = require('../models/NewsComment');
+const NewsReply = require('../models/NewsReply');
+const mongodb = require('mongodb')
 
 const getAllNewsArticles = async () => {
     return await NewsArticle.find();
 }
 
-const getNewsArticleAndComments = async (path) => {
+const getNewsArticle = async (path) => {
     const article = await NewsArticle.findOne({ path: path });
 
-    console.log(article);
+    if (!article) {
+        return {
+            error: '404'
+        }
+    }
 
-    //const comments = await NewsComment.find({ articleId: article._id });
+    //await NewsArticle.updateOne({ _id: article.id }, { $addToSet: { clicks: Date.now() }}); TODO: Look into this shit
+
+    return {
+        article
+    }
+}
+
+const getNewsArticleComments = async articleId => {
+    return await NewsComment.find({ articleId: articleId });
 }
 
 const checkIfTitleIsUnique = async title => {
@@ -62,15 +76,77 @@ const createArticle = async req => {
 
         return { path };
 
-    } catch(err) {
+    } catch (err) {
         console.log(err);
 
         return { error: '500' }
     }
 }
 
+const checkIfArticleExists = async id => {
+    const count = await NewsArticle.count({ id: id });
+
+    return count === 1;
+}
+
+const addComment = async body => {
+    const {
+        articleId,
+        commentatorId,
+        comment
+    } = body;
+
+    const isArticleReal = await checkIfArticleExists(articleId);
+
+    if (isArticleReal) {
+        return {
+            status: false
+        };
+    }
+
+    const newsComment = new NewsComment({
+        articleId,
+        commentatorId,
+        content: comment
+    });
+
+    await newsComment.save();
+
+    return {
+        status: true
+    }
+}
+
+const addReply = async body => {
+    const {
+        commentId,
+        username,
+        reply
+    } = body;
+
+    const newsReply = new NewsReply({
+        commentId,
+        content: reply,
+        username
+    });
+
+    await newsReply.save();
+
+    return {
+        status: true
+    }
+}
+
+const getReplies = async id => {
+    return await NewsReply.find({ commentId: id });
+}
+
 module.exports = {
     getAllNewsArticles,
-    getNewsArticleAndComments,
-    createArticle
+    getNewsArticle,
+    getNewsArticleComments,
+    createArticle,
+    addComment,
+    addReply,
+    getReplies
 }

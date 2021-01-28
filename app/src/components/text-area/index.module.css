@@ -1,8 +1,8 @@
 .textarea {
     background-color: rgba(128, 128, 128, 0.561);
-    border-radius: 15px;
-    width: 90%;
-    height: 500px;
+    border-radius: 10px;
+    width: 98%;
+    height: 75px;
     resize: none;
     color: white;
     font-size: 1.6rem;

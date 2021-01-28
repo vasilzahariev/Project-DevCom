@@ -1,0 +1,9 @@
+.btns {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline;
+    margin-left: 10px;
+}

@@ -1,0 +1,13 @@
+.link {
+    margin-right: 5px;
+    display: inline;
+    border: 1px solid #586379b4;
+    border-radius: 7px;
+    background-color: #4a515d73;
+    padding: 2px 4px;
+    transition: all .5s;
+}
+
+.link:hover {
+    background-color: #586379b4;
+}

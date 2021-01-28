@@ -6,6 +6,7 @@ import UserContext from './contexts/UserContext';
 import Login from './pages/login';
 import News from './pages/news';
 import CreateArticle from './pages/create-article';
+import NewsArticle from './pages/news-article';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -21,8 +22,9 @@ const Navigation = () => {
             </Route>
             <Route exact path='/news' component={News} />
             <Route exact path='/news/create'>
-                {userContext.user.loggedIn && (userContext.user.isJournalist || userContext.user.isAdmin) ? <CreateArticle /> : <Redirect to='/news'/>}
+                {userContext.user.loggedIn && (userContext.user.isJournalist || userContext.user.isAdmin) ? <CreateArticle /> : <Redirect to='/news' />}
             </Route>
+            <Route exact path='/news/:path' component={NewsArticle} />
             {/* TODO: Insert 404 page here when created */}
         </Switch>
     )
