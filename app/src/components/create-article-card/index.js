@@ -129,6 +129,10 @@ const CreateArticleCard = () => {
         history.push(`/news/${path}`);
     }
 
+    const updateBody = (body) => {
+        articleContext.article.content = body;
+    }
+
     return (
         <PageDiv>
             <div>
@@ -136,7 +140,7 @@ const CreateArticleCard = () => {
                     <Input label='Title' value={title} err={titleErr} onChange={onTitleChange} />
                     <Input label='Path' value={path} err={pathErr} onChange={onPathChange} placeholder='Result: http://link.com/{path}' />
                     { /* <TextArea label='Article Content' value={content} err={contentErr} onChange={onContentChange} /> */}
-                    <SpecialTextArea label='Content' onChange={onContentChange} value={content} />
+                    <SpecialTextArea label='Content' updateBody={updateBody} value={content} />
                     <Input label='Tags' value={tags} onChange={onTagsChange} placeholder={`Tags must start with '#'`} />
                     <br />
                     <div>

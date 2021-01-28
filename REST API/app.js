@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const config = require('./config/config')[env];
 const authRouter = require('./routers/authRouter');
 const newsRouter = require('./routers/newsRouter');
+const jobsRouter = require('./routers/jobsRouter');
 
 const app = express();
 
@@ -27,6 +28,7 @@ require('./config/express')(app);
 
 app.use('/auth', authRouter);
 app.use('/news', newsRouter);
+app.use('/jobs', jobsRouter);
 
 // Binds and listens for connections on the specific port
 app.listen(config.PORT, console.log(`REST API is listening on http://localhost:${config.PORT}`));

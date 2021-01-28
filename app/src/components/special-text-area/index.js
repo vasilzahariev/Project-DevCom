@@ -27,7 +27,7 @@ const SpecialTextArea = (props) => {
 
         const body = iFrameNode.contentWindow.document.body.innerHTML;
 
-        articleContext.article.content = body;
+        props.updateBody(body);
     }
 
     const updateBody = e => {
@@ -35,7 +35,7 @@ const SpecialTextArea = (props) => {
 
         const body = document.getElementsByTagName('iframe')[0].contentWindow.document.body.innerHTML;
 
-        articleContext.article.content = body;
+        props.updateBody(body);
     }
 
     useEffect(() => {

@@ -24,7 +24,7 @@ const CssFormControl = withStyles({
         '& .MuiSelect-select option': {
             backgroundColor: '#282c34',
             fontSize: '.8rem'
-        },
+        }
     },
 })(FormControl);
 
@@ -39,6 +39,7 @@ const SelectInput = (props) => {
         <CssFormControl>
             <InputLabel htmlFor="age-native-simple">{props.label}</InputLabel>
             <Select
+                style={props.width ? { width: props.width + 'px' } : {}}
                 native
                 value={props.value}
                 onChange={onChange}
@@ -46,7 +47,6 @@ const SelectInput = (props) => {
                     name: props.name,
                 }}
             >
-                <option value="all">All</option>
                 {props.children}
             </Select>
         </CssFormControl>
