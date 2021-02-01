@@ -60,7 +60,7 @@ const NewsArticle = (props) => {
                 <Grid container alignItems='center'>
                     <Grid item xs={2}>
                         <img className={styles.img} src={author.profilePictureUrl} />
-                        <span className={styles.byText}> by <HeaderLink to={`/${author.username}`}>{author.fullName}</HeaderLink></span>
+                        <span className={styles.byText}> by <HeaderLink to={`/u/${author.username}`}>{author.fullName}</HeaderLink></span>
                     </Grid>
                     <Grid item xs={3}>
                         <span className={styles.published}>Published: {`${article.publishedDate.split('T')[0]} ${article.publishedDate.split('.')[0].split('T')[1]}`}</span>

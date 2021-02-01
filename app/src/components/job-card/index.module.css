@@ -1,0 +1,25 @@
+.card {
+    border: 1px solid #586379b4;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: #4a515d73;
+    padding: 0% 2% 2% 2%;
+}
+
+.name {
+    text-align: center;
+}
+
+.by {
+    text-align: right;
+    font-size: 1.4rem;
+}
+
+.btns {
+    margin-top: 2%;
+    text-align: center;
+}
+
+.btn {
+    margin-right: 5%;
+}

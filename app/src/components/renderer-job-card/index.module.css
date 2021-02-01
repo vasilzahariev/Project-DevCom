@@ -1,0 +1,15 @@
+.card {
+    border: 1px solid #586379b4;
+    border-radius: 15px;
+    background-color: #4a515d73;
+    padding: 0px 20px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.type {
+    border-right: 2px solid black;
+    padding-right: 10px;
+}

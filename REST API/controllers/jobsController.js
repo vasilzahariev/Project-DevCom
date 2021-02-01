@@ -11,6 +11,8 @@ const createJob = async body => {
         salary
     } = body;
 
+    // TODO: do a swap if the first salary value is bigger than the second one
+
     const job = new Job({
         authorId,
         type,
@@ -30,6 +32,11 @@ const createJob = async body => {
     }
 }
 
+const getJobs = async () => {
+    return await Job.find();
+}
+
 module.exports = {
-    createJob
+    createJob,
+    getJobs
 }

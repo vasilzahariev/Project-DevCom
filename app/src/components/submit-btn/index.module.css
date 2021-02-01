@@ -1,7 +1,5 @@
 .btn {
     background-color: transparent;
-    border: 1px solid rgb(206, 53, 206);
-    color: rgb(206, 53, 206);
     border-radius: 10px;
     font-size: 1.2rem;
     padding: 2% 2.5%;
@@ -10,7 +8,24 @@
 }
 
 .btn:hover {
-    background-color: rgb(206, 53, 206);
     color: white;
     cursor: pointer;
+}
+
+.purple {
+    border: 1px solid rgb(206, 53, 206);
+    color: rgb(206, 53, 206);
+}
+
+.purple:hover {
+    background-color: rgb(206, 53, 206);
+}
+
+.red {
+    border: 1px solid rgb(206, 53, 53);
+    color: rgb(206, 53, 53);
+}
+
+.red:hover {
+    background-color: rgb(206, 53, 53);
 }

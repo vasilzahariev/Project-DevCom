@@ -33,7 +33,7 @@ const HeaderUser = () => {
             <Grid item>
                 <HeaderUserAvatar>
                     {/* TODO: Once proper authentication is added change the link */}
-                    <HeaderUserMenuItem to={`/${userContext.user.username}`}>Profile</HeaderUserMenuItem>
+                    <HeaderUserMenuItem to={`/u/${userContext.user.username}`}>Profile</HeaderUserMenuItem>
                     <HeaderUserMenuItem to='/settings'>Settings</HeaderUserMenuItem>
                     <HeaderUserMenuItem to='/drafts'>Drafts</HeaderUserMenuItem>
                     <HeaderUserMenuItem onClick={onLogoutClick} to='/auth/logout'>Log out</HeaderUserMenuItem>

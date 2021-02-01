@@ -17,7 +17,7 @@ const NewsArticleCommentCard = (props) => {
     return (
         <div>
             <div className={styles.card}>
-                <HeaderLink to={`/${props.user.username}`}>{props.user.username}</HeaderLink>
+                <HeaderLink to={`/u/${props.user.username}`}>{props.user.username}</HeaderLink>
                 <div className={styles.comment}>
                     <span>{props.comment.content}</span>
                 </div>

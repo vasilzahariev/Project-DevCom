@@ -8,6 +8,7 @@ import News from './pages/news';
 import CreateArticle from './pages/create-article';
 import NewsArticle from './pages/news-article';
 import CreateJob from './pages/create-job';
+import Jobs from './pages/jobs';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -26,6 +27,7 @@ const Navigation = () => {
                 {userContext.user.loggedIn && (userContext.user.isJournalist || userContext.user.isAdmin) ? <CreateArticle /> : <Redirect to='/news' />}
             </Route>
             <Route exact path='/news/:path' component={NewsArticle} />
+            <Route exact path='/jobs' component={Jobs} />
             <Route exact path='/jobs/create'>
                 {userContext.user.loggedIn ? <CreateJob /> : <Redirect to='/auth/login' />}
             </Route>
