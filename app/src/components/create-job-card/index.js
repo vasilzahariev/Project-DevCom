@@ -110,7 +110,7 @@ const CreateJobCard = (props) => {
 
         const response = await promise.json();
 
-        history.push(`/jobs/${response.jobId}`);
+        history.push(`/jobs`);
     }
 
     return (

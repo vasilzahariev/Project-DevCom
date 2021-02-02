@@ -7,6 +7,7 @@ import { Grid, Backdrop, CircularProgress } from '@material-ui/core';
 import JobsRenderer from '../../components/jobs-renderer';
 import JobContext from '../../contexts/JobContext';
 import JobCard from '../../components/job-card';
+import JobsOptions from '../../components/jobs-options';
 
 const Jobs = () => {
     const configContext = useContext(ConfigContext);
@@ -16,6 +17,7 @@ const Jobs = () => {
     const [selectedJobAuthorUsername, setSelectedJobAuthorUsername] = useState('');
     const [jobs, setJobs] = useState([]);
     const [ended, setEnded] = useState(false);
+    const [renderJobs, setRenderJobs] = useState([]);
 
     useEffect(() => {
         fetch(`${configContext.restApiUrl}/jobs/`, {
@@ -27,7 +29,7 @@ const Jobs = () => {
             setJobs(response);
             setEnded(true);
         });
-    }, [jobs]);
+    });
 
     if (!ended) {
         return (
@@ -43,9 +45,9 @@ const Jobs = () => {
                 <PageDiv><h1>Jobs</h1></PageDiv>
 
                 <Grid container direction='row' justify='center' alignItems='flex-start' spacing={2}>
-                    <Grid item xs={1}>Options</Grid>
-                    <Grid item xs={4}><JobsRenderer setJob={setSelectedJob} setUsername={setSelectedJobAuthorUsername} jobs={jobs} /></Grid>
-                    <Grid item xs={7}><JobCard /></Grid>
+                    <Grid item xs={2}><JobsOptions jobs={jobs} setRenderJobs={setRenderJobs} /></Grid>
+                    <Grid item xs={4}><JobsRenderer setJob={setSelectedJob} setUsername={setSelectedJobAuthorUsername} jobs={renderJobs} /></Grid>
+                    <Grid item xs={6}><JobCard /></Grid>
                 </Grid>
             </JobContext.Provider>
         </Layout>

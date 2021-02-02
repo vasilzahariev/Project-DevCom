@@ -9,7 +9,7 @@ const RendererJobCard = (props) => {
     const jobContext = useContext(JobContext);
     const configContext = useContext(ConfigContext);
 
-    const jobType = props.job.type === 'freelance' ? (props.job.type === 'fullTime' ? (props.job.type === 'partTime' ? 'Part Time' : '') : 'Full Time') : 'Freelance';
+    const jobType = props.job.type === 'freelance' ? 'Freelance' : (props.job.type === 'fullTime' ? 'Full Time' : (props.job.type === 'partTime' ? 'Part Time' : ''));
     const publishedDate = new Date(Date.parse(`${props.job.publishDate}`));
 
     const [username, setUsername] = useState('');
