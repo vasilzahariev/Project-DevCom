@@ -36,7 +36,24 @@ const getJobs = async () => {
     return await Job.find();
 }
 
+const closeJob = async id => {
+    try {
+        await Job.findByIdAndUpdate(id, { isClosed: true });
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+
+    return {
+        status: true
+    }
+}
+
 module.exports = {
     createJob,
-    getJobs
+    getJobs,
+    closeJob
 }

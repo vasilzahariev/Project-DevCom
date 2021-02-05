@@ -7,10 +7,15 @@ import HeaderLink from '../header-link';
 import EpicProgrammer from '../epic-programmer';
 import SubmitBtn from '../submit-btn';
 import UserContext from '../../contexts/UserContext';
+import ConfigContext from '../../contexts/ConfigContext';
+import { useHistory } from 'react-router-dom';
 
 const JobCard = (props) => {
     const jobContext = useContext(JobContext);
     const userContext = useContext(UserContext);
+    const configContext = useContext(ConfigContext);
+
+    const history = useHistory();
 
     const [publishDate, setPublishDate] = useState(new Date());
 
@@ -47,6 +52,22 @@ const JobCard = (props) => {
         return x1 + x2;
     }
 
+    const onCloseClick = async e => {
+        e.preventDefault();
+
+        const promise = await fetch(`${configContext.restApiUrl}/jobs/close/${jobContext.job._id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const response = await promise.json();
+
+        if (!response.status) history.push('/505');
+        else window.location.reload(false);
+    }
+
     return (
         <div className={styles.card}>
             <h3 className={styles.name}>{jobContext.job.name}</h3>
@@ -60,10 +81,8 @@ const JobCard = (props) => {
             <div id='description'>
             </div>
             <div className={styles.btns}>
-                <form>
-                    { userContext.user.loggedIn && (userContext.user.username === jobContext.username) ? <span className={styles.btn}><SubmitBtn color='red'>Close</SubmitBtn></span> : ''}
-                    <SubmitBtn>Apply</SubmitBtn>
-                </form>
+                {userContext.user.loggedIn && (userContext.user.username === jobContext.username) ? <span className={styles.btn}><SubmitBtn color='red' onClick={onCloseClick}>Close</SubmitBtn></span> : ''}
+                <SubmitBtn>Apply</SubmitBtn>
             </div>
         </div>
     );
