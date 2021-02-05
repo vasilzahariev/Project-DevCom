@@ -14,6 +14,9 @@ import FormatIndentDecreaseIcon from '@material-ui/icons/FormatIndentDecrease';
 import UndoIcon from '@material-ui/icons/Undo';
 import RedoIcon from '@material-ui/icons/Redo';
 import ArticleContext from '../../contexts/ArticleContext';
+import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 const SpecialTextArea = (props) => {
     const articleContext = useContext(ArticleContext);
@@ -27,7 +30,7 @@ const SpecialTextArea = (props) => {
 
         const body = iFrameNode.contentWindow.document.body.innerHTML;
 
-        articleContext.article.content = body;
+        props.updateBody(body);
     }
 
     const updateBody = e => {
@@ -35,7 +38,7 @@ const SpecialTextArea = (props) => {
 
         const body = document.getElementsByTagName('iframe')[0].contentWindow.document.body.innerHTML;
 
-        articleContext.article.content = body;
+        props.updateBody(body);
     }
 
     useEffect(() => {
@@ -57,18 +60,21 @@ const SpecialTextArea = (props) => {
             <div>
                 <div className={styles.block}>
                     <div className={styles.btns}>
-                        <button onClick={e => onCmd(e, 'bold')}><FormatBoldIcon /></button>
-                        <button onClick={e => onCmd(e, 'italic')}><FormatItalicIcon /></button>
-                        <button onClick={e => onCmd(e, 'underline')}><FormatUnderlinedIcon /></button>
-                        <button onClick={e => onCmd(e, 'strikethrough')}><StrikethroughSIcon /></button>
-                        <button onClick={e => onCmd(e, 'justifyLeft')}><FormatAlignLeftIcon /></button>
-                        <button onClick={e => onCmd(e, 'justifyFull')}><FormatAlignJustifyIcon /></button>
-                        <button onClick={e => onCmd(e, 'justifyRight')}><FormatAlignRightIcon /></button>
-                        <button onClick={e => onCmd(e, 'insertParagraph')}><FormatTextdirectionRToLIcon /></button>
-                        <button onClick={e => onCmd(e, 'indent')}><FormatIndentIncreaseIcon /></button>
-                        <button onClick={e => onCmd(e, 'outdent')}><FormatIndentDecreaseIcon /></button>
-                        <button onClick={e => onCmd(e, 'undo')}><UndoIcon /></button>
-                        <button onClick={e => onCmd(e, 'redo')}><RedoIcon /></button>
+                        <button title='Bold' onClick={e => onCmd(e, 'bold')}><FormatBoldIcon /></button>
+                        <button title='Italic' onClick={e => onCmd(e, 'italic')}><FormatItalicIcon /></button>
+                        <button title='Underline' onClick={e => onCmd(e, 'underline')}><FormatUnderlinedIcon /></button>
+                        <button title='Strikethrough' onClick={e => onCmd(e, 'strikethrough')}><StrikethroughSIcon /></button>
+                        <button title='Justify Left' onClick={e => onCmd(e, 'justifyLeft')}><FormatAlignLeftIcon /></button>
+                        <button title='Justify Center' onClick={e => onCmd(e, 'justifyCenter')}><FormatAlignCenterIcon /></button>
+                        <button title='Justify Right' onClick={e => onCmd(e, 'justifyRight')}><FormatAlignRightIcon /></button>
+                        <button title='Justify Full' onClick={e => onCmd(e, 'justifyFull')}><FormatAlignJustifyIcon /></button>
+                        <button title='Insert Ordered List' onClick={e => onCmd(e, 'insertOrderedList')}><FormatListNumberedIcon /></button>
+                        <button title='Insert Unordered List' onClick={e => onCmd(e, 'insertUnorderedList')}><FormatListBulletedIcon /></button>
+                        <button title='Insert Paragraph' onClick={e => onCmd(e, 'insertParagraph')}><FormatTextdirectionRToLIcon /></button>
+                        <button title='Indent' onClick={e => onCmd(e, 'indent')}><FormatIndentIncreaseIcon /></button>
+                        <button title='Outdent' onClick={e => onCmd(e, 'outdent')}><FormatIndentDecreaseIcon /></button>
+                        <button title='Undo' onClick={e => onCmd(e, 'undo')}><UndoIcon /></button>
+                        <button title='Redo' onClick={e => onCmd(e, 'redo')}><RedoIcon /></button>
                     </div>
 
                     <iframe className={styles.iframe}></iframe>

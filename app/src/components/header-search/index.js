@@ -9,8 +9,8 @@ import SearchButton from '../search-button';
 const HeaderSearch = () => {
     const history = useHistory();
 
-    const [ searchValue, setSearchValue ] = useState('');
-    const [ category, setCategory ] = useState('all');
+    const [searchValue, setSearchValue] = useState('');
+    const [category, setCategory] = useState('all');
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -32,6 +32,7 @@ const HeaderSearch = () => {
                 </Grid>
                 <Grid item xs={2}>
                     <SelectInput label='Category' name='category' value={category} setValue={setCategory}>
+                        <option value="all">All</option>
                         <option value='news'>News</option>
                         <option value='forum'>Forum Posts</option>
                         <option value='jobs'>Jobs</option>

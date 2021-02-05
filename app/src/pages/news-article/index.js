@@ -5,7 +5,7 @@ import ConfigContext from '../../contexts/ConfigContext';
 import Layout from '../../components/layout';
 import PageDiv from '../../components/page-div';
 import HeaderLink from '../../components/header-link';
-import { Grid } from '@material-ui/core';
+import { Grid, Backdrop, CircularProgress } from '@material-ui/core';
 import AddComment from '../../components/add-comment';
 import UserContext from '../../contexts/UserContext';
 import NewsArticleCommentsRenderer from '../../components/news-article-comments-renderer';
@@ -46,9 +46,9 @@ const NewsArticle = (props) => {
 
     if (!ended) {
         return (
-            <Layout>
-                <PageDiv>Loading...</PageDiv>
-            </Layout>
+            <Backdrop open={true}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
         );
     }
 
@@ -60,7 +60,7 @@ const NewsArticle = (props) => {
                 <Grid container alignItems='center'>
                     <Grid item xs={2}>
                         <img className={styles.img} src={author.profilePictureUrl} />
-                        <span className={styles.byText}> by <HeaderLink to={`/${author.username}`}>{author.fullName}</HeaderLink></span>
+                        <span className={styles.byText}> by <HeaderLink to={`/u/${author.username}`}>{author.fullName}</HeaderLink></span>
                     </Grid>
                     <Grid item xs={3}>
                         <span className={styles.published}>Published: {`${article.publishedDate.split('T')[0]} ${article.publishedDate.split('.')[0].split('T')[1]}`}</span>

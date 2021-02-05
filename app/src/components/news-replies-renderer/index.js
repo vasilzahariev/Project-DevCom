@@ -2,6 +2,7 @@ import styles from './index.module.css';
 import { useMemo, useState, useEffect, useContext } from 'react';
 import ConfigContext from '../../contexts/ConfigContext';
 import NewsReplyCard from '../news-reply-card';
+import { CircularProgress } from '@material-ui/core';
 
 const NewsRepliesRenderer = (props) => {
     const configContext = useContext(ConfigContext);
@@ -28,8 +29,6 @@ const NewsRepliesRenderer = (props) => {
         }).then(promise => {
             return promise.json();
         }).then(response => {
-            console.log(response);
-
             setReplies(response);
             setEnded(true);
         });
@@ -37,7 +36,9 @@ const NewsRepliesRenderer = (props) => {
 
     if (!ended) {
         return (
-            <div></div>
+            <div>
+                <CircularProgress color="inherit" />
+            </div>
         )
     }
 

@@ -7,6 +7,7 @@ import HeaderLink from '../../components/header-link';
 import UserContext from '../../contexts/UserContext';
 import Header from '../../components/header';
 import NewsRenderer from '../../components/news-renderer';
+import { Backdrop, CircularProgress } from '@material-ui/core';
 
 const News = () => {
     const configContext = useContext(ConfigContext);
@@ -33,11 +34,9 @@ const News = () => {
 
     if (!ended) {
         return (
-            <Layout>
-                <PageDiv>
-                    Loading...
-                </PageDiv>
-            </Layout>
+            <Backdrop open={true}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
         )
     }
 

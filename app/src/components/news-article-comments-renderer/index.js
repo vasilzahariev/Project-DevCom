@@ -2,10 +2,11 @@ import styles from './index.module.css';
 import { useEffect, useMemo, useState, useContext } from 'react';
 import ConfigContext from '../../contexts/ConfigContext';
 import NewsArticleCommentCard from '../news-article-comment-card';
+import { CircularProgress } from '@material-ui/core';
 
 const NewsArticleCommentsRenderer = (props) => {
     const configContext = useContext(ConfigContext);
-    
+
     const [comments, setComments] = useState(null);
     const [ended, setEnded] = useState(false);
 
@@ -35,7 +36,9 @@ const NewsArticleCommentsRenderer = (props) => {
 
     if (!ended) {
         return (
-            <p>Loading Comments...</p>
+            <div>
+                <CircularProgress color="inherit" />
+            </div>
         );
     }
 
