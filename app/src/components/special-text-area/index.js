@@ -17,6 +17,9 @@ import ArticleContext from '../../contexts/ArticleContext';
 import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import LinkIcon from '@material-ui/icons/Link';
+import LinkOffIcon from '@material-ui/icons/LinkOff';
+import TextFieldsIcon from '@material-ui/icons/TextFields';
 
 const SpecialTextArea = (props) => {
     const articleContext = useContext(ArticleContext);
@@ -28,6 +31,21 @@ const SpecialTextArea = (props) => {
 
         iFrameNode.contentWindow.document.execCommand(cmd);
 
+        const body = iFrameNode.contentWindow.document.body.innerHTML;
+
+        props.updateBody(body);
+    }
+
+    const onCmdWithWindow = (e, cmd) => {
+        e.preventDefault();
+
+        const linkVal = prompt('Please enter link:', '');
+
+        if (linkVal == null || linkVal == '')
+            return;
+        else
+            iFrameNode.contentWindow.document.execCommand(cmd, false, linkVal);
+        
         const body = iFrameNode.contentWindow.document.body.innerHTML;
 
         props.updateBody(body);
@@ -64,6 +82,9 @@ const SpecialTextArea = (props) => {
                         <button title='Italic' onClick={e => onCmd(e, 'italic')}><FormatItalicIcon /></button>
                         <button title='Underline' onClick={e => onCmd(e, 'underline')}><FormatUnderlinedIcon /></button>
                         <button title='Strikethrough' onClick={e => onCmd(e, 'strikethrough')}><StrikethroughSIcon /></button>
+                        <button title='Link' onClick={e => onCmdWithWindow(e, 'createLink')}><LinkIcon /></button>
+                        <button title='Unlink' onClick={e => onCmd(e, 'unlink')}><LinkOffIcon /></button>
+                        <button title='Font Size' onClick={e => onCmdWithWindow(e, 'fontSize')}><TextFieldsIcon /></button>
                         <button title='Justify Left' onClick={e => onCmd(e, 'justifyLeft')}><FormatAlignLeftIcon /></button>
                         <button title='Justify Center' onClick={e => onCmd(e, 'justifyCenter')}><FormatAlignCenterIcon /></button>
                         <button title='Justify Right' onClick={e => onCmd(e, 'justifyRight')}><FormatAlignRightIcon /></button>
