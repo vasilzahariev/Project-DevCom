@@ -1,9 +1,11 @@
 .link {
     text-decoration: none;
-    color: #61dafb;
+    /* color: #61dafb; Dark Theme */
+    color: blue;
     transition: .5s all;
 }
 
 .link:hover {
-    color: #059dc7;
+    /* color: #059dc7; Dark Theme */
+    color: rgb(3, 3, 122);
 }

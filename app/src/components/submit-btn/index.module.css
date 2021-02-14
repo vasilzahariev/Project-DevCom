@@ -13,12 +13,15 @@
 }
 
 .purple {
-    border: 1px solid rgb(206, 53, 206);
-    color: rgb(206, 53, 206);
+    /* border: 1px solid rgb(206, 53, 206);
+    color: rgb(206, 53, 206); */
+    border: 2px solid rgb(116, 0, 116);
+    color: rgb(116, 0, 116);
 }
 
 .purple:hover {
-    background-color: rgb(206, 53, 206);
+    /* background-color: rgb(206, 53, 206); */
+    background-color: rgb(116, 0, 116);
 }
 
 .red {
