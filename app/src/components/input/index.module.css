@@ -1,18 +1,18 @@
 .input {
     display: inline-block;
     margin: 0 auto;
-    /* background-color: rgba(128, 128, 128, 0.561); Dark Theme */
-    background: rgb(120, 120, 160);
+    background-color: rgba(128, 128, 128, 0.561);
+    /* background: rgb(120, 120, 160); Bright */
     border-radius: 15px;
     font-size: 1.2rem;
-    /* color: white; Dark Theme */
     color: white;
+    /* color: white; Bright */
     padding-left: 1.2%;
 }
 
 .input::placeholder {
-    /* color: gray; */
-    color: rgb(224, 215, 215);
+    color: gray;
+    /* color: rgb(224, 215, 215); Bright */
 }
 
 .text {

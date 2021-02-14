@@ -111,9 +111,27 @@ const getUserById = async id => {
     return await User.findById(id);
 }
 
+const checkIfUsernameExists = async username => {
+    const count = await User.count({ username: username });
+
+    return count === 1;
+}
+
+const getUserByUsername = async username => {
+    const user = await User.findOne({ username });
+    const userLinks = await UserLinks.findById(user.userLinksId);
+
+    return {
+        user,
+        userLinks
+    }
+}
+
 module.exports = {
     register,
     login,
     verifyToken,
-    getUserById
+    getUserById,
+    checkIfUsernameExists,
+    getUserByUsername
 }

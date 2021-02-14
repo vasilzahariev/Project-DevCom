@@ -1,0 +1,19 @@
+.card {
+    margin-top: 2.5%;
+    border: 1px solid #586379b4;
+    background-color: #4a515d73;
+    border-radius: 15px;
+    padding: 1%;
+}
+
+.ppf {
+    width: 75%;
+}
+
+.bio {
+    text-align: center;
+}
+
+.links {
+    margin-top: 1.5%;
+}

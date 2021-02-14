@@ -9,6 +9,7 @@ import CreateArticle from './pages/create-article';
 import NewsArticle from './pages/news-article';
 import CreateJob from './pages/create-job';
 import Jobs from './pages/jobs';
+import UserProfile from './pages/user-profile';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -31,6 +32,7 @@ const Navigation = () => {
             <Route exact path='/jobs/create'>
                 {userContext.user.loggedIn ? <CreateJob /> : <Redirect to='/auth/login' />}
             </Route>
+            <Route exact path='/u/:username' component={UserProfile} />
             {/* TODO: Insert 404 page here when created */}
         </Switch>
     )
