@@ -1,9 +1,9 @@
 .block {
     width: 90%;
-    /* border: 1px solid #586379b4;
-    background-color: rgba(128, 128, 128, 0.561); Dark */
     border: 1px solid #586379b4;
-    background: rgb(120, 120, 160);
+    background-color: rgba(128, 128, 128, 0.561);
+    /* border: 1px solid #586379b4;
+    background: rgb(120, 120, 160); Bright */
     border-radius: 15px;
     height: 500px;
     padding-top: .5%;

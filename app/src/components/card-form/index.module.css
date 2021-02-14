@@ -1,6 +1,6 @@
 .card {
-    /* border: 1px solid #586379b4; Dark */
-    border: 3px solid #586379b4;
+    border: 1px solid #586379b4;
+    /* border: 3px solid #586379b4; Bright */
     border-radius: 10px;
     margin: 0 auto;
     width: 35%;
