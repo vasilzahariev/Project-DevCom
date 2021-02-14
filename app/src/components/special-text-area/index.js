@@ -65,7 +65,8 @@ const SpecialTextArea = (props) => {
         iFrame.contentWindow.document.designMode = 'on';
         iFrame.contentWindow.document.body.innerHTML = props.value;
         iFrame.contentWindow.document.addEventListener('keyup', updateBody);
-        iFrame.contentWindow.document.body.style.color = 'white';
+        // iFrame.contentWindow.document.body.style.color = 'white'; Dark
+        iFrame.contentWindow.document.body.style.color = 'black';
         iFrame.contentWindow.document.body.style.fontSize = '1.3rem';
         iFrame.contentWindow.document.body.style.fontFamily = `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`;
 

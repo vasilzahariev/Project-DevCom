@@ -72,12 +72,17 @@ const JobCard = (props) => {
         <div className={styles.card}>
             <h3 className={styles.name}>{jobContext.job.name}</h3>
             <p className={styles.by}>by <HeaderLink to={`/u/${jobContext.username}`}>{jobContext.username}</HeaderLink></p>
-            <p><EpicProgrammer><b>Published Date: </b></EpicProgrammer>{`${('0' + publishDate.getDate()).slice(-2)}.${('0' + (publishDate.getMonth() + 1)).slice(-2)}.${publishDate.getFullYear()}`}</p>
+            {/* <p><EpicProgrammer><b>Published Date: </b></EpicProgrammer>{`${('0' + publishDate.getDate()).slice(-2)}.${('0' + (publishDate.getMonth() + 1)).slice(-2)}.${publishDate.getFullYear()}`}</p>
             <p><EpicProgrammer><b>Location: </b></EpicProgrammer>{jobContext.job.location}</p>
             <p><EpicProgrammer><b>Job Type: </b></EpicProgrammer>{jobContext.job.type === 'fullTime' ? 'Full Time' : (jobContext.job.type === 'partTime' ? 'Part Time' : (jobContext.job.type === 'freelance' ? 'Freelance' : ''))}</p>
-            <p><EpicProgrammer><b>Salary: </b></EpicProgrammer>{jobContext.job.isNegotiableSalary ? 'Negotiable Salary' : (jobContext.job.salaryRanges[0] === jobContext.job.salaryRanges[1] ? `$${getSalaryAsString(jobContext.job.salaryRanges[0])} $` : `$${getSalaryAsString(jobContext.job.salaryRanges[0])} - $${getSalaryAsString(jobContext.job.salaryRanges[1])}`)}</p>
+            <p><EpicProgrammer><b>Salary: </b></EpicProgrammer>{jobContext.job.isNegotiableSalary ? 'Negotiable Salary' : (jobContext.job.salaryRanges[0] === jobContext.job.salaryRanges[1] ? `$${getSalaryAsString(jobContext.job.salaryRanges[0])} $` : `$${getSalaryAsString(jobContext.job.salaryRanges[0])} - $${getSalaryAsString(jobContext.job.salaryRanges[1])}`)}</p> */}
+            <p><b className={styles.kme}>Published Date: </b>{`${('0' + publishDate.getDate()).slice(-2)}.${('0' + (publishDate.getMonth() + 1)).slice(-2)}.${publishDate.getFullYear()}`}</p>
+            <p><b className={styles.kme}>Location: </b>{jobContext.job.location}</p>
+            <p><b className={styles.kme}>Job Type: </b>{jobContext.job.type === 'fullTime' ? 'Full Time' : (jobContext.job.type === 'partTime' ? 'Part Time' : (jobContext.job.type === 'freelance' ? 'Freelance' : ''))}</p>
+            <p><b className={styles.kme}>Salary: </b>{jobContext.job.isNegotiableSalary ? 'Negotiable Salary' : (jobContext.job.salaryRanges[0] === jobContext.job.salaryRanges[1] ? `$${getSalaryAsString(jobContext.job.salaryRanges[0])} $` : `$${getSalaryAsString(jobContext.job.salaryRanges[0])} - $${getSalaryAsString(jobContext.job.salaryRanges[1])}`)}</p>
             <hr />
-            <h3 className={styles.name}><EpicProgrammer><b>Job Description:</b></EpicProgrammer></h3>
+            {/*<h3 className={styles.name}><EpicProgrammer><b>Job Description:</b></EpicProgrammer></h3> */}
+            <h3 className={styles.name}><b className={styles.kme}>Description: </b></h3>
             <div id='description'>
             </div>
             <div className={styles.btns}>

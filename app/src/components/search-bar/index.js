@@ -5,7 +5,8 @@ import SearchIcon from '@material-ui/icons/Search';
 const CssTextField = withStyles({
     root: {
         '& label': {
-            color: '#61dafb',
+            // color: '#61dafb',
+            color: 'blue',
         },
         '& .MuiInput-underline': {
             color: 'white',
@@ -14,7 +15,8 @@ const CssTextField = withStyles({
             color: '#059dc7',
         },
         '& .MuiInput-underline:before': {
-            borderBottomColor: '#61dafb',
+            // borderBottomColor: '#61dafb',
+            borderBottomColor: 'blue',
         },
         '&:hover .MuiInput-underline:before': {
             borderBottomColor: '#30cefa',

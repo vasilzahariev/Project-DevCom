@@ -3,7 +3,11 @@
     border-radius: 10px;
     margin: 0 auto;
     background-color: #4a515d73;
-    padding: 0% 2% 2% 2%;
+    padding: 0% 5% 2% 5%;
+}
+
+.kme {
+    color: rgba(0, 255, 55, 0.781);
 }
 
 .name {
