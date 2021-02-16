@@ -1,0 +1,45 @@
+.btn {
+    border: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    color: #61dafb;
+    transition: .5s all;
+}
+
+.btn:hover {
+    color: #059dc7;
+    cursor: pointer;
+}
+
+.btn2 {
+    border: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: #059dc7;
+    transition: .5s all;
+    padding: 1.5%;
+    border-radius: 5px;
+}
+
+.btn2:hover {
+    color: #059dc7;
+    background-color: #61dafb0c;
+    cursor: pointer;
+}
+
+.title {
+    background-color: #282c34;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.dialog {
+    background-color: #282c34;
+    text-align: center;
+    color: white;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+.actions {
+    background-color: #282c34;
+}
