@@ -6,6 +6,7 @@ import UserContext from '../../contexts/UserContext';
 import ConfigContext from '../../contexts/ConfigContext';
 import { Backdrop, CircularProgress } from '@material-ui/core';
 import UserPart from '../../components/user-part';
+import Educations from '../../components/educations';
 
 const UserProfile = () => {
     const configContext = useContext(ConfigContext);
@@ -55,6 +56,8 @@ const UserProfile = () => {
                 <input className={`${styles.btn} ${section === 'projects' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'projects')} value='Projects'/>
                 { (userContext.user && userContext.user.loggedIn) ? <input className={`${styles.btn} ${section === 'dashboard' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'dashboard')} value='Dashboard'/> : ''}
             </div>
+
+            {section === 'education' ? <Educations username={params.username} /> : ''}
         </Layout>
     );
 }

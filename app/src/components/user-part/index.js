@@ -22,7 +22,7 @@ const UserPart = (props) => {
             setUserLinks(response.userLinks);
             setEnded(true);
         });
-    }, [user, userLinks]);
+    }, []);
 
     if (!ended) {
         return (<CircularProgress color="inherit" />);

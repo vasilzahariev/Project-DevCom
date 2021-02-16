@@ -8,35 +8,35 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
-import Link from '../link';
+import ALink from '../link';
 
 const UserLinks = (props) => {
     return (
         <div className={styles.links}>
             <Grid container spacing={2} justify='center' alignItems='center'>
                 <Grid item>
-                    {props.userLinks.gitHubUrl ? <HeaderLink to={props.userLinks.gitHubUrl}><GitHubIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.gitHubUrl ? <ALink to={props.userLinks.gitHubUrl}><GitHubIcon fontSize='large' /></ALink> : ''}
                 </Grid>
                 <Grid item>
-                    {props.userLinks.websiteUrl ? <HeaderLink to={props.userLinks.websiteUrl}><WebIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.websiteUrl ? <ALink to={props.userLinks.websiteUrl}><WebIcon fontSize='large' /></ALink> : ''}
                 </Grid>
                 <Grid item>
-                    {props.userLinks.linkedInUrl ? <HeaderLink to={props.userLinks.linkedInUrl}><LinkedInIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.linkedInUrl ? <ALink to={props.userLinks.linkedInUrl}><LinkedInIcon fontSize='large' /></ALink> : ''}
                 </Grid>
                 <Grid item>
-                    {props.userLinks.youTubeUrl ? <HeaderLink to={props.userLinks.youTubeUrl}><YouTubeIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.youTubeUrl ? <ALink to={props.userLinks.youTubeUrl}><YouTubeIcon fontSize='large' /></ALink> : ''}
                 </Grid>
                 <Grid item>
-                    {props.userLinks.twitterUrl ? <HeaderLink to={props.userLinks.twitterUrl}><TwitterIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.twitterUrl ? <ALink to={props.userLinks.twitterUrl}><TwitterIcon fontSize='large' /></ALink> : ''}
                 </Grid>
                 <Grid item>
-                    {props.userLinks.facebookUrl ? <HeaderLink to={props.userLinks.facebookUrl}><FacebookIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.facebookUrl ? <ALink to={props.userLinks.facebookUrl}><FacebookIcon fontSize='large' /></ALink> : ''}
                 </Grid>
                 <Grid item>
-                    {props.userLinks.instagramUrl ? <HeaderLink to={props.userLinks.instagramUrl}><InstagramIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.instagramUrl ? <ALink to={props.userLinks.instagramUrl}><InstagramIcon fontSize='large' /></ALink> : ''}
                 </Grid>
                 <Grid item>
-                    {props.userLinks.url ? <HeaderLink to={props.userLinks.gitHubLink}><GitHubIcon fontSize='large' /></HeaderLink> : ''}
+                    {props.userLinks.url ? <ALink to={props.userLinks.gitHubLink}><GitHubIcon fontSize='large' /></ALink> : ''}
                 </Grid>
             </Grid>
         </div>
