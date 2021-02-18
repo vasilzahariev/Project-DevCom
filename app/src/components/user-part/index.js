@@ -34,17 +34,17 @@ const UserPart = (props) => {
                 <Grid item xs={1}>
                     <img className={styles.ppf} src={user.profilePictureUrl} alt='ppf' />
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={2}>
                     <Grid container direction='column' justify='center' alignItems='center'>
                         <Grid item>@{user.username}</Grid>
                         <Grid item>{user.fullName}</Grid>
                         <Grid item>{user.email}</Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={6}>
                     <p className={styles.bio}>{user.bio ? user.bio : 'No bio...'}</p>
                 </Grid>
-                <Grid item xs={1}></Grid>
+                <Grid item xs={2}></Grid>
                 <Grid item xs={1}>
                     BTN
                 </Grid>

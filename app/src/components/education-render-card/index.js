@@ -18,7 +18,7 @@ const EducationRenderCard = (props) => {
                     <Grid item xs={6}>
                         <Grid container direction='column' alignItems='flex-end' spacing={3}>
                             <Grid item>{edu.degree}</Grid>
-                            <Grid item>{edu.years[0] === edu.years[1] ? '' : `${edu.years[0]} - ${edu.years[1]}`}</Grid>
+                            <Grid item>{edu.years[0] && edu.years[1] ? `${edu.years[0]} - ${edu.years[1]}` : (edu.years[0] ? `${edu.years[0]} - Present` : '')}</Grid>
                         </Grid>
                     </Grid>
                 </Grid>
