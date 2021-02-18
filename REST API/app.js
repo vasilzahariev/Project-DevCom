@@ -7,6 +7,7 @@ const authRouter = require('./routers/authRouter');
 const newsRouter = require('./routers/newsRouter');
 const jobsRouter = require('./routers/jobsRouter');
 const educationRouter = require('./routers/educationRouter');
+const workRouter = require('./routers/workRouter');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/auth', authRouter);
 app.use('/news', newsRouter);
 app.use('/jobs', jobsRouter);
 app.use('/edu', educationRouter);
+app.use('/work', workRouter);
 
 // Binds and listens for connections on the specific port
 app.listen(config.PORT, console.log(`REST API is listening on http://localhost:${config.PORT}`));
