@@ -50,7 +50,7 @@ const AddComment = (props) => {
     return (
         <div className={styles.addCommentDiv}>
             <form method='post' onSubmit={onSubmit}>
-                <TextArea placeholder='Comment' onChange={onCommentChange} value={comment} />
+                <TextArea placeholder='Comment' onChange={onCommentChange} value={comment} height={75} />
                 <div className={styles.btn}><SubmitBtn>Post</SubmitBtn></div>
             </form>
         </div>

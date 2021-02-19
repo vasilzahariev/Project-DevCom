@@ -13,31 +13,20 @@ import ALink from '../link';
 const UserLinks = (props) => {
     return (
         <div className={styles.links}>
-            <Grid container spacing={2} justify='center' alignItems='center'>
-                <Grid item>
-                    {props.userLinks.gitHubUrl ? <ALink to={props.userLinks.gitHubUrl}><GitHubIcon fontSize='large' /></ALink> : ''}
-                </Grid>
-                <Grid item>
-                    {props.userLinks.websiteUrl ? <ALink to={props.userLinks.websiteUrl}><WebIcon fontSize='large' /></ALink> : ''}
-                </Grid>
-                <Grid item>
-                    {props.userLinks.linkedInUrl ? <ALink to={props.userLinks.linkedInUrl}><LinkedInIcon fontSize='large' /></ALink> : ''}
-                </Grid>
-                <Grid item>
-                    {props.userLinks.youTubeUrl ? <ALink to={props.userLinks.youTubeUrl}><YouTubeIcon fontSize='large' /></ALink> : ''}
-                </Grid>
-                <Grid item>
-                    {props.userLinks.twitterUrl ? <ALink to={props.userLinks.twitterUrl}><TwitterIcon fontSize='large' /></ALink> : ''}
-                </Grid>
-                <Grid item>
-                    {props.userLinks.facebookUrl ? <ALink to={props.userLinks.facebookUrl}><FacebookIcon fontSize='large' /></ALink> : ''}
-                </Grid>
-                <Grid item>
-                    {props.userLinks.instagramUrl ? <ALink to={props.userLinks.instagramUrl}><InstagramIcon fontSize='large' /></ALink> : ''}
-                </Grid>
-                <Grid item>
-                    {props.userLinks.url ? <ALink to={props.userLinks.gitHubLink}><GitHubIcon fontSize='large' /></ALink> : ''}
-                </Grid>
+            <Grid container justify='center' alignItems='center' spacing={2}>
+                {props.userLinks.gitHubUrl ? <Grid item><ALink to={props.userLinks.gitHubUrl}><GitHubIcon fontSize='large' /></ALink></Grid> : ''}
+
+                {props.userLinks.websiteUrl ? <Grid item><ALink to={props.userLinks.websiteUrl}><WebIcon fontSize='large' /></ALink></Grid> : ''}
+
+                {props.userLinks.linkedInUrl ? <Grid item><ALink to={props.userLinks.linkedInUrl}><LinkedInIcon fontSize='large' /></ALink></Grid> : ''}
+
+                {props.userLinks.youTubeUrl ? <Grid item><ALink to={props.userLinks.youTubeUrl}><YouTubeIcon fontSize='large' /></ALink></Grid> : ''}
+
+                {props.userLinks.twitterUrl ? <Grid item><ALink to={props.userLinks.twitterUrl}><TwitterIcon fontSize='large' /></ALink></Grid> : ''}
+
+                {props.userLinks.facebookUrl ? <Grid item><ALink to={props.userLinks.facebookUrl}><FacebookIcon fontSize='large' /></ALink></Grid> : ''}
+
+                {props.userLinks.instagramUrl ? <Grid item><ALink to={props.userLinks.instagramUrl}><InstagramIcon fontSize='large' /></ALink></Grid> : ''}
             </Grid>
         </div>
     );
