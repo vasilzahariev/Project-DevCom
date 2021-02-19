@@ -3,8 +3,11 @@ import { useEffect, useState, useContext } from 'react';
 import ConfigContext from '../../contexts/ConfigContext';
 import { CircularProgress, Grid } from '@material-ui/core';
 import UserLinks from '../user-links';
+import UserContext from '../../contexts/UserContext';
+import HeaderLink from '../header-link';
 
 const UserPart = (props) => {
+    const userContext = useContext(UserContext);
     const configContext = useContext(ConfigContext);
 
     const [user, setUser] = useState(null);
@@ -36,7 +39,7 @@ const UserPart = (props) => {
                 </Grid>
                 <Grid item xs={2}>
                     <Grid container direction='column' justify='center' alignItems='center'>
-                        <Grid item>@{user.username}</Grid>
+                        <Grid item><HeaderLink to={`/u/${user.username}`}>@{user.username}</HeaderLink></Grid>
                         <Grid item>{user.fullName}</Grid>
                         <Grid item>{user.email}</Grid>
                     </Grid>
@@ -46,7 +49,7 @@ const UserPart = (props) => {
                 </Grid>
                 <Grid item xs={2}></Grid>
                 <Grid item xs={1}>
-                    BTN
+                    {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <HeaderLink to={`/u/${props.username}/settings`}>Edit Profile</HeaderLink> : 'BTN'}
                 </Grid>
             </Grid>
             <div className={styles.links}>

@@ -139,6 +139,97 @@ const getUserIdByUsername = async username => {
     return user._id;
 }
 
+const getUserInformation = async username => {
+    try {
+        const user = await User.findOne({ username });
+        const userLinks = await UserLinks.findById(user.userLinksId);
+
+        return {
+            user,
+            userLinks,
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const doesTheUsernameBelongToUserWithId = async (username, id) => {
+    const user = await User.findById(id);
+
+    return user.username === username;
+}
+
+const checkIfEmailExists = async email => {
+    const count = await User.count({ email });
+
+    return count !== 0;
+}
+
+const doesTheEmailBelongToUserWithId = async (email, id) => {
+    const user = await User.findById(id);
+
+    return user.email === email;
+}
+
+const updateUserInfo = async body => {
+    const {
+        user,
+        userLinks
+    } = body;
+
+    try {
+        const usernameExists = await checkIfUsernameExists(user.username);
+
+        if (usernameExists) {
+            const usernameCheck = await doesTheUsernameBelongToUserWithId(user.username, user.id);
+
+            if (!usernameCheck) return { err: 'Username taken' };
+        }
+
+        const emailExists = await checkIfEmailExists(user.email);
+
+        if (emailExists) {
+            const emailCheck = await doesTheEmailBelongToUserWithId(user.email, user.id);
+
+            if (!emailExists) return { err: 'Email taken' };
+        }
+
+        await User.findByIdAndUpdate(user.id, {
+            username: user.username,
+            email: user.email,
+            fullName: user.fullName,
+            bio: user.bio,
+            profilePictureUrl: user.profilePictureUrl,
+        })
+
+        await UserLinks.findByIdAndUpdate(userLinks.id, {
+            gitHubUrl: userLinks.gitHubUrl,
+            websiteUrl: userLinks.websiteUrl,
+            linkedInUrl: userLinks.linkedInUrl,
+            youTubeUrl: userLinks.youTubeUrl,
+            twitterUrl: userLinks.twitterUrl,
+            facebookUrl: userLinks.facebookUrl,
+            instagramUrl: userLinks.instagramUrl
+        });
+
+        return {
+            status: true,
+            username: user.username
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            err
+        }
+    }
+}
+
 module.exports = {
     register,
     login,
@@ -147,5 +238,7 @@ module.exports = {
     checkIfUsernameExists,
     getUserByUsername,
     checkIfUserExistsById,
-    getUserIdByUsername
+    getUserIdByUsername,
+    getUserInformation,
+    updateUserInfo
 }

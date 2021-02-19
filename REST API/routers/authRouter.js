@@ -5,7 +5,9 @@ const {
     verifyToken,
     getUserById,
     checkIfUsernameExists,
-    getUserByUsername
+    getUserByUsername,
+    getUserInformation,
+    updateUserInfo
 } = require('../controllers/authController');
 
 const router = express();
@@ -49,6 +51,19 @@ router.get('/getUserByUsername/:username', async (req, res) => {
     const result = await getUserByUsername(username);
 
     res.send(result);
+});
+
+router.get('/getUserInformation/:username', async (req, res) => {
+    const username = req.params.username;
+    const result = await getUserInformation(username);
+
+    res.send(result);
+});
+
+router.post('/updateUserInformation', async (req, res) => {
+    const result = await updateUserInfo(req.body);
+
+    res.send(result)
 });
 
 module.exports = router;
