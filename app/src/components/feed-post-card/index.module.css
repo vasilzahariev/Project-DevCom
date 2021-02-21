@@ -1,0 +1,63 @@
+.card {
+    border: 1px solid #586379b4;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: #4a515d73;
+    width: 50%;
+    padding: 1% 2% 2% 2%;
+}
+
+.userPart {
+    margin-bottom: 1%;
+}
+
+.pfp {
+    width: 70%;
+}
+
+.username {
+    color: gray;
+}
+
+.contentBlock {
+    background-color: #2e3035;
+    border: 1px solid #586379b4;
+    border-radius: 15px;
+    padding: 1%;
+}
+
+.btns {
+    margin-top: 2%;
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    padding: 5px 5px 0px 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.liked {
+    color: rgb(206, 53, 53);
+}
+
+.like {
+    color: white;
+
+    transition: .5s all;
+}
+
+.like:hover {
+    color: rgb(206, 53, 53);
+}
+
+.comment {
+    color: white;
+    transition: .5s all;
+}
+
+.comment:hover {
+    color: #61dafb;
+}
+

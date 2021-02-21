@@ -8,6 +8,7 @@ import { Backdrop, CircularProgress } from '@material-ui/core';
 import UserPart from '../../components/user-part';
 import Educations from '../../components/educations';
 import WorkExperience from '../../components/work-experience';
+import UserFeed from '../../components/user-feed';
 
 const UserProfile = () => {
     const configContext = useContext(ConfigContext);
@@ -58,6 +59,7 @@ const UserProfile = () => {
                 {(userContext.user && userContext.user.loggedIn) ? <input className={`${styles.btn} ${section === 'dashboard' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'dashboard')} value='Dashboard' /> : ''}
             </div>
 
+            {section === 'feed' ? <UserFeed username={params.username} /> : ''}
             {section === 'education' ? <Educations username={params.username} /> : ''}
             {section === 'work' ? <WorkExperience username={params.username} /> : ''}
         </Layout>
