@@ -45,7 +45,7 @@ const SpecialTextArea = (props) => {
             return;
         else
             iFrameNode.contentWindow.document.execCommand(cmd, false, linkVal);
-        
+
         const body = iFrameNode.contentWindow.document.body.innerHTML;
 
         props.updateBody(body);
@@ -102,6 +102,7 @@ const SpecialTextArea = (props) => {
                     <iframe className={styles.iframe}></iframe>
                 </div>
             </div>
+            {props.err ? <p><InputErrorMessage message={props.err} /></p> : ''}
         </div>
     );
 }
