@@ -9,6 +9,7 @@ import UserPart from '../../components/user-part';
 import Educations from '../../components/educations';
 import WorkExperience from '../../components/work-experience';
 import UserFeed from '../../components/user-feed';
+import UserProjects from '../../components/user-projects';
 
 const UserProfile = () => {
     const configContext = useContext(ConfigContext);
@@ -62,6 +63,7 @@ const UserProfile = () => {
             {section === 'feed' ? <UserFeed username={params.username} /> : ''}
             {section === 'education' ? <Educations username={params.username} /> : ''}
             {section === 'work' ? <WorkExperience username={params.username} /> : ''}
+            {section === 'projects' ? <UserProjects username={params.username} /> : ''}
         </Layout>
     );
 }

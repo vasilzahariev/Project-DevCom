@@ -1,0 +1,25 @@
+.card {
+    border: 1px solid #586379b4;
+    border-radius: 10px;
+    width: 95%;
+    background-color: #4a515d73;
+    padding: 3%;
+}
+
+.members {
+    margin-top: 4%;
+}
+
+.centered {
+    text-align: center;
+}
+
+.btns {
+    text-align: right;
+    margin-top: 10%;
+}
+
+.follow {
+    text-align: center;
+    margin-top: 2.5%;
+}
