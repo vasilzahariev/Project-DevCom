@@ -1,6 +1,5 @@
 .btn {
     background-color: transparent;
-    border-radius: 10px;
     font-size: 1.2rem;
     padding: 2% 2.5%;
     
@@ -31,4 +30,31 @@
 
 .red:hover {
     background-color: rgb(206, 53, 53);
+}
+
+.green {
+    border: 1px solid #23a723;
+    color: #23a723;
+}
+
+.green:hover {
+    background-color: #23a723;
+}
+
+.yellow {
+    border: 1px solid #ffdf00;
+    color: #ffdf00;
+}
+
+.yellow:hover {
+    background-color: #ffdf00;
+}
+
+.blue {
+    border: 1px solid #059dc7;
+    color: #059dc7;
+}
+
+.blue:hover {
+    background-color: #059dc7;
 }
