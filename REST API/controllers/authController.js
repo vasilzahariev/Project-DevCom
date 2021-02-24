@@ -230,6 +230,10 @@ const updateUserInfo = async body => {
     }
 }
 
+const getAllUsers = async () => {
+    return await User.find();
+}
+
 module.exports = {
     register,
     login,
@@ -240,5 +244,6 @@ module.exports = {
     checkIfUserExistsById,
     getUserIdByUsername,
     getUserInformation,
-    updateUserInfo
+    updateUserInfo,
+    getAllUsers
 }

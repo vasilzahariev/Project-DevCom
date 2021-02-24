@@ -13,6 +13,7 @@ import UserProfile from './pages/user-profile';
 import EditProfile from './pages/edit-profile';
 import Project from './pages/project';
 import CreateDevlog from './pages/create-devlog';
+import Chat from './pages/chat';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -40,6 +41,9 @@ const Navigation = () => {
             <Route exact path='/projects/:url' component={Project} />
             <Route exact path='/projects/:url/addDevlog'>
                 {userContext.user.loggedIn ? <CreateDevlog /> : <Redirect to='auth/login' />}
+            </Route>
+            <Route exact path='/chat'>
+                {userContext.user.loggedIn ? <Chat /> : <Redirect to='auth/login' />}
             </Route>
             {/* TODO: 404 and 505 */}
         </Switch>

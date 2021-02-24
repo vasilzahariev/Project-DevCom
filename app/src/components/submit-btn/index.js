@@ -10,7 +10,7 @@ const SubmitBtn = (props) => {
     }
 
     return (
-        <button className={`${getColor()} ${styles.btn}`} style={{ borderRadius: props.borderRadius ? props.borderRadius : '10px' }} onClick={props.onClick}>
+        <button className={`${getColor()} ${styles.btn}`} style={{ borderRadius: props.borderRadius ? props.borderRadius : '10px', padding: props.padding ? props.padding : '2% 2.5%' }} title={props.title} onClick={props.onClick}>
             {props.children}
         </button>
     );
