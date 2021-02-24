@@ -25,7 +25,7 @@ const HeaderUser = () => {
     return (
         <Grid container justify='flex-end' alignItems='center' spacing={3}>
             <Grid item>
-                <HeaderLinkBadge to='/messages' icon={ChatBubbleOutlineIcon} badgeContent={4} />
+                <HeaderLinkBadge to='/chat' icon={ChatBubbleOutlineIcon} badgeContent={4} />
             </Grid>
             <Grid item>
                 <HeaderLinkBadge to='/notifications' icon={NotificationsNoneIcon} badgeContent={1000000} />

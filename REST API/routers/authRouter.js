@@ -7,10 +7,17 @@ const {
     checkIfUsernameExists,
     getUserByUsername,
     getUserInformation,
-    updateUserInfo
+    updateUserInfo,
+    getAllUsers
 } = require('../controllers/authController');
 
 const router = express();
+
+router.get('/', async (req, res) => {
+    const result = await getAllUsers();
+
+    res.send(result);
+});
 
 router.post(`/register`, async (req, res) => {
     const result = await register(req.body);

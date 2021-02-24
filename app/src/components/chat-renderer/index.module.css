@@ -1,0 +1,46 @@
+.card {
+    border: 1px solid #586379b4;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: #4a515d73;
+    padding: 5%;
+}
+
+.center {
+    text-align: center;
+}
+
+.members {
+    margin-top: 5%;
+}
+
+.membersBtn {
+    border-radius: 15px;
+    border: none;
+    padding: 1%;
+    
+    transition: .5s all;
+}
+
+.membersBtn:hover {
+    background-color: #2e3035;
+    border: .1px solid #586379b4;
+    cursor: pointer;
+}
+
+.rendered {
+    margin-left: 10%;
+}
+
+.input {
+    margin-top: 1%;
+}
+
+.cool {
+    /* border: 1px solid #586379b4; */
+}
+
+.send {
+    text-align: right;
+}

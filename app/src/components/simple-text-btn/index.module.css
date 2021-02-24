@@ -2,11 +2,50 @@
     border: none;
     background-color: transparent;
     font-size: 1.3rem;
-    color: #61dafb;
     transition: .5s all;
 }
 
 .btn:hover {
-    color: #059dc7;
+    color: white;
     cursor: pointer;
+}
+
+.purple {
+    color: rgb(206, 53, 206);
+}
+
+.purple:hover {
+    color: rgb(206, 53, 206);
+}
+
+.red {
+    color: rgb(206, 53, 53);
+}
+
+.red:hover {
+    color: rgb(124, 1, 1);
+}
+
+.green {
+    color: #23a723;
+}
+
+.green:hover {
+    color: #23a723;
+}
+
+.yellow {
+    color: #ffdf00;
+}
+
+.yellow:hover {
+    color: #ffdf00;
+}
+
+.blue {
+    color: #61dafb;
+}
+
+.blue:hover {
+    color: #059dc7;
 }

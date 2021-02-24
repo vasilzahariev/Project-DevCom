@@ -1,0 +1,20 @@
+.page {
+    margin-top: 2.5%;
+}
+
+.convos {
+    margin-top: 5%;
+}
+
+.convo {
+    border: 1px solid #586379b4;
+    background-color: #4a515d73;
+    border-radius: 10px;
+    width: 100%;
+    padding: 2% 5%;
+}
+
+.convo:hover {
+    background-color: #586379b4;
+    cursor: pointer;
+}
