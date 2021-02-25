@@ -3,6 +3,10 @@ const NewsComment = require('../models/NewsComment');
 const NewsReply = require('../models/NewsReply');
 const mongodb = require('mongodb')
 
+const {
+    getUserIdByUsername
+} = require('./authController');
+
 const getAllNewsArticles = async () => {
     return await NewsArticle.find();
 }
@@ -141,6 +145,24 @@ const getReplies = async id => {
     return await NewsReply.find({ commentId: id });
 }
 
+const getUserArticles = async username => {
+    try {
+        const authorId = await getUserIdByUsername(username);
+        const articles = await NewsArticle.find({ authorId });
+
+        return {
+            articles,
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     getAllNewsArticles,
     getNewsArticle,
@@ -148,5 +170,6 @@ module.exports = {
     createArticle,
     addComment,
     addReply,
-    getReplies
+    getReplies,
+    getUserArticles
 }

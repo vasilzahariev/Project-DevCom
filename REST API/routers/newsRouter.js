@@ -6,7 +6,8 @@ const {
     createArticle,
     addComment,
     addReply,
-    getReplies
+    getReplies,
+    getUserArticles
 } = require('../controllers/newsController');
 const { getUserById } = require('../controllers/authController');
 
@@ -66,6 +67,13 @@ router.post('/addReply', async (req, res) => {
 router.get('/comment/:commentId/getReplies', async (req, res) => {
     const id = req.params.commentId;
     const result = await getReplies(id);
+
+    res.send(result);
+});
+
+router.get('/getUserArticles/:username', async (req, res) => {
+    const username = req.params.username;
+    const result = await getUserArticles(username);
 
     res.send(result);
 });
