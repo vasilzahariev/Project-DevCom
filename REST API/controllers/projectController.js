@@ -218,11 +218,44 @@ const addDevlog = async body => {
     }
 }
 
+const getUserDevlogs = async username => {
+    try {
+        const authorId = await getUserIdByUsername(username);
+        const dls = await Devlog.find({ authorId });
+        const devlogs = await Promise.all(dls.map(async devlog => {
+            const project = await Project.findById(devlog.projectId);
+
+            return {
+                _id: devlog._id,
+                projectId: devlog.projectId,
+                authorId: devlog.authorId,
+                title: devlog.title,
+                content: devlog.content,
+                isDraft: devlog.isDraft,
+                publishedDate: devlog.publishedDate,
+                project
+            }
+        }));
+
+        return {
+            status: true,
+            devlogs
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     create,
     getProjects,
     getProjectByUrl,
     edit,
     addMember,
-    addDevlog
+    addDevlog,
+    getUserDevlogs
 }

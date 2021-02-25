@@ -10,6 +10,7 @@ import Educations from '../../components/educations';
 import WorkExperience from '../../components/work-experience';
 import UserFeed from '../../components/user-feed';
 import UserProjects from '../../components/user-projects';
+import Dashboard from '../../components/dashboard';
 
 const UserProfile = () => {
     const configContext = useContext(ConfigContext);
@@ -57,13 +58,14 @@ const UserProfile = () => {
                 <input className={`${styles.btn} ${section === 'education' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'education')} value='Education' />
                 <input className={`${styles.btn} ${section === 'work' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'work')} value='Work' />
                 <input className={`${styles.btn} ${section === 'projects' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'projects')} value='Projects' />
-                {(userContext.user && userContext.user.loggedIn) ? <input className={`${styles.btn} ${section === 'dashboard' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'dashboard')} value='Dashboard' /> : ''}
+                {(userContext.user && userContext.user.loggedIn && userContext.user.username === params.username) ? <input className={`${styles.btn} ${section === 'dashboard' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'dashboard')} value='Dashboard' /> : ''}
             </div>
 
             {section === 'feed' ? <UserFeed username={params.username} /> : ''}
             {section === 'education' ? <Educations username={params.username} /> : ''}
             {section === 'work' ? <WorkExperience username={params.username} /> : ''}
             {section === 'projects' ? <UserProjects username={params.username} /> : ''}
+            {section === 'dashboard' ? <Dashboard username={params.username} /> : ''}
         </Layout>
     );
 }

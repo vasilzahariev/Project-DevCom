@@ -2,7 +2,9 @@ const express = require('express');
 const {
     createJob,
     getJobs,
-    closeJob
+    closeJob,
+    getUserJobs,
+    openJob
 } = require('../controllers/jobsController');
 
 const router = express();
@@ -23,8 +25,21 @@ router.post('/create', async (req, res) => {
 
 router.post('/close/:id', async (req, res) => {
     const id = req.params.id;
-
     const result = await closeJob(id);
+
+    res.send(result);
+});
+
+router.post('/open/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await openJob(id);
+
+    res.send(result);
+});
+
+router.get('/getUserJobs/:username', async (req, res) => {
+    const username = req.params.username;
+    const result = await getUserJobs(username);
 
     res.send(result);
 });

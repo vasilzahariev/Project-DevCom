@@ -5,7 +5,8 @@ const {
     getProjectByUrl,
     edit,
     addMember,
-    addDevlog
+    addDevlog,
+    getUserDevlogs
 } = require('../controllers/projectController');
 
 const router = express();
@@ -45,6 +46,13 @@ router.post('/addMember', async (req, res) => {
 
 router.post('/addDevlog', async (req, res) => {
     const result = await addDevlog(req.body);
+
+    res.send(result);
+});
+
+router.get('/getUserDevlogs/:username', async (req, res) => {
+    const username = req.params.username;
+    const result = await getUserDevlogs(username);
 
     res.send(result);
 });
