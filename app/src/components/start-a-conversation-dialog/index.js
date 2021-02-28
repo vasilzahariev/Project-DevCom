@@ -13,6 +13,7 @@ import SimpleTextBtn from '../simple-text-btn';
 import ALink from '../link';
 import UserContext from '../../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
+import HeaderLink from '../header-link';
 
 const StartAConversationDialog = props => {
     const configContext = useContext(ConfigContext);
@@ -78,7 +79,7 @@ const StartAConversationDialog = props => {
             return (
                 <div className={styles.selectedUser}>
                     <Grid container key={username} index={index} justify="space-between" alignItems="center">
-                        <Grid item><ALink to={`/u/${username}`}>{username}</ALink></Grid>
+                        <Grid item><HeaderLink to={`/u/${username}`}>{username}</HeaderLink></Grid>
                         <Grid item><SimpleTextBtn onClick={() => removeSelectedUser(username)}><CancelIcon /></SimpleTextBtn></Grid>
                     </Grid>
                 </div>

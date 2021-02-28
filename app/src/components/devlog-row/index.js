@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 import ALink from '../link';
 import SubmitBtn from '../submit-btn';
 import { useHistory } from 'react-router-dom';
+import HeaderLink from '../header-link';
 
 const DevlogRow = props => {
     const date = new Date(Date.parse(`${props.devlog.publishedDate}`));
@@ -30,7 +31,7 @@ const DevlogRow = props => {
             <Grid container>
                 <Grid className={styles.value} item xs={1}>{props.index}</Grid>
                 <Grid className={styles.value} item xs={3}>{props.devlog.title}</Grid>
-                <Grid className={styles.value} item xs={2}><ALink to={`/projects/${props.devlog.project.projectUrl}`}>{props.devlog.project.name}</ALink></Grid>
+                <Grid className={styles.value} item xs={2}><HeaderLink to={`/projects/${props.devlog.project.projectUrl}`}>{props.devlog.project.name}</HeaderLink></Grid>
                 <Grid className={styles.value} item xs={1}>{props.devlog.isDraft ? 'Draft' : 'Published'}</Grid>
                 <Grid className={styles.value} item xs={1}>{props.devlog.isDraft ? '-' : date.toLocaleDateString()}</Grid>
                 <Grid className={styles.value} item xs={4}>

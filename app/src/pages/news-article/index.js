@@ -10,6 +10,7 @@ import AddComment from '../../components/add-comment';
 import UserContext from '../../contexts/UserContext';
 import NewsArticleCommentsRenderer from '../../components/news-article-comments-renderer';
 import NewsTagsRenderer from '../../components/news-tags-renderer';
+import UserAvatar from '../../components/user-avatar';
 
 const NewsArticle = (props) => {
     const configContext = useContext(ConfigContext);
@@ -59,8 +60,14 @@ const NewsArticle = (props) => {
             <div>
                 <Grid container alignItems='center'>
                     <Grid item xs={2}>
-                        <img className={styles.img} src={author.profilePictureUrl} />
-                        <span className={styles.byText}> by <HeaderLink to={`/u/${author.username}`}>{author.fullName}</HeaderLink></span>
+                        <Grid container alignItems='center'>
+                            <Grid item>
+                                <UserAvatar pfp={author.profilePictureUrl} size={6} />
+                            </Grid>
+                            <Grid item>
+                                <span className={styles.byText}><HeaderLink to={`/u/${author.username}`}>{author.fullName}</HeaderLink></span>
+                            </Grid>
+                        </Grid>
                     </Grid>
                     <Grid item xs={3}>
                         <span className={styles.published}>Published: {`${article.publishedDate.split('T')[0]} ${article.publishedDate.split('.')[0].split('T')[1]}`}</span>
@@ -82,7 +89,7 @@ const NewsArticle = (props) => {
                 <h2>Comments</h2>
                 <div className={styles.bodyDiv}>
                     <div>
-                        { userContext.user.loggedIn ? <AddComment articleId={article._id} /> : '' }
+                        {userContext.user.loggedIn ? <AddComment articleId={article._id} /> : ''}
                     </div>
                     <div>
                         <NewsArticleCommentsRenderer articleId={article._id} />

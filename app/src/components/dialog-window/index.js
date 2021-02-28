@@ -11,7 +11,7 @@ actionName
 
 const DialogWindow = props => {
     return (
-        <Dialog open={props.open} scroll='paper' fullWidth={true} maxWidth='md' onClose={props.onClearClose} aria-labelledby="form-dialog-title">
+        <Dialog open={props.open} scroll='paper' fullWidth={true} maxWidth={props.maxWidth ? props.maxWidth : 'md'} onClose={props.onClearClose} aria-labelledby="form-dialog-title">
             <DialogTitle className={styles.title} id='form-dialog-title'>{props.title}</DialogTitle>
             <DialogContent className={styles.dialog}>
                 {props.children}

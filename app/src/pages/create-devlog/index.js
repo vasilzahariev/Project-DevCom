@@ -8,6 +8,7 @@ import UserContext from '../../contexts/UserContext';
 import { Backdrop, CircularProgress } from '@material-ui/core';
 import ALink from '../../components/link';
 import CreateDevlogForm from '../../components/create-devlog-form';
+import HeaderLink from '../../components/header-link';
 
 const CreateDevlog = () => {
     const configContext = useContext(ConfigContext);
@@ -57,7 +58,7 @@ const CreateDevlog = () => {
     return (
         <Layout>
             <PageDiv>
-                <h1>Create a Devlog for <ALink to={`/projects/${params.url}`}>{project.name}</ALink></h1>
+                <h1>Create a Devlog for <HeaderLink to={`/projects/${params.url}`}>{project.name}</HeaderLink></h1>
                 <CreateDevlogForm project={project} />
             </PageDiv>
         </Layout>

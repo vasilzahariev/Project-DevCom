@@ -1,0 +1,29 @@
+.btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+
+    transition: .5s all;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.dislike {
+    color: white;
+
+    transition: .5s all;
+}
+
+.dislike:hover {
+    color: rgba(255, 0, 0, 0.589);
+}
+
+.disliked {
+    color: rgba(255, 0, 0, 0.589);
+}
+
+.disliked:hover {
+    color: white;
+}

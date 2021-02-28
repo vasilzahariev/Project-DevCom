@@ -14,6 +14,9 @@ import EditProfile from './pages/edit-profile';
 import Project from './pages/project';
 import CreateDevlog from './pages/create-devlog';
 import Chat from './pages/chat';
+import Forums from './pages/forums';
+import Forum from './pages/forum';
+import ForumPost from './pages/forum-post';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -45,6 +48,9 @@ const Navigation = () => {
             <Route exact path='/chat'>
                 {userContext.user.loggedIn ? <Chat /> : <Redirect to='auth/login' />}
             </Route>
+            <Route exact path='/forum' component={Forums} />
+            <Route exact path='/forum/f/:forumName' component={Forum} />
+            <Route exact path='/forum/f/:forumName/:postId' component={ForumPost} />
             {/* TODO: 404 and 505 */}
         </Switch>
     )

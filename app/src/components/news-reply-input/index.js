@@ -57,7 +57,7 @@ const NewsReplyInput = (props) => {
         <form method='POST' onSubmit={onSubmit}>
             <TextArea placeholder='Reply' onChange={onReplyChange} value={reply} height={75} />
             <div className={styles.btns}>
-                <SubmitBtn color='red'>Cancel</SubmitBtn>
+                <SubmitBtn color='red' onClick={closeComponent}>Cancel</SubmitBtn>
                 <div className={styles.btn}>
                     <SubmitBtn>Post</SubmitBtn>
                 </div>

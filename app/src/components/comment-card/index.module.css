@@ -1,0 +1,33 @@
+.card {
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 95%;
+    background-color: #4a515d73;
+    padding: 2% 2% 2% 0%;
+}
+
+.normal {
+    border: 1px solid #586379b4;
+}
+
+.answer {
+    border: 1px solid #23a723;
+}
+
+.comment {
+    background-color: #2e3035;
+    border: 1px solid #586379b4;
+    border-radius: 15px;
+    padding: 1%;
+    margin-bottom: 2.5%;
+}
+
+.btns {
+    width: 50%;
+    margin-top: 1%;
+}
+
+.btn {
+    display: inline;
+    margin-right: 2.5%;
+}

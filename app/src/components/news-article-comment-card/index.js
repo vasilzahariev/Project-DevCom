@@ -4,8 +4,11 @@ import { useState, useEffect, useContext } from 'react';
 import EpicProgrammer from '../epic-programmer';
 import NewsReplyInput from '../news-reply-input';
 import NewsRepliesRenderer from '../news-replies-renderer';
+import UserContext from '../../contexts/UserContext';
 
 const NewsArticleCommentCard = (props) => {
+    const userContext = useContext(UserContext);
+
     const [openReplyInput, setOpenReplyInput] = useState(false);
 
     const onReplyClick = e => {
@@ -22,7 +25,7 @@ const NewsArticleCommentCard = (props) => {
                     <span>{props.comment.content}</span>
                 </div>
                 <div className={styles.replyDiv}>
-                    <span className={styles.reply} onClick={onReplyClick}>Reply</span>
+                    { userContext.user.loggedIn ? <span className={styles.reply} onClick={onReplyClick}>Reply</span> : ''}
                 </div>
                 <div>
                     {openReplyInput ? <NewsReplyInput commentId={props.comment._id} setOpen={setOpenReplyInput} /> : ''}
