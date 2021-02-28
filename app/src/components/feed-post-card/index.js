@@ -9,6 +9,7 @@ import ConfigContext from '../../contexts/ConfigContext';
 import CommentIcon from '@material-ui/icons/Comment';
 import FeedPostCommentDialog from '../feed-post-comment-dialog';
 import { Link } from 'react-router-dom';
+import UserAvatar from '../user-avatar';
 
 const FeedPostCard = (props) => {
     const userContext = useContext(UserContext);
@@ -55,7 +56,7 @@ const FeedPostCard = (props) => {
                 <div className={styles.userPart}>
                     <Grid container justify='flex-start' alignItems='center'>
                         <Grid item xs={1}>
-                            <HeaderLink to={`/u/${props.user.username}`}><img className={styles.pfp} src={props.user.profilePictureUrl} alt='Pfp' /></HeaderLink>
+                            <HeaderLink to={`/u/${props.user.username}`}><UserAvatar pfp={props.user.profilePictureUrl} size={6} /></HeaderLink>
                         </Grid>
                         <Grid item xs={9}>
                             <HeaderLink to={`/u/${props.user.username}`}>{props.user.fullName} <span className={styles.username}>@{props.user.username}</span></HeaderLink>

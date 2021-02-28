@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { CircularProgress, Grid, Avatar } from '@material-ui/core';
 import UserContext from '../../contexts/UserContext';
 import ALink from '../link';
+import HeaderLink from '../header-link';
 
 const MessagesRenderer = props => {
     const restApiUrl = useContext(ConfigContext).restApiUrl;
@@ -56,7 +57,7 @@ const MessagesRenderer = props => {
                 <div key={message._id} index={index}>
                     <Grid container justify='flex-start' alignItems='center' spacing={2}>
                         <Grid item><Avatar src={message.user.profilePictureUrl}/></Grid>
-                        <Grid item><ALink to={`/u/${message.user.username}`}>{message.user.username}</ALink>{isUser ? ' (You)' : ''}</Grid>
+                        <Grid item><HeaderLink to={`/u/${message.user.username}`}>{message.user.username}</HeaderLink>{isUser ? ' (You)' : ''}</Grid>
                         <Grid className={styles.date} item>{date.toLocaleString()}</Grid>
                     </Grid>
                     <div className={`${styles.message}`}>

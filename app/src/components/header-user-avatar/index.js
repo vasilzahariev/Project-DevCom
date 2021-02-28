@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import styles from './index.module.css';
 import { Button, Avatar, makeStyles } from '@material-ui/core';
 import HeaderUserMenu from '../header-user-menu';
+import UserContext from '../../contexts/UserContext';
 
 const useStyles = makeStyles((theme) => ({
     avatar: {
@@ -11,6 +12,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HeaderUserAvatar = (props) => {
+    const userContext = useContext(UserContext);
+
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -51,7 +54,7 @@ const HeaderUserAvatar = (props) => {
                 aria-controls={open ? 'menu-list-grow' : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}>
-                <Avatar src='/logo512.png'></Avatar>
+                <Avatar src={userContext.user.profilePictureUrl}></Avatar>
             </Button>
             <HeaderUserMenu open={open} anchorRef={anchorRef} handleClose={handleClose} handleListKeyDown={handleListKeyDown}>
                 {props.children}

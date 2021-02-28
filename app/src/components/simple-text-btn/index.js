@@ -6,6 +6,7 @@ const SimpleTextBtn = (props) => {
         else if (props.color === 'green') return styles.green;
         else if (props.color === 'yellow') return styles.yellow;
         else if (props.color === 'purple') return styles.purple;
+        else if (props.color === 'gray') return styles.gray;
         else return styles.blue;
     }
 

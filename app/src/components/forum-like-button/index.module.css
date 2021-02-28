@@ -1,0 +1,27 @@
+.btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+
+    transition: .5s all;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.like {
+    color: white;
+}
+
+.like:hover {
+    color: #059dc7;
+}
+
+.liked {
+    color: #059dc7;
+}
+
+.liked:hover {
+    color: white;
+}

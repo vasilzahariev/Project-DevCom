@@ -16,6 +16,7 @@ import ALink from '../link';
 import SimpleTextBtn from '../simple-text-btn';
 import CancelIcon from '@material-ui/icons/Cancel';
 import MessagesRenderer from '../messages-renderer';
+import HeaderLink from '../header-link';
 
 const ChatRenderer = props => {
     const configContext = useContext(ConfigContext);
@@ -89,7 +90,7 @@ const ChatRenderer = props => {
             return (
                 <Grid key={u._id} index={index} item xs={12}>
                     <Grid container justify='space-between' alignItems='center'>
-                        <Grid item><ALink to={`/u/${u.username}`}>{u.username}</ALink>{owner ? ' (Owner)' : ''}</Grid>
+                        <Grid item><HeaderLink to={`/u/${u.username}`}>{u.username}</HeaderLink>{owner ? ' (Owner)' : ''}</Grid>
                         {isCurrentUserOwner && !owner ? <Grid item><SimpleTextBtn color='red'><CancelIcon /></SimpleTextBtn></Grid> : ''}
                     </Grid>
                 </Grid>

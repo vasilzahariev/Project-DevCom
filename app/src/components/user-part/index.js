@@ -1,10 +1,11 @@
 import styles from './index.module.css';
 import { useEffect, useState, useContext } from 'react';
 import ConfigContext from '../../contexts/ConfigContext';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { CircularProgress, Grid, Avatar } from '@material-ui/core';
 import UserLinks from '../user-links';
 import UserContext from '../../contexts/UserContext';
 import HeaderLink from '../header-link';
+import UserAvatar from '../user-avatar';
 
 const UserPart = (props) => {
     const userContext = useContext(UserContext);
@@ -35,7 +36,7 @@ const UserPart = (props) => {
         <div className={styles.card}>
             <Grid container alignItems='center'>
                 <Grid item xs={1}>
-                    <img className={styles.ppf} src={user.profilePictureUrl} alt='ppf' />
+                    <UserAvatar pfp={user.profilePictureUrl} size={10} />
                 </Grid>
                 <Grid item xs={2}>
                     <Grid container direction='column' justify='center' alignItems='center'>
