@@ -36,7 +36,7 @@ const UserProfile = () => {
             setEnded(true);
         });
 
-    }, []);
+    }, [params.username]);
 
     const onClick = (e, val) => {
         setSection(val);
@@ -58,7 +58,7 @@ const UserProfile = () => {
                 <input className={`${styles.btn} ${section === 'education' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'education')} value='Education' />
                 <input className={`${styles.btn} ${section === 'work' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'work')} value='Work' />
                 <input className={`${styles.btn} ${section === 'projects' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'projects')} value='Projects' />
-                {(userContext.user && userContext.user.loggedIn && userContext.user.username === params.username) ? <input className={`${styles.btn} ${section === 'dashboard' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'dashboard')} value='Dashboard' /> : ''}
+                {(userContext.user.loggedIn && (userContext.user.username === params.username || userContext.user.isAdmin)) ? <input className={`${styles.btn} ${section === 'dashboard' ? styles.currentTab : ''}`} type='submit' onClick={(e) => onClick(e, 'dashboard')} value='Dashboard' /> : ''}
             </div>
 
             {section === 'feed' ? <UserFeed username={params.username} /> : ''}

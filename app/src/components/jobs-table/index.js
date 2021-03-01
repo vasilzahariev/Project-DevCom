@@ -32,7 +32,7 @@ const JobsTable = props => {
     const renderer = useMemo(() => {
         return jobs.map((job, index) => {
             return (
-                <JobRow key={job._id} index={index} job={job} />
+                <JobRow key={job._id} index={index} job={job} showUser={props.showUser} />
             );
         });
     }, [jobs]);
@@ -50,7 +50,8 @@ const JobsTable = props => {
                     <Grid container>
                         <Grid className={styles.value} item xs={1}><b>#</b></Grid>
                         <Grid className={styles.value} item xs={2}><b>Name</b></Grid>
-                        <Grid className={styles.value} item xs={2}><b>Type</b></Grid>
+                        {props.showUser ? <Grid className={styles.value} item xs={1}><b>Username</b></Grid> : ''}
+                        <Grid className={styles.value} item xs={props.showUser ? 1 : 2}><b>Type</b></Grid>
                         <Grid className={styles.value} item xs={2}><b>Published Date</b></Grid>
                         <Grid className={styles.value} item xs={1}><b>Status</b></Grid>
                         <Grid className={styles.value} item xs={4}><b>Actions</b></Grid>

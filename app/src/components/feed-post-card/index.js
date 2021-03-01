@@ -56,7 +56,7 @@ const FeedPostCard = (props) => {
                 <div className={styles.userPart}>
                     <Grid container justify='flex-start' alignItems='center'>
                         <Grid item xs={1}>
-                            <HeaderLink to={`/u/${props.user.username}`}><UserAvatar pfp={props.user.profilePictureUrl} size={6} /></HeaderLink>
+                            <HeaderLink to={`/u/${props.user.username}`}><UserAvatar user={props.user} size={6} /></HeaderLink>
                         </Grid>
                         <Grid item xs={9}>
                             <HeaderLink to={`/u/${props.user.username}`}>{props.user.fullName} <span className={styles.username}>@{props.user.username}</span></HeaderLink>

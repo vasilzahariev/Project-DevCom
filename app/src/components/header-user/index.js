@@ -32,7 +32,7 @@ const HeaderUser = () => {
                     {/* TODO: Once proper authentication is added change the link */}
                     <HeaderUserMenuItem to={`/u/${userContext.user.username}`}>Profile</HeaderUserMenuItem>
                     <HeaderUserMenuItem to={`u/${userContext.user.username}/settings`}>Settings</HeaderUserMenuItem>
-                    <HeaderUserMenuItem to='/drafts'>Drafts</HeaderUserMenuItem>
+                    {userContext.user.isAdmin || userContext.user.isOwner ? <HeaderUserMenuItem to='/admin'>Admin</HeaderUserMenuItem> : ''}
                     <HeaderUserMenuItem onClick={onLogoutClick} to='/auth/logout'>Log out</HeaderUserMenuItem>
                 </HeaderUserAvatar>
             </Grid>

@@ -133,7 +133,7 @@ const EditForumDialog = props => {
         } else if (!response.status) {
             history.push('/505');
         } else {
-            history.push(`/forum/f/${response.name}`);
+            // history.push(`/forum/f/${response.name}`);
         }
 
         close();

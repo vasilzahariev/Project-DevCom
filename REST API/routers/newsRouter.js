@@ -7,7 +7,10 @@ const {
     addComment,
     addReply,
     getReplies,
-    getUserArticles
+    getUserArticles,
+    getAllNewsArticlesWithAuthor,
+    deleteArticle,
+    publish
 } = require('../controllers/newsController');
 const { getUserById } = require('../controllers/authController');
 
@@ -19,7 +22,7 @@ router.get('/', async (req, res) => {
     res.send(result);
 });
 
-router.get('/:path', async (req, res) => {
+router.get('/n/:path', async (req, res) => {
     const path = req.params.path;
     const result = await getNewsArticle(path);
     result.author = await getUserById(result.article.authorId);
@@ -71,9 +74,29 @@ router.get('/comment/:commentId/getReplies', async (req, res) => {
     res.send(result);
 });
 
+router.get('/getUserArticles/', async (req, res) => {
+    const result = await getAllNewsArticlesWithAuthor();
+
+    res.send(result);
+});
+
 router.get('/getUserArticles/:username', async (req, res) => {
     const username = req.params.username;
     const result = await getUserArticles(username);
+
+    res.send(result);
+});
+
+router.post('/delete/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await deleteArticle(id);
+
+    res.send(result);
+});
+
+router.post('/publish/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await publish(id);
 
     res.send(result);
 });

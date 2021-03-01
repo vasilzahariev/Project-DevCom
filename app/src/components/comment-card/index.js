@@ -113,7 +113,7 @@ const CommentCard = props => {
                             </Grid>
                             <Grid item>
                                 <Grid container alignItems='center' spacing={1}>
-                                    <Grid item><UserAvatar pfp={props.user.profilePictureUrl} size={5} /></Grid>
+                                    <Grid item><UserAvatar user={props.user} size={5} /></Grid>
                                     <Grid item><HeaderLink to={`/u/${props.user.username}`}>{props.user.username}</HeaderLink>{checkIfIsOP() ? ' (OP)' : ''}</Grid>
                                 </Grid>
                             </Grid>

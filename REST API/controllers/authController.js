@@ -234,6 +234,30 @@ const getAllUsers = async () => {
     return await User.find();
 }
 
+const setRole = async body => {
+    try {
+        const {
+            id,
+            role,
+            status
+        } = body;
+
+        if (role === 'admin') await User.findByIdAndUpdate(id, { isAdmin: status });
+        else if (role === 'journalist') await User.findByIdAndUpdate(id, { isJournalist: status });
+        else if (role === 'verify') await User.findByIdAndUpdate(id, { isVerified: status });
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     register,
     login,
@@ -245,5 +269,6 @@ module.exports = {
     getUserIdByUsername,
     getUserInformation,
     updateUserInfo,
-    getAllUsers
+    getAllUsers,
+    setRole
 }

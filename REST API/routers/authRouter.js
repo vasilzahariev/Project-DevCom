@@ -8,7 +8,8 @@ const {
     getUserByUsername,
     getUserInformation,
     updateUserInfo,
-    getAllUsers
+    getAllUsers,
+    setRole
 } = require('../controllers/authController');
 
 const router = express();
@@ -71,6 +72,12 @@ router.post('/updateUserInformation', async (req, res) => {
     const result = await updateUserInfo(req.body);
 
     res.send(result)
+});
+
+router.post('/setRole', async (req, res) => {
+    const result = await setRole(req.body);
+
+    res.send(result);
 });
 
 module.exports = router;

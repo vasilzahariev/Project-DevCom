@@ -24,13 +24,13 @@ const DevLogs = props => {
     const renderer = useMemo(() => {
         return props.devlogs.map((devlog, index) => {
             return (
-                <RenderedDevlogCard key={devlog._id} index={index} devlog={devlog} checkIfUserIsMember={checkIfUserIsMember} />
+                <RenderedDevlogCard key={devlog._id} index={index} devlog={devlog} checkIfUserIsMember={checkIfUserIsMember} selectedDevlogId={props.selectedDevlogId} />
             );
         });
     }, [props.devlogs]);
 
     const onAddClick = e => {
-        history.push(`/projects/${props.project.projectUrl}/addDevlog`)
+        history.push(`/devlogs/add/${props.project.projectUrl}`)
     }
 
     return (
