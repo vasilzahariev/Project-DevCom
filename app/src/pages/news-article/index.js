@@ -25,7 +25,7 @@ const NewsArticle = (props) => {
     useEffect(() => {
         const path = params.path;
 
-        fetch(`${configContext.restApiUrl}/news/${path}`, {
+        fetch(`${configContext.restApiUrl}/news/n/${path}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ const NewsArticle = (props) => {
                     <Grid item xs={2}>
                         <Grid container alignItems='center'>
                             <Grid item>
-                                <UserAvatar pfp={author.profilePictureUrl} size={6} />
+                                <UserAvatar user={author} size={6} />
                             </Grid>
                             <Grid item>
                                 <span className={styles.byText}><HeaderLink to={`/u/${author.username}`}>{author.fullName}</HeaderLink></span>

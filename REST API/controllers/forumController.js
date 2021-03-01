@@ -5,6 +5,7 @@ const ForumComment = require('../models/ForumComment');
 const ForumMember = require('../models/ForumMember');
 
 const { getUserById, getUserIdByUsername } = require('./authController');
+const { post } = require('../routers/forumRouter');
 
 const checkForName = async name => {
     const count = await Forum.count({ name: name });
@@ -667,6 +668,142 @@ const getAllForums = async () => {
     return await Forum.find();
 }
 
+const sortForumsAlphabetically = (a, b) => {
+    const title1 = a.forum.title.toLowerCase();
+    const title2 = b.forum.title.toLowerCase();
+
+    if (title1 < title2) return -1;
+    else if (title1 > title2) return 1;
+
+    return 0;
+}
+
+const getUserForums = async () => {
+    try {
+        const forumsObj = await Forum.find();
+        const forums = await Promise.all(forumsObj.map(async forum => {
+            const user = await getUserById(forum.ownerId);
+
+            return {
+                forum,
+                user
+            }
+        }));
+
+        return {
+            status: true,
+            forums: forums.sort(sortForumsAlphabetically)
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const getUserForumsWithId = async userId => {
+    try {
+        const forumsObj = await ForumMember.find({ userId });
+        const forumIds = forumsObj.map(forum => forum._id);
+        const forums = await Promise.all(forumIds.map(async id => {
+            const forum = await Forum.findById(id);
+            const user = await getUserById(forum.ownerId);
+
+            return {
+                forum,
+                user
+            }
+        }));
+
+        return {
+            status: true,
+            forums
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const deleteForum = async forumId => {
+    try {
+        const posts = await ForumPost.find({ forumId });
+        
+        for (const post of posts) {
+            const postId = post._id;
+
+            await ForumComment.deleteMany({ postId });
+        }
+
+        await ForumPost.deleteMany({ forumId });
+        await ForumMember.deleteMany({ forumId });
+        await ForumModerator.deleteMany({ forumId });
+        await Forum.findByIdAndDelete(forumId);
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const sortUserPosts = (a, b) => {
+    const forum1 = a.forum.title.toLowerCase();
+    const forum2 = b.forum.title.toLowerCase();
+    const post1 = a.post.title.toLowerCase();
+    const post2 = b.post.title.toLowerCase();
+    const date1 = new Date(Date.parse(`${a.post.publishedDate}`));
+    const date2 = new Date(Date.parse(`${b.post.publishedDate}`));
+
+    if (forum1 < forum2) return -1;
+    else if (forum1 > forum2) return 1;
+    else if (post1 < post2) return -1;
+    else if (post1 > post2) return 1;
+    else if (date1 < date2) return 1;
+    else if (date1 > date2) return -1;
+
+    return 0;
+}
+
+const getUserPosts = async username => {
+    try {
+        const userId = username === undefined ? undefined : await getUserIdByUsername(username);
+
+        const postsObj = userId === undefined ? await ForumPost.find() : await ForumPost.find({ authorId: userId });
+        const posts = await Promise.all(postsObj.map(async post => {
+            const user = await getUserById(post.authorId);
+            const forum = await Forum.findById(post.forumId);
+            
+            return {
+                post,
+                user,
+                forum
+            }
+        }));
+
+        return {
+            status: true,
+            posts: posts.sort(sortUserPosts)
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     create,
     edit,
@@ -687,5 +824,9 @@ module.exports = {
     leave,
     addMods,
     getUserForumFeed,
-    getAllForums
+    getAllForums,
+    getUserForums,
+    getUserForumsWithId,
+    deleteForum,
+    getUserPosts
 }

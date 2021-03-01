@@ -102,7 +102,7 @@ const EditProjectDialog = props => {
             gitHubUrl
         }
 
-        const promise = await fetch(`${configContext.restApiUrl}/project/${props.project._id}/edit`, {
+        const promise = await fetch(`${configContext.restApiUrl}/project/p/${props.project._id}/edit`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ const EditProjectDialog = props => {
         } else {
             onClearClose();
 
-            history.push(`/projects/${response.url}`)
+            // history.push(`/projects/${response.url}`)
         }
     }
 

@@ -6,7 +6,13 @@ const {
     edit,
     addMember,
     addDevlog,
-    getUserDevlogs
+    getUserDevlogs,
+    getDevlogs,
+    publish,
+    deleteDevlog,
+    editDevlog,
+    getProjectsAndUsers,
+    deleteProject
 } = require('../controllers/projectController');
 
 const router = express();
@@ -24,14 +30,14 @@ router.get('/u/:username', async (req, res) => {
     res.send(result);
 });
 
-router.get('/:url', async (req, res) => {
+router.get('/p/:url', async (req, res) => {
     const url = req.params.url;
     const result = await getProjectByUrl(url);
 
     res.send(result);
 });
 
-router.post('/:id/edit', async (req, res) => {
+router.post('/p/:id/edit', async (req, res) => {
     const id = req.params.id;
     const result = await edit(id, req.body);
 
@@ -50,9 +56,48 @@ router.post('/addDevlog', async (req, res) => {
     res.send(result);
 });
 
+router.get('/getUserDevlogs/', async (req, res) => {
+    const result = await getDevlogs();
+
+    res.send(result);
+});
+
 router.get('/getUserDevlogs/:username', async (req, res) => {
     const username = req.params.username;
     const result = await getUserDevlogs(username);
+
+    res.send(result);
+});
+
+router.post('/publish/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await publish(id);
+
+    res.send(result);
+});
+
+router.post('/deleteDevlog/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await deleteDevlog(id);
+
+    res.send(result);
+});
+
+router.post('/devlog/edit', async (req, res) => {
+    const result = await editDevlog(req.body);
+
+    res.send(result);
+});
+
+router.get('/getProjectsAndUsers', async (req, res) => {
+    const result = await getProjectsAndUsers();
+
+    res.send(result);
+});
+
+router.post('/deleteProject/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await deleteProject(id);
 
     res.send(result);
 });

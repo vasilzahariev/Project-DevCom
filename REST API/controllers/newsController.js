@@ -4,7 +4,7 @@ const NewsReply = require('../models/NewsReply');
 const mongodb = require('mongodb')
 
 const {
-    getUserIdByUsername
+    getUserIdByUsername, getUserById
 } = require('./authController');
 
 const getAllNewsArticles = async () => {
@@ -163,6 +163,68 @@ const getUserArticles = async username => {
     }
 }
 
+const getAllNewsArticlesWithAuthor = async () => {
+    try {
+        const articlesObj = await NewsArticle.find();
+        const articles = await Promise.all(articlesObj.map(async article => {
+            const author = await getUserById(article.authorId);
+    
+            return Object.assign({ author }, article._doc);
+        }));
+    
+        return {
+            status: true,
+            articles
+        };
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const deleteArticle = async id => {
+    try {
+        const comments = await NewsComment.find({ articleId: id });
+
+        for (const commentId of comments) {
+            await NewsReply.deleteMany({ commentId });
+
+            await NewsComment.findByIdAndDelete(commentId);
+        }
+
+        await NewsArticle.findByIdAndDelete(id);
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const publish = async id => {
+    try {
+        await NewsArticle.findByIdAndUpdate(id, { isDraft: false });
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     getAllNewsArticles,
     getNewsArticle,
@@ -171,5 +233,8 @@ module.exports = {
     addComment,
     addReply,
     getReplies,
-    getUserArticles
+    getUserArticles,
+    getAllNewsArticlesWithAuthor,
+    deleteArticle,
+    publish
 }

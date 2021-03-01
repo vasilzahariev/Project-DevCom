@@ -5,6 +5,7 @@ import SubmitBtn from '../submit-btn';
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import ConfigContext from '../../contexts/ConfigContext';
+import HeaderLink from '../header-link';
 
 const JobRow = props => {
     const configContext = useContext(ConfigContext);
@@ -46,12 +47,27 @@ const JobRow = props => {
         if (!response.status) history.push('/505');
     }
 
+    const onDeleteClick = async e => {
+        if (!window.confirm(`Are you sure you want to delete a job with name: "${props.job.name}"`)) return;
+
+        const promise = await fetch(`${configContext.restApiUrl}/jobs/delete/${props.job._id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const response = await promise.json();
+
+        if (!response.status) history.push('/505');
+    }
+
     return (
         <Grid className={styles.row} item xs={12}>
             <Grid container>
                 <Grid className={styles.value} item xs={1}>{props.index}</Grid>
                 <Grid className={styles.value} item xs={2}>{props.job.name}</Grid>
-                <Grid className={styles.value} item xs={2}>{props.job.type === 'fullTime' ? 'Full Time' : (props.job.type === 'partTime' ? 'Part Time' : (props.job.type === 'freelance' ? 'Freelance' : ''))}</Grid>
+                {props.showUser ? <Grid className={styles.value} item xs={1}><HeaderLink to={`/u/${props.job.user.username}`}>{props.job.user.username}</HeaderLink></Grid> : ''}
+                <Grid className={styles.value} item xs={props.showUser ? 1 : 2}>{props.job.type === 'fullTime' ? 'Full Time' : (props.job.type === 'partTime' ? 'Part Time' : (props.job.type === 'freelance' ? 'Freelance' : ''))}</Grid>
                 <Grid className={styles.value} item xs={2}>{date.toLocaleDateString()}</Grid>
                 <Grid className={styles.value} item xs={1}>{props.job.isClosed ? 'Closed' : 'Open'}</Grid>
                 <Grid className={styles.value} item xs={4}>
@@ -65,7 +81,7 @@ const JobRow = props => {
                         {props.job.isClosed ? <SubmitBtn color='green' onClick={onOpenClick}>Open</SubmitBtn> : <SubmitBtn color='red' onClick={onCloseClick}>Close</SubmitBtn>}
                     </div>
                     <div className={styles.btn}>
-                        <SubmitBtn color='red'>Delete</SubmitBtn>
+                        <SubmitBtn color='red' onClick={onDeleteClick}>Delete</SubmitBtn>
                     </div>
                 </Grid>
             </Grid>

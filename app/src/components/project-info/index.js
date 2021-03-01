@@ -53,7 +53,7 @@ const ProjectInfo = props => {
                 <div styles={styles.desc} ref={desc}>
                 </div>
                 {checkIfUserIsMember() ? <div className={styles.btns}><SubmitBtn onClick={() => { setEditOpen(true) }} color='yellow'>Edit</SubmitBtn></div> : ''}
-                {checkIfUserIsMember() ? <EditProjectDialog open={editOpen} setOpen={setEditOpen} project={props.project} /> : ''}
+                {checkIfUserIsMember() && editOpen ? <EditProjectDialog open={editOpen} setOpen={setEditOpen} project={props.project} /> : ''}
             </div>
             <div className={`${styles.card} ${styles.members}`}>
                 <h2 className={styles.centered}><EpicProgrammer>Members:</EpicProgrammer></h2>

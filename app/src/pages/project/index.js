@@ -19,7 +19,7 @@ const Project = () => {
     const [members, setMembers] = useState([]);
 
     useEffect(() => {
-        fetch(`${configContext.restApiUrl}/project/${params.url}`, {
+        fetch(`${configContext.restApiUrl}/project/p/${params.url}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ const Project = () => {
             <div className={styles.project}>
                 <Grid container alignItems="flex-start" spacing={2}>
                     <Grid item xs={8}>
-                        <DevLogs project={project} devlogs={devLogs} members={members} />
+                        <DevLogs project={project} devlogs={devLogs} members={members} selectedDevlogId={params.selectedDevlogId} />
                     </Grid>
                     <Grid item xs={4}>
                         <ProjectInfo project={project} devLogs={devLogs.length} members={members} />

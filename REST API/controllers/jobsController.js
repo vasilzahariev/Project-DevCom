@@ -1,5 +1,5 @@
 const Job = require('../models/Job');
-const { getUserIdByUsername } = require('./authController');
+const { getUserIdByUsername, getUserById } = require('./authController');
 
 const createJob = async body => {
     const {
@@ -85,10 +85,48 @@ const getUserJobs = async username => {
     }
 }
 
+const getJobsWithUsers = async () => {
+    try {
+        const jobsObj = await Job.find();
+        const jobs = await Promise.all(jobsObj.map(async job => {
+            const user = await getUserById(job.authorId);
+
+            return Object.assign({ user }, job._doc);
+        }));
+
+        return {
+            status: true,
+            jobs
+        }
+    } catch (err) {
+        console.log(err);
+        
+        return {
+            status: false
+        }
+    }
+}
+
+const deleteJob = async id => {
+    try {
+        await Job.findByIdAndDelete(id);
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     createJob,
     getJobs,
     closeJob,
     getUserJobs,
-    openJob
+    openJob,
+    getJobsWithUsers,
+    deleteJob
 }

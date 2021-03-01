@@ -19,7 +19,11 @@ const {
     leave,
     addMods,
     getUserForumFeed,
-    getAllForums
+    getAllForums,
+    getUserForums,
+    getUserForumsWithId,
+    deleteForum,
+    getUserPosts
 } = require('../controllers/forumController')
 
 const router = express();
@@ -148,6 +152,39 @@ router.get('/getUserForumFeed/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
     const result = await getAllForums();
+
+    res.send(result);
+});
+
+router.get('/getUserForums/', async (req, res) => {
+    const result = await getUserForums();
+
+    res.send(result);
+});
+
+router.get('/getUserForums/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await getUserForumsWithId(id);
+
+    res.send(result);
+});
+
+router.post('/delete/:id', async (req, res) => {
+    const result = await deleteForum(req.params.id);
+
+    res.send(result);
+});
+
+router.get('/getUserPosts/', async (req, res) => {
+    const username = undefined;
+    const result = await getUserPosts(username);
+
+    res.send(result);
+});
+
+router.get('/getUserPosts/:username', async (req, res) => {
+    const username = req.params.username;
+    const result = await getUserPosts(username);
 
     res.send(result);
 });

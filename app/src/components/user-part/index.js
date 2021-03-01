@@ -26,7 +26,7 @@ const UserPart = (props) => {
             setUserLinks(response.userLinks);
             setEnded(true);
         });
-    }, []);
+    }, [props.username]);
 
     if (!ended) {
         return (<CircularProgress color="inherit" />);
@@ -36,7 +36,7 @@ const UserPart = (props) => {
         <div className={styles.card}>
             <Grid container alignItems='center'>
                 <Grid item xs={1}>
-                    <UserAvatar pfp={user.profilePictureUrl} size={10} />
+                    <UserAvatar user={user} size={10} />
                 </Grid>
                 <Grid item xs={2}>
                     <Grid container direction='column' justify='center' alignItems='center'>

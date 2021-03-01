@@ -1,0 +1,14 @@
+.row {
+    background-color: #4a515d1e;
+
+    transition: .5s all;
+}
+
+.row:hover {
+    background-color: #4a515d73;
+}
+
+.value {
+    text-align: left;
+    padding: 1%;
+}

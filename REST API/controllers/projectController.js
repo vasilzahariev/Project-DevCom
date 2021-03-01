@@ -61,6 +61,18 @@ const create = async body => {
     }
 }
 
+const sortDevlogs = (a, b) => {
+    const date1 = new Date(Date.parse(`${a.publishedDate}`));
+    const date2 = new Date(Date.parse(`${b.publishedDate}`));
+
+    if (a.isDraft && !b.isDraft) return -1;
+    else if (!a.isDraft && b.isDraft) return 1;
+    else if (date1 < date2) return 1;
+    else if (date1 > date2) return -1;
+
+    return 0;
+}
+
 const getProject = async id => {
     return await Project.findById(id);
 }
@@ -239,7 +251,137 @@ const getUserDevlogs = async username => {
 
         return {
             status: true,
-            devlogs
+            devlogs: devlogs.sort(sortDevlogs)
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const getDevlogs = async () => {
+    try {
+        const devlogsObj = await Devlog.find();
+        const devlogs = await Promise.all(devlogsObj.map(async devlog => {
+            const project = await Project.findById(devlog.projectId);
+            const user = await getUserById(devlog.authorId);
+
+            return {
+                _id: devlog._id,
+                projectId: devlog.projectId,
+                authorId: devlog.authorId,
+                title: devlog.title,
+                content: devlog.content,
+                isDraft: devlog.isDraft,
+                publishedDate: devlog.publishedDate,
+                project,
+                user
+            }
+        }));
+
+        return {
+            status: true,
+            devlogs: devlogs.sort(sortDevlogs)
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const publish = async id => {
+    try {
+        await Devlog.findByIdAndUpdate(id, { isDraft: false, publishedDate: Date.now() });
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const deleteDevlog = async id => {
+    try {
+        await Devlog.findByIdAndDelete(id);
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const editDevlog = async body => {
+    try {
+        const {
+            id,
+            title,
+            content
+        } = body;
+
+        await Devlog.findByIdAndUpdate(id, { title, content });
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const getProjectsAndUsers = async () => {
+    try {
+        const projectsObj = await Project.find();
+        const projects = await Promise.all(projectsObj.map(async project => {
+            const user = await getUserById(project.ownerId);
+            
+            return {
+                project,
+                user
+            }
+        }));
+
+        return {
+            status: true,
+            projects
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const deleteProject = async id => {
+    try {
+        await Project.findByIdAndDelete(id);
+        await UserProject.deleteMany({ projectId: id });
+        await Devlog.deleteMany({ projectId: id });
+
+        return {
+            status: true
         }
     } catch (err) {
         console.log(err);
@@ -257,5 +399,11 @@ module.exports = {
     edit,
     addMember,
     addDevlog,
-    getUserDevlogs
+    getUserDevlogs,
+    getDevlogs,
+    publish,
+    deleteDevlog,
+    editDevlog,
+    getProjectsAndUsers,
+    deleteProject
 }

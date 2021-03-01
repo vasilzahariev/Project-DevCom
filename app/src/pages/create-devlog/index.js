@@ -29,7 +29,8 @@ const CreateDevlog = () => {
     }
 
     useEffect(() => {
-        fetch(`${configContext.restApiUrl}/project/${params.url}`, {
+        console.log(params.url);
+        fetch(`${configContext.restApiUrl}/project/p/${params.url}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
