@@ -75,7 +75,7 @@ const HomeGuest = () => {
                                 <HeaderLink to={userContext.user.loggedIn ? `/u/${userContext.user.username}` : '/auth/register'}>
                                     <Grid container alignItems='center' spacing={2}>
                                         <Grid item><BookIcon fontSize='large' /></Grid>
-                                        <Grid item>Post to a Personal Blog</Grid>
+                                        <Grid item>Personal Blogs</Grid>
                                     </Grid>
                                 </HeaderLink>
                             </Grid>

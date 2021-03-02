@@ -392,6 +392,10 @@ const deleteProject = async id => {
     }
 }
 
+const getAllProjects = async () => {
+    return await Project.find();
+}
+
 module.exports = {
     create,
     getProjects,
@@ -405,5 +409,6 @@ module.exports = {
     deleteDevlog,
     editDevlog,
     getProjectsAndUsers,
-    deleteProject
+    deleteProject,
+    getAllProjects
 }

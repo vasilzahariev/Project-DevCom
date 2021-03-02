@@ -18,6 +18,7 @@ import Forums from './pages/forums';
 import Forum from './pages/forum';
 import ForumPost from './pages/forum-post';
 import Admin from './components/admin';
+import Search from './components/search';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -58,6 +59,7 @@ const Navigation = () => {
             <Route exact path='/admin'>
                 {userContext.user.loggedIn && (userContext.user.isAdmin || userContext.user.isOwner) ? <Admin /> : (userContext.user.loggedIn ? <Redirect to='auth/login' /> : <Redirect to='/auth/login' />)}
             </Route>
+            <Route exact path='/search/:category/:searchValue' component={Search} />
             {/* TODO: 404 and 505 */}
         </Switch>
     )
