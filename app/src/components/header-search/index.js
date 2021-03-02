@@ -10,7 +10,7 @@ const HeaderSearch = () => {
     const history = useHistory();
 
     const [searchValue, setSearchValue] = useState('');
-    const [category, setCategory] = useState('all');
+    const [category, setCategory] = useState('news');
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -21,7 +21,7 @@ const HeaderSearch = () => {
         const searchEncoded = encodeURIComponent(searchValue);
         const categoryEncoded = encodeURIComponent(category);
 
-        history.push(`/search?q=${searchEncoded}` + (category === 'all' ? '' : `&cat=${categoryEncoded}`));
+        history.push(`/search/${categoryEncoded}/${searchEncoded}`);
     }
 
     return (
@@ -32,10 +32,11 @@ const HeaderSearch = () => {
                 </Grid>
                 <Grid item xs={2}>
                     <SelectInput label='Category' name='category' value={category} setValue={setCategory}>
-                        <option value="all">All</option>
                         <option value='news'>News</option>
                         <option value='forum'>Forum Posts</option>
                         <option value='jobs'>Jobs</option>
+                        <option value='porjects'>Projects</option>
+                        <option value='jobs'>Users</option>
                     </SelectInput>
                 </Grid>
                 <Grid item xs={2}>

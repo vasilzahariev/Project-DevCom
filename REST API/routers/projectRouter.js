@@ -12,10 +12,17 @@ const {
     deleteDevlog,
     editDevlog,
     getProjectsAndUsers,
-    deleteProject
+    deleteProject,
+    getAllProjects
 } = require('../controllers/projectController');
 
 const router = express();
+
+router.get('/', async (req, res) => {
+    const result = await getAllProjects();
+
+    res.send(result);
+});
 
 router.post('/create', async (req, res) => {
     const result = await create(req.body);
