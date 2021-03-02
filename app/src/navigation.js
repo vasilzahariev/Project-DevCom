@@ -24,7 +24,9 @@ const Navigation = () => {
 
     return (
         <Switch>
-            <Route exact path='/' component={HomeGuest} />
+            <Route exact path='/'>
+                <HomeGuest />
+            </Route>
             <Route exact path='/auth/register'>
                 {userContext.user.loggedIn ? <Redirect to='/' /> : <Register />}
             </Route>

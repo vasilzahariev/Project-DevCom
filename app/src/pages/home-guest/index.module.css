@@ -1,0 +1,25 @@
+.card {
+    border: 1px solid #586379b4;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: #4a515d73;
+    padding-bottom: 2%;
+}
+
+.img {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+}
+
+.underImgText {
+    font-size: 2rem;
+}
+
+.functionalities {
+    margin: 0 auto;
+    text-align: center;
+    width: 75%;
+}
