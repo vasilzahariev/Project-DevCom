@@ -8,6 +8,7 @@ import FeedData from '../feed-data';
 import JobsTable from '../jobs-table';
 import ArticlesTable from '../articles-table';
 import DevlogsTalbe from '../devlogs-table';
+import ForumsPostsTable from '../forums-posts-table'
 
 const Dashboard = props => {
     const userContext = useContext(UserContext);
@@ -28,7 +29,7 @@ const Dashboard = props => {
             </Tabs>
 
             <div className={styles.marginTop}>
-                {tab === 0 ? 'FORUM' : ''}
+                {tab === 0 ? <ForumsPostsTable username={props.username} /> : ''}
                 {tab === 1 ? <JobsTable username={props.username} /> : ''}
                 {tab === 2 ? <DevlogsTalbe username={props.username} /> : ''}
                 {tab === 3 ? <ArticlesTable username={props.username} /> : ''}

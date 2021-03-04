@@ -53,7 +53,7 @@ const AddMemberDialog = props => {
         if (!response.status && response.err) {
             setUsernameErr(response.err);
         } else if (!response.status) {
-            history.push('/505');
+            history.push('/500');
         } else {
             onClearClose();
         }

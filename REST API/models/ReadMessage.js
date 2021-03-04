@@ -2,11 +2,15 @@ const mongoose = require('mongoose');
 
 const ReadMessageSchema = new mongoose.Schema({
     userId: {
-        type: 'Object',
+        type: 'ObjectId',
         ref: 'User'
     },
+    conversationId: {
+        type: 'ObjectId',
+        ref: 'Conversation'
+    },
     messageId: {
-        type: 'Object',
+        type: 'ObjectId',
         ref: 'Message'
     },
     read: {

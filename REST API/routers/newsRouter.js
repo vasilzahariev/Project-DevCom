@@ -10,7 +10,8 @@ const {
     getUserArticles,
     getAllNewsArticlesWithAuthor,
     deleteArticle,
-    publish
+    publish,
+    edit
 } = require('../controllers/newsController');
 const { getUserById } = require('../controllers/authController');
 
@@ -35,6 +36,12 @@ router.post('/create', async (req, res) => {
 
     res.send(result);
 })
+
+router.post('/edit', async (req, res) => {
+    const result = await edit(req.body);
+
+    res.send(result);
+});
 
 router.post('/addComment', async (req, res) => {
     const body = req.body;

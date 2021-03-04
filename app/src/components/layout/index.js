@@ -9,8 +9,6 @@ const Layout = (props) => {
             <div>
                 {props.children}
             </div>
-
-            {/* TODO: Insert Footer here when created */}
         </div>
     )
 }

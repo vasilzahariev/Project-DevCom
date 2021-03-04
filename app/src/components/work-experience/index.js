@@ -25,7 +25,7 @@ const WorkExperience = props => {
                 'Content-Type': 'application/json'
             }
         }).then(promise => promise.json()).then(response => {
-            if (!response) history.push('/505');
+            if (!response) history.push('/500');
 
             setWorkExperiences(response);
             setEnded(true);

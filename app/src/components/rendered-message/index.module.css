@@ -1,0 +1,13 @@
+.message {
+    border: 1px solid #586379b4;
+    border-radius: 10px;
+    background-color: #4a515d73;
+    margin: .5% 0 2% 0;
+    padding: 2%;
+    width: 90%;
+}
+
+.date {
+    font-size: .9rem;
+    color: gray;
+}

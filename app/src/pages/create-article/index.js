@@ -8,8 +8,8 @@ import PreviewArticleCard from '../../components/preview-article-card';
 
 const CreateArticle = () => {
     const [isEdit, setIsEdit] = useState(true);
-    const [article, setArticle] = useState({ title: '', path: '', content: '' });
-    const [articleErr, setArticleErr] = useState({ titleErr: '', path: '', content: '' });
+    const [article, setArticle] = useState({ title: '', path: '', content: '', coverImageUrl: '', tags: '' });
+    const [articleErr, setArticleErr] = useState({ titleErr: '', path: '', content: '', coverImageUrlErr: '' });
 
     const onEditClick = e => {
         e.preventDefault();

@@ -7,6 +7,7 @@ import Input from '../input';
 import TextArea from '../text-area';
 import ForumIcon from '../forum-icon';
 import { useHistory } from 'react-router-dom';
+import ImageInput from '../image-input';
 
 const CreateCommunityDialog = props => {
     const configContext = useContext(ConfigContext);
@@ -131,7 +132,7 @@ const CreateCommunityDialog = props => {
 
             return;
         } else if (!response.status) {
-            history.push('/505');
+            history.push('/500');
         } else {
             history.push(`/forum/f/${response.name}`);
         }
@@ -145,6 +146,7 @@ const CreateCommunityDialog = props => {
             <Input label='Title' placeholder='Title' value={title} onChange={onTitleChange} err={titleErr} />
             <TextArea label='Description' placeholder='Description' value={description} onChange={onDescriptionChange} height={200} />
             <Input label='Icon Url' placeholder='Icon Url' value={iconUrl} onChange={onIconUrlChange} err={iconUrlErr} />
+            <ImageInput setUrl={url => { setIconUrl(url) }} />
             <div style={{ marginTop: '2.5%' }}>
                 <ForumIcon iconUrl={iconUrl} />
             </div>

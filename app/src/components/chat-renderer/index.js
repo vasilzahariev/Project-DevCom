@@ -45,7 +45,7 @@ const ChatRenderer = props => {
                 'Content-Type': 'application/json'
             }
         }).then(promise => promise.json()).then(response => {
-            if (!response.status) history.push('/505');
+            if (!response.status) history.push('/500');
             else {
                 setChat(response.chat);
                 setUsers(response.users);
@@ -106,7 +106,8 @@ const ChatRenderer = props => {
         const body = {
             conversationId: chat._id,
             content: message,
-            userId: userContext.user._id
+            userId: userContext.user._id,
+            username: userContext.user.username
         };
 
         const promise = await fetch(`${configContext.restApiUrl}/chat/send`, {
@@ -120,7 +121,7 @@ const ChatRenderer = props => {
         const response = await promise.json();
 
         if (!response.status) {
-            history.push('/505');
+            history.push('/500');
         } else {
             setMessage('');
         }

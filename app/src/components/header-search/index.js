@@ -35,8 +35,8 @@ const HeaderSearch = () => {
                         <option value='news'>News</option>
                         <option value='forum'>Forum Posts</option>
                         <option value='jobs'>Jobs</option>
-                        <option value='porjects'>Projects</option>
-                        <option value='jobs'>Users</option>
+                        <option value='projects'>Projects</option>
+                        <option value='users'>Users</option>
                     </SelectInput>
                 </Grid>
                 <Grid item xs={2}>

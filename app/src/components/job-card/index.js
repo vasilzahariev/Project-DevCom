@@ -64,30 +64,64 @@ const JobCard = (props) => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
         else window.location.reload(false);
     }
 
+    const apply = async e => {
+        if (!userContext.user.loggedIn) history.push('/auth/login');
+        if (userContext.user.username === jobContext.username) return;
+
+        const href = `/jobs/j/${jobContext.job._id}`;
+        const link = `<a href="${href}" style='text-decoration: none; color: #61dafb; transition: .5s all;' onmouseover="this.style.color='#059dc7';" onmouseout="this.style.color='#61dafb';">${jobContext.job.name}</a>`;
+
+        const body = {
+            usernames: [userContext.user.username, jobContext.username],
+            message: `Hello, ${jobContext.username}, I would like to apply for this job: ${link}`,
+            sendToExisting: true
+        }
+
+        const promise = await fetch(`${configContext.restApiUrl}/chat/startANewChat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        const response = await promise.json();
+
+        if (!response.status) {
+            history.push('/500');
+
+            return;
+        }
+
+        history.push(`/chat/${response.id}`);
+    }
+
     return (
-        <div className={styles.card}>
-            <h3 className={styles.name}>{jobContext.job.name}</h3>
-            <p className={styles.by}>by <HeaderLink to={`/u/${jobContext.username}`}>{jobContext.username}</HeaderLink></p>
-            <p><EpicProgrammer><b>Published Date: </b></EpicProgrammer>{`${('0' + publishDate.getDate()).slice(-2)}.${('0' + (publishDate.getMonth() + 1)).slice(-2)}.${publishDate.getFullYear()}`}</p>
-            <p><EpicProgrammer><b>Location: </b></EpicProgrammer>{jobContext.job.location}</p>
-            <p><EpicProgrammer><b>Job Type: </b></EpicProgrammer>{jobContext.job.type === 'fullTime' ? 'Full Time' : (jobContext.job.type === 'partTime' ? 'Part Time' : (jobContext.job.type === 'freelance' ? 'Freelance' : ''))}</p>
-            <p><EpicProgrammer><b>Salary: </b></EpicProgrammer>{jobContext.job.isNegotiableSalary ? 'Negotiable Salary' : (jobContext.job.salaryRanges[0] === jobContext.job.salaryRanges[1] ? `$${getSalaryAsString(jobContext.job.salaryRanges[0])} $` : `$${getSalaryAsString(jobContext.job.salaryRanges[0])} - $${getSalaryAsString(jobContext.job.salaryRanges[1])}`)}</p>
-            { /*<p><b className={styles.kme}>Published Date: </b>{`${('0' + publishDate.getDate()).slice(-2)}.${('0' + (publishDate.getMonth() + 1)).slice(-2)}.${publishDate.getFullYear()}`}</p>
+        <div className={styles.bigJob}>
+            <div className={styles.card}>
+                <h3 className={styles.name}>{jobContext.job.name}</h3>
+                <p className={styles.by}>by <HeaderLink to={`/u/${jobContext.username}`}>{jobContext.username}</HeaderLink></p>
+                <p><EpicProgrammer><b>Published Date: </b></EpicProgrammer>{`${('0' + publishDate.getDate()).slice(-2)}.${('0' + (publishDate.getMonth() + 1)).slice(-2)}.${publishDate.getFullYear()}`}</p>
+                <p><EpicProgrammer><b>Location: </b></EpicProgrammer>{jobContext.job.location}</p>
+                <p><EpicProgrammer><b>Job Type: </b></EpicProgrammer>{jobContext.job.type === 'fullTime' ? 'Full Time' : (jobContext.job.type === 'partTime' ? 'Part Time' : (jobContext.job.type === 'freelance' ? 'Freelance' : ''))}</p>
+                <p><EpicProgrammer><b>Salary: </b></EpicProgrammer>{jobContext.job.isNegotiableSalary ? 'Negotiable Salary' : (jobContext.job.salaryRanges[0] === jobContext.job.salaryRanges[1] ? `$${getSalaryAsString(jobContext.job.salaryRanges[0])} $` : `$${getSalaryAsString(jobContext.job.salaryRanges[0])} - $${getSalaryAsString(jobContext.job.salaryRanges[1])}`)}</p>
+                { /*<p><b className={styles.kme}>Published Date: </b>{`${('0' + publishDate.getDate()).slice(-2)}.${('0' + (publishDate.getMonth() + 1)).slice(-2)}.${publishDate.getFullYear()}`}</p>
             <p><b className={styles.kme}>Location: </b>{jobContext.job.location}</p>
             <p><b className={styles.kme}>Job Type: </b>{jobContext.job.type === 'fullTime' ? 'Full Time' : (jobContext.job.type === 'partTime' ? 'Part Time' : (jobContext.job.type === 'freelance' ? 'Freelance' : ''))}</p>
             <p><b className={styles.kme}>Salary: </b>{jobContext.job.isNegotiableSalary ? 'Negotiable Salary' : (jobContext.job.salaryRanges[0] === jobContext.job.salaryRanges[1] ? `$${getSalaryAsString(jobContext.job.salaryRanges[0])} $` : `$${getSalaryAsString(jobContext.job.salaryRanges[0])} - $${getSalaryAsString(jobContext.job.salaryRanges[1])}`)}</p> Bright*/}
-            <hr />
-            <h3 className={styles.name}><EpicProgrammer><b>Job Description:</b></EpicProgrammer></h3>
-            {/* <h3 className={styles.name}><b className={styles.kme}>Description: </b></h3> Bright */}
-            <div id='description'>
-            </div>
-            <div className={styles.btns}>
-                {userContext.user.loggedIn && (userContext.user.username === jobContext.username) ? <span className={styles.btn}><SubmitBtn color='red' onClick={onCloseClick}>Close</SubmitBtn></span> : ''}
-                <SubmitBtn>Apply</SubmitBtn>
+                <hr />
+                <h3 className={styles.name}><EpicProgrammer><b>Job Description:</b></EpicProgrammer></h3>
+                {/* <h3 className={styles.name}><b className={styles.kme}>Description: </b></h3> Bright */}
+                <div id='description'>
+                </div>
+                <div className={styles.btns}>
+                    {userContext.user.loggedIn && (userContext.user.username === jobContext.username || userContext.user.isAdmin) ? <span className={styles.btn}><SubmitBtn color='red' onClick={onCloseClick}>Close</SubmitBtn></span> : ''}
+                    <SubmitBtn onClick={apply}>Apply</SubmitBtn>
+                </div>
             </div>
         </div>
     );

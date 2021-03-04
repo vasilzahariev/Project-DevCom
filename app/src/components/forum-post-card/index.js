@@ -66,7 +66,7 @@ const ForumPostCard = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
         else {
             history.push(`/forum/f/${props.forum.name}`);
         }

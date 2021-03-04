@@ -126,7 +126,7 @@ const CreateProjectDialog = props => {
         if (!response.status && response.err) {
             setProjectUrlErr(response.err);
         } else if (!response.status) {
-            history.push('/505');
+            history.push('/500');
         } else {
             history.push(`/projects/${response.projectUrl}`);
         }

@@ -29,7 +29,7 @@ const Forum = props => {
                 'Content-Type': 'application/json'
             }
         }).then(promise => promise.json()).then(response => {
-            if (!response.status) history.push('/505');
+            if (!response.status) history.push('/500');
 
             setForum(response.forum);
             setPosts(response.posts);

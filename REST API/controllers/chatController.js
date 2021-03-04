@@ -5,7 +5,7 @@ const {
     getUserIdByUsername, getUserByUsername, getUserById
 } = require('../controllers/authController');
 
-const getMessages = async conversationId => {
+const getMessages = async (conversationId, userId) => {
     try {
         const ms = await Message.find({ conversationId });
 
@@ -28,6 +28,8 @@ const getMessages = async conversationId => {
                 user
             }
         }));
+
+        await ReadMessage.deleteMany({ userId, conversationId });
 
         return {
             status: true,
@@ -63,6 +65,16 @@ const getChat = async id => {
     }
 }
 
+const sortChats = (a, b) => {
+    const date1 = a.lastMessage ? a.lastMessage.date : null;
+    const date2 = b.lastMessage ? b.lastMessage.date : null;
+
+    if (date1 < date2) return 1;
+    else if (date1 > date2) return -1;
+
+    return 0;
+}
+
 const getChats = async userId => {
     try {
         const convos = await Conversation.find({ users: userId });
@@ -71,17 +83,19 @@ const getChats = async userId => {
                 return await getUserById(id);
             }));
 
-            // TODO: Get last message
+            const lastMessage = await Message.findOne({ conversationId: convo._id }, {}, { sort: { 'date': -1 } });
 
             return {
                 _id: convo._id,
                 name: convo.name,
-                users
+                users,
+                lastMessage,
+                unread: await ReadMessage.count({ userId, conversationId: convo._id })
             }
         }));
 
         return {
-            chats,
+            chats: chats.sort(sortChats),
             status: true
         }
     } catch (err) {
@@ -143,8 +157,91 @@ const send = async body => {
 
         await message.save();
 
+        const convo = await Conversation.findById(conversationId);
+
+        for (const user of convo.users) {
+            if (user.equals(userId)) continue;
+
+            const readMessage = new ReadMessage({ userId: user, conversationId, messageId: message._id, read: false });
+
+            await readMessage.save();
+        }
+
         return {
             status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
+const getUnreadCount = async userId => {
+    try {
+        const unreadMessages = await ReadMessage.count({ userId });
+
+        return { unreadMessages };
+    } catch (err) {
+        console.log(err);
+
+        return { unreadMessages: 0 };
+    }
+}
+
+const startANewChat = async body => {
+    try {
+        const {
+            usernames,
+            message,
+            sendToExisting
+        } = body;
+
+        const users = await Promise.all(usernames.map(async username => {
+            return await getUserIdByUsername(username);
+        }));
+
+        const convo = await Conversation.findOne({ users: { $all: users, $size: 2 } });
+
+        if (convo) {
+            if (sendToExisting) {
+                const resObj = await send({
+                    conversationId: convo._id,
+                    content: message,
+                    userId: users[0]
+                });
+                
+                return {
+                    status: resObj.status,
+                    id: convo._id
+                }
+            }
+
+            return {
+                status: true,
+                id: convo._id
+            }
+        }
+
+        const chat = new Conversation({
+            creatorId: users[0],
+            name: '',
+            users
+        });
+
+        await chat.save();
+
+        const resObj = await send({
+            conversationId: chat._id,
+            content: message,
+            userId: users[0]
+        });
+
+        return {
+            status: resObj.status,
+            id: chat._id
         }
     } catch (err) {
         console.log(err);
@@ -160,5 +257,7 @@ module.exports = {
     create,
     getChat,
     send,
-    getMessages
+    getMessages,
+    getUnreadCount,
+    startANewChat
 }

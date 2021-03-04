@@ -17,6 +17,7 @@ const RangedSlider = (props) => {
             </Grid>
             <Grid item>
                 <Input
+                    style={{ color: 'white' }}
                     value={props.value[0]}
                     margin="dense"
                     onChange={props.onFirstValChange}
@@ -31,7 +32,7 @@ const RangedSlider = (props) => {
             </Grid>
             <Grid item>
                 <Input
-                    className={styles.input}
+                    style={{ color: 'white' }}
                     value={props.value[1]}
                     margin="dense"
                     onChange={props.onSecondValChange}

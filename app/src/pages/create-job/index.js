@@ -8,7 +8,7 @@ const CreateJob = (props) => {
     return (
         <Layout>
             <PageDiv>
-                <h1>Create a <EpicProgrammer>job</EpicProgrammer></h1>
+                <h1>Create a <EpicProgrammer>Job</EpicProgrammer></h1>
                 <CreateJobCard />
             </PageDiv>
         </Layout>

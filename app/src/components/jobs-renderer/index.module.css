@@ -1,0 +1,5 @@
+.jobs {
+    height: 70vh;
+    overflow: auto;
+    padding-right: 10px;
+}

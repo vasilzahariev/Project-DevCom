@@ -29,7 +29,6 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
-    // TODO: Add default value here:
     profilePictureUrl: {
         type: String,
         default: ''

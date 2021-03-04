@@ -9,5 +9,6 @@
 }
 
 .btn {
-    margin-top: 3%;
+    display: inline;
+    margin-right: 2.5%;
 }

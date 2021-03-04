@@ -168,10 +168,10 @@ const getAllNewsArticlesWithAuthor = async () => {
         const articlesObj = await NewsArticle.find();
         const articles = await Promise.all(articlesObj.map(async article => {
             const author = await getUserById(article.authorId);
-    
+
             return Object.assign({ author }, article._doc);
         }));
-    
+
         return {
             status: true,
             articles
@@ -225,6 +225,35 @@ const publish = async id => {
     }
 }
 
+const edit = async body => {
+    try {
+        const {
+            id,
+            title,
+            path,
+            content
+        } = body;
+
+        const titleArticle = await NewsArticle.find({ title });
+
+        if (titleArticle.length === 1 && !titleArticle[0]._id.equals(id)) return { error: 'Title is already taken' };
+
+        const pathArticle = await NewsArticle.find({ path });
+
+        if (pathArticle.length === 1 && !pathArticle[0]._id.equals(id)) return { error: 'Path is already taken' };
+
+        await NewsArticle.findByIdAndUpdate(id, { title, path, content, lastEditedDate: Date.now() });
+
+        return { path };
+    } catch (err) {
+        console.log(err);
+
+        return {
+            error: '505'
+        }
+    }
+}
+
 module.exports = {
     getAllNewsArticles,
     getNewsArticle,
@@ -236,5 +265,6 @@ module.exports = {
     getUserArticles,
     getAllNewsArticlesWithAuthor,
     deleteArticle,
-    publish
+    publish,
+    edit
 }

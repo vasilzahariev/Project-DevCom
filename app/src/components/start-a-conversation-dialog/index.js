@@ -115,7 +115,7 @@ const StartAConversationDialog = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
         else props.setSelectedChatId(response.chatId);
 
         close();

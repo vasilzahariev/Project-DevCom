@@ -113,6 +113,12 @@ const CreateJobCard = (props) => {
         history.push(`/jobs`);
     }
 
+    const back = e => {
+        e.preventDefault();
+
+        history.push('/jobs');
+    }
+
     return (
         <CardForm onSubmit={onSubmit} big={true}>
             <Input label='Name' value={name} err={nameErr} onChange={onNameChange} placeholder={`Job's Name`} />
@@ -133,8 +139,13 @@ const CreateJobCard = (props) => {
                 <SimpleCheckbox label='Negotiable Salary' name='negotiablesalary' checked={negotiableSalary} onClick={onNegotiableSalaryChange} />
                 {negotiableSalary ? '' : <RangedSlider value={salary} onChange={onSalaryChange} onFirstValChange={onFirstValChange} onSecondValChange={onSecondValChange} min={0} max={100000} step={100} />}
             </div>
-            <div className={styles.btn}>
-                <SubmitBtn>Publish</SubmitBtn>
+            <div style={{ marginTop: '3%' }}>
+                <div className={styles.btn}>
+                    <SubmitBtn color='red' onClick={back}>Back to Jobs</SubmitBtn>
+                </div>
+                <div className={styles.btn}>
+                    <SubmitBtn>Publish</SubmitBtn>
+                </div>
             </div>
         </CardForm>
     );

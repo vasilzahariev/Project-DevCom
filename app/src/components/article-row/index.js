@@ -3,8 +3,9 @@ import { Grid } from '@material-ui/core';
 import SubmitBtn from '../submit-btn';
 import { useHistory } from 'react-router-dom';
 import ConfigContext from '../../contexts/ConfigContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import HeaderLink from '../header-link';
+import EditArticleDialog from '../edit-article-dialog';
 
 const ArticleRow = props => {
     const configContext = useContext(ConfigContext);
@@ -14,12 +15,14 @@ const ArticleRow = props => {
 
     const history = useHistory();
 
+    const [editOpen, setEditOpen] = useState(false);
+
     const onViewClick = e => {
         history.push(`/news/${props.article.path}`);
     }
 
     const onEditClick = e => {
-        history.push(`/news/edit/${props.article.path}`);
+        setEditOpen(true);
     }
 
     const onPublishClick = async e => {
@@ -34,7 +37,7 @@ const ArticleRow = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     const onDeleteClick = async e => {
@@ -48,7 +51,7 @@ const ArticleRow = props => {
         });
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     return (
@@ -67,6 +70,7 @@ const ArticleRow = props => {
                     </div>
                     <div className={styles.btn}>
                         <SubmitBtn color='yellow' onClick={onEditClick}>Edit</SubmitBtn>
+                        {editOpen ? <EditArticleDialog open={editOpen} setOpen={setEditOpen} article={props.article} /> : ''}
                     </div>
                     {props.article.isDraft ?
                         <div className={styles.btn}>

@@ -78,7 +78,7 @@ const CreateDevlogForm = props => {
         const response = await promise.json();
 
         if (!response.status) {
-            history.push('/505');
+            history.push('/500');
         } else {
             history.push(`/projects/${props.project.projectUrl}`);
         }

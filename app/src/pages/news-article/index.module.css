@@ -3,6 +3,16 @@
     padding-right: 25%;
 }
 
+.btns {
+    width: 25%;
+    margin-top: 1%;
+}
+
+.btn {
+    display: inline;
+    margin-right: 2.5%;
+}
+
 .img {
     width: 10%;
 }
