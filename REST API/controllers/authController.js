@@ -12,12 +12,12 @@ const createUserToken = userObj => {
         username: userObj.username,
         isAdmin: userObj.isAdmin,
         isJournalist: userObj.isJournalist
-    }, config.privateKey);
+    }, 'DEVCOM-RESTAPI-PrivateKey');
 }
 
 const verifyToken = async (token) => {
     try {
-        const decoded = jwt.decode(token, config.privateKey);
+        const decoded = jwt.decode(token, 'DEVCOM-RESTAPI-PrivateKey');
         const user = await User.findById(decoded.userId);
 
         return {
@@ -118,12 +118,19 @@ const checkIfUsernameExists = async username => {
 }
 
 const getUserByUsername = async username => {
-    const user = await User.findOne({ username });
-    const userLinks = await UserLinks.findById(user.userLinksId);
+    try {
+        const user = await User.findOne({ username });
+        const userLinks = await UserLinks.findById(user.userLinksId);
 
-    return {
-        user,
-        userLinks
+        return {
+            user,
+            userLinks,
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return null;
     }
 }
 
