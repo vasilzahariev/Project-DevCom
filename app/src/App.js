@@ -35,7 +35,7 @@ function App(props) {
 		}
 
 		// TODO: Change
-		fetch(`http://localhost:3001/auth/verifyToken`, {
+		fetch(`http://localhost:3001/api/auth/verifyToken`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function App(props) {
 				logout
 			}}>
 				<ConfigContext.Provider value={{
-					restApiUrl: `http://localhost:3001`
+					restApiUrl: `http://localhost:3001/api`
 				}}>
 					{props.children}
 				</ConfigContext.Provider>

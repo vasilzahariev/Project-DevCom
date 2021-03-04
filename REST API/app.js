@@ -33,16 +33,16 @@ mongoose.connect(config.dbConnectionUrl, {
 // Configuring the app, so that it uses modules
 require('./config/express')(app);
 
-app.use('/auth', authRouter);
-app.use('/news', newsRouter);
-app.use('/jobs', jobsRouter);
-app.use('/edu', educationRouter);
-app.use('/work', workRouter);
-app.use('/feed', feedRouter);
-app.use('/project', projectRouter);
-app.use('/chat', chatRouter);
-app.use('/forum', forumRouter);
-app.use('/img', imgRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/news', newsRouter);
+app.use('/api/jobs', jobsRouter);
+app.use('/api/edu', educationRouter);
+app.use('/api/work', workRouter);
+app.use('/api/feed', feedRouter);
+app.use('/api/project', projectRouter);
+app.use('/api/chat', chatRouter);
+app.use('/api/forum', forumRouter);
+app.use('/api/img', imgRouter);
 
 // Binds and listens for connections on the specific port
 app.listen(config.PORT, console.log(`REST API is listening on http://localhost:${config.PORT}`));
