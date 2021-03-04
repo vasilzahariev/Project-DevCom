@@ -4,7 +4,7 @@ import HeaderLink from '../header-link';
 
 const NewsCard = (props) => {
     return (
-        <Grid item xs={5}>
+        <Grid item xs={12}>
             <HeaderLink to={`/news/${props.article.path}`}>
                 <Grid className={styles.card} container direction='row' justify='flex-start' alignItems='center'>
                     <Grid item xs={6}>

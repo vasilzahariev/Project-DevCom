@@ -6,6 +6,7 @@ import ConfigContext from '../../contexts/ConfigContext';
 import UserContext from '../../contexts/UserContext';
 import Input from '../input';
 import SpecialTextArea from '../special-text-area';
+import ImageInput from '../image-input';
 
 const EditForumPostDialog = props => {
     const configContext = useContext(ConfigContext);
@@ -110,7 +111,7 @@ const EditForumPostDialog = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
 
         //history.push(`/forum/f/${props.forumName}/${response.id}`);
 
@@ -121,6 +122,7 @@ const EditForumPostDialog = props => {
         <DialogWindow open={props.open} onClearClose={close} title={`Edit a Post for ${props.forumTitle}`} action={edit} actionName='Edit'>
             <Input label='Title' placeholder='Title' value={title} onChange={onTitleChange} err={titleErr} />
             <Input label='Cover Image Url' placeholder='Cover Image Url' value={coverImageUrl} onChange={onCoverImageUrlChange} err={coverImageUrlErr} />
+            <ImageInput setUrl={(url) => { setCoverImageUrl(url) }} />
             <SpecialTextArea label='Content' placeholder='Content' value={content} updateBody={onContentChange} err={contentErr} />
         </DialogWindow>
     );

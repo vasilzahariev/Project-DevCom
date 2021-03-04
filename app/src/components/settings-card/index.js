@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { Backdrop, CircularProgress } from '@material-ui/core';
 import Input from '../input';
 import TextArea from '../text-area'
+import ImageInput from '../image-input';
 
 /*
 Full Name
@@ -49,7 +50,7 @@ const SettingsCard = (props) => {
             }
         }).then(promise => promise.json()).then(response => {
             if (!response.status) {
-                history.push('/505');
+                history.push('/500');
 
                 return;
             }
@@ -219,7 +220,7 @@ const SettingsCard = (props) => {
         } else if (String(response.err).toLowerCase().includes('email')) {
             setEmailErr(response.err);
         } else {
-            history.push('/505');
+            history.push('/500');
         }
     }
 
@@ -244,6 +245,8 @@ const SettingsCard = (props) => {
                 <div className={styles.bioDiv}>
                     <TextArea label='Bio' placeholder='Bio' onChange={onBioChange} value={bio} height={150} max={400} err={bioErr} />
                 </div>
+                <Input label='Prifle Picture Url' type='text' value={pfpUrl} onChange={(e) => { setPfpUrl(e.target.value) }} placeholder='Profile Picture Url' />
+                <ImageInput setUrl={(url) => { setPfpUrl(url) }} />
                 <Input label='GitHub Link' type='text' value={gitHubUrl} onChange={e => onLinkChange(e, 'github')} placeholder='GitHub Link' />
                 <Input label='Website Link' type='text' value={websiteUrl} onChange={e => onLinkChange(e, 'website')} placeholder='Website Link' />
                 <Input label='LinkedIn Link' type='text' value={linkedInUrl} onChange={e => onLinkChange(e, 'linkedIn')} placeholder='LinkedIn Link' />

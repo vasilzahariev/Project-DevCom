@@ -1,10 +1,13 @@
 import styles from './index.module.css';
 import AddForumComment from '../add-forum-comment';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useContext } from 'react';
 import { Grid } from '@material-ui/core';
 import CommentCard from '../comment-card';
+import UserContext from '../../contexts/UserContext';
 
 const CommentSection = props => {
+    const userContext = useContext(UserContext);
+
     useEffect(() => { }, [props.comments]);
 
     const renderer = useMemo(() => {
@@ -17,7 +20,7 @@ const CommentSection = props => {
 
     return (
         <div style={{ marginLeft: '5%' }}>
-            <AddForumComment postId={props.post._id} />
+            {userContext.user.loggedIn ? <AddForumComment postId={props.post._id} /> : ''}
             <Grid style={{ marginTop: '2.5%' }} container spacing={1}>
                 {renderer}
             </Grid>

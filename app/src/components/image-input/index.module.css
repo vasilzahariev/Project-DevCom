@@ -1,0 +1,14 @@
+.block {
+    margin: 2.5% 0 5% 0;
+}
+
+.previewDiv {
+    margin-bottom: 25px;
+}
+
+.preview {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    border: 1px solid rgb(206, 53, 206);
+}

@@ -11,6 +11,8 @@ import UserContext from '../../contexts/UserContext';
 import NewsArticleCommentsRenderer from '../../components/news-article-comments-renderer';
 import NewsTagsRenderer from '../../components/news-tags-renderer';
 import UserAvatar from '../../components/user-avatar';
+import SubmitBtn from '../../components/submit-btn';
+import EditArticleDialog from '../../components/edit-article-dialog';
 
 const NewsArticle = (props) => {
     const configContext = useContext(ConfigContext);
@@ -21,6 +23,7 @@ const NewsArticle = (props) => {
     const [ended, setEnded] = useState(false);
     const [article, setArticle] = useState(null);
     const [author, setAuthor] = useState(null);
+    const [editOpen, setEditOpen] = useState(false);
 
     useEffect(() => {
         const path = params.path;
@@ -40,10 +43,10 @@ const NewsArticle = (props) => {
             setAuthor(response.author);
             setEnded(true);
 
-            document.getElementById('bodyDiv').innerHTML = response.article.content;
+            if (document.getElementById('bodyDiv')) document.getElementById('bodyDiv').innerHTML = response.article.content;
         });
 
-    }, []);
+    }, [article]);
 
     if (!ended) {
         return (
@@ -51,6 +54,22 @@ const NewsArticle = (props) => {
                 <CircularProgress color="inherit" />
             </Backdrop>
         );
+    }
+
+    const remove = async e => {
+        if (!window.confirm(`Are you sure you want to delete article with title: "${article.title}"?`)) return;
+
+        const promise = await fetch(`${configContext.restApiUrl}/news/delete/${article._id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const response = await promise.json();
+
+        if (!response.status) history.push('/500');
+
+        history.push('/news/');
     }
 
     return (
@@ -76,6 +95,12 @@ const NewsArticle = (props) => {
                         {article.publishedDate !== article.lastEditedDate ? <span className={styles.published}>Last Edited: {`${article.lastEditedDate.split('T')[0]} ${article.lastEditedDate.split('.')[0].split('T')[1]}`}</span> : ''}
                     </Grid>
                 </Grid>
+                {userContext.user.loggedIn && (userContext.user._id === author._id || userContext.user.isAdmin) ?
+                    <div className={styles.btns}>
+                        <div className={styles.btn}><SubmitBtn color='yellow' onClick={() => { setEditOpen(true) }}>Edit</SubmitBtn></div>
+                        {editOpen ? <EditArticleDialog open={editOpen} setOpen={setEditOpen} article={article} /> : ''}
+                        <div className={styles.btn}><SubmitBtn color='red' onClick={remove}>Delete</SubmitBtn></div>
+                    </div> : ''}
             </div>
             <br />
             <hr />

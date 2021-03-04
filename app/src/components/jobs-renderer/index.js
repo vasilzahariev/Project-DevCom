@@ -13,9 +13,11 @@ const JobsRenderer = (props) => {
     }, [props.jobs]);
 
     return (
-        <Grid container direction='column' justify='center' alignItems='stretch' spacing={2}>
-            {renderer}
-        </Grid>
+        <div className={styles.jobs}>
+            <Grid container direction='column' justify='center' alignItems='stretch' spacing={2}>
+                {renderer}
+            </Grid>
+        </div>
     );
 }
 

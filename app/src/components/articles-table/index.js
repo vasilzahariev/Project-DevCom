@@ -22,7 +22,7 @@ const ArticlesTable = props => {
                 'Content-Type': 'application/json'
             }
         }).then(promise => promise.json()).then(response => {
-            if (!response.status) history.push('/505');
+            if (!response.status) history.push('/500');
 
             setArticles(response.articles);
             setEnded(true);

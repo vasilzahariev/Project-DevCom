@@ -6,10 +6,14 @@ import UserLinks from '../user-links';
 import UserContext from '../../contexts/UserContext';
 import HeaderLink from '../header-link';
 import UserAvatar from '../user-avatar';
+import SubmitBtn from '../submit-btn';
+import { useHistory } from 'react-router-dom';
 
 const UserPart = (props) => {
     const userContext = useContext(UserContext);
     const configContext = useContext(ConfigContext);
+
+    const history = useHistory();
 
     const [user, setUser] = useState(null);
     const [userLinks, setUserLinks] = useState(null);
@@ -27,6 +31,36 @@ const UserPart = (props) => {
             setEnded(true);
         });
     }, [props.username]);
+
+    const chat = async e => {
+        e.preventDefault();
+
+        if (!userContext.user.loggedIn) history.push('/auth/login');
+
+        const body = {
+            usernames: [userContext.user.username, props.username],
+            message: 'Hello there!',
+            sendToExisting: false
+        }
+
+        const promise = await fetch(`${configContext.restApiUrl}/chat/startANewChat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        const response = await promise.json();
+
+        if (!response.status) {
+            history.push('/500');
+
+            return;
+        }
+
+        history.push(`/chat/${response.id}`);
+    }
 
     if (!ended) {
         return (<CircularProgress color="inherit" />);
@@ -50,7 +84,7 @@ const UserPart = (props) => {
                 </Grid>
                 <Grid item xs={2}></Grid>
                 <Grid item xs={1}>
-                    {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <HeaderLink to={`/u/${props.username}/settings`}>Edit Profile</HeaderLink> : 'BTN'}
+                    {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <HeaderLink to={`/u/${props.username}/settings`}>Edit Profile</HeaderLink> : <SubmitBtn color='blue' padding='5% 10%' onClick={chat}>Chat</SubmitBtn>}
                 </Grid>
             </Grid>
             <div className={styles.links}>

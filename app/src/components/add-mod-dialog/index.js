@@ -105,7 +105,7 @@ const AddModDialog = props => {
         });
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
 
         close();
     }

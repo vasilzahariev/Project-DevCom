@@ -64,7 +64,7 @@ const CommentCard = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     const answer = async answerVal => {
@@ -83,7 +83,7 @@ const CommentCard = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     return (

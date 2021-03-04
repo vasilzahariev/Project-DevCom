@@ -48,7 +48,7 @@ const RenderedDevlogCard = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     return (
@@ -66,7 +66,6 @@ const RenderedDevlogCard = props => {
                     <div className={styles.content} style={{ display: show ? '' : 'none' }} ref={content}></div>
                     <div className={styles.right} style={{ display: show ? '' : 'none' }}><EpicProgrammer>Published on:</EpicProgrammer> {date.toLocaleDateString()}</div>
                 </Collapse>
-                {/* TODO: Add functionalities */}
                 {props.checkIfUserIsMember() ? <div className={styles.edit} style={{ display: show ? '' : 'none' }}><SubmitBtn color='red' borderRadius='100%' onClick={onDeleteClick}><DeleteIcon /></SubmitBtn> <SubmitBtn color='yellow' borderRadius='100%' onClick={() => { setEditOpen(true) }} ><EditIcon /></SubmitBtn></div> : ''}
                 {editOpen ? <EditDevlogDialog open={editOpen} setOpen={setEditOpen} devlog={props.devlog} /> : ''}
             </div>

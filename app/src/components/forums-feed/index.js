@@ -22,7 +22,7 @@ const ForumsFeed = props => {
                 'Content-Type': 'application/json'
             }
         }).then(promise => promise.json()).then(response => {
-            if (!response.status) history.push('/505');
+            if (!response.status) history.push('/500');
 
             setPosts(response.posts);
             setEnded(true);
@@ -39,14 +39,14 @@ const ForumsFeed = props => {
 
     if (!ended) {
         return (
-            <CircularProgress color='inherit'/>
+            <CircularProgress color='inherit' />
         );
     }
 
     return (
         <div>
             <Grid container spacing={1}>
-                {renderer}
+                {posts.length === 0 ? 'Nothing to show yet. Join a community' : renderer}
             </Grid>
         </div>
     );

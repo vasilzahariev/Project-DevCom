@@ -19,6 +19,7 @@ import Forum from './pages/forum';
 import ForumPost from './pages/forum-post';
 import Admin from './components/admin';
 import Search from './components/search';
+import Error from './pages/error';
 
 const Navigation = () => {
     const userContext = useContext(UserContext);
@@ -40,6 +41,7 @@ const Navigation = () => {
             </Route>
             <Route exact path='/news/:path' component={NewsArticle} />
             <Route exact path='/jobs' component={Jobs} />
+            <Route exact path='/jobs/j/:id' component={Jobs} />
             <Route exact path='/jobs/create'>
                 {userContext.user.loggedIn ? <CreateJob /> : <Redirect to='/auth/login' />}
             </Route>
@@ -53,6 +55,9 @@ const Navigation = () => {
             <Route exact path='/chat'>
                 {userContext.user.loggedIn ? <Chat /> : <Redirect to='/auth/login' />}
             </Route>
+            <Route exact path='/chat/:id'>
+                {userContext.user.loggedIn ? <Chat /> : <Redirect to='/auth/login' />}
+            </Route>
             <Route exact path='/forum' component={Forums} />
             <Route exact path='/forum/f/:forumName' component={Forum} />
             <Route exact path='/forum/f/:forumName/:postId' component={ForumPost} />
@@ -60,7 +65,12 @@ const Navigation = () => {
                 {userContext.user.loggedIn && (userContext.user.isAdmin || userContext.user.isOwner) ? <Admin /> : (userContext.user.loggedIn ? <Redirect to='auth/login' /> : <Redirect to='/auth/login' />)}
             </Route>
             <Route exact path='/search/:category/:searchValue' component={Search} />
-            {/* TODO: 404 and 505 */}
+            <Route exact path='/500'>
+                <Error err='500' />
+            </Route>
+            <Route>
+                <Error err='404' />
+            </Route>
         </Switch>
     )
 }

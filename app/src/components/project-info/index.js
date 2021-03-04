@@ -25,7 +25,7 @@ const ProjectInfo = props => {
         if (!userContext.user || !userContext.user.loggedIn) return false;
 
         for (const member of props.members) {
-            if (member._id === props.project.ownerId) return true;
+            if (member._id === userContext.user._id) return true;
         }
 
         return false;
@@ -63,8 +63,6 @@ const ProjectInfo = props => {
                 {checkIfUserIsMember() ? <div className={styles.btns}><SubmitBtn onClick={() => { setAddMemberOpen(true) }}>Add a Member</SubmitBtn></div> : ''}
                 {checkIfUserIsMember() ? <AddMemberDialog open={addMemberOpen} setOpen={setAddMemberOpen} projectId={props.project._id} /> : ''}
             </div>
-
-            {checkIfUserIsMember() ? '' : <div className={styles.follow}><SubmitBtn color='green'>Follow / Unfollow</SubmitBtn></div>}
         </div>
     );
 }

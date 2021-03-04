@@ -4,8 +4,18 @@ import { useMemo } from 'react';
 import NewsCard from '../news-card';
 
 const NewsRenderer = (props) => {
+    const sortNews = (a, b) => {
+        const date1 = new Date(Date.parse(a.publishedDate));
+        const date2 = new Date(Date.parse(b.publishedDate));
+
+        if (date1 > date2) return -1;
+        else if (date1 < date2) return 1;
+
+        return 0;
+    }
+
     const renderer = useMemo(() => {
-        return props.news.map((article, index) => {
+        return props.news.sort(sortNews).map((article, index) => {
             return (
                 <NewsCard key={article._id} index={index} article={article} />
             )
@@ -13,9 +23,9 @@ const NewsRenderer = (props) => {
     }, [props.news]);
 
     return (
-        <div>
+        <div style={{ width: '50%', margin: '0 auto' }}>
             <br />
-            <Grid container direction='column' justify='space-evenly' alignItems='center'>
+            <Grid container direction='row' justify='center' alignItems='center' spacing={2}>
                 {renderer}
             </Grid>
         </div>

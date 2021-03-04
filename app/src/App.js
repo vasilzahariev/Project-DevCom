@@ -19,7 +19,7 @@ function App(props) {
 	}
 
 	const logout = () => {
-		document.cookie = `aid=;expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+		document.cookie = "aid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
 		setUser({ user: null, loggedIn: false });
 		setLoading(false);

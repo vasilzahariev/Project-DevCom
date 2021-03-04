@@ -8,10 +8,17 @@ import JobsRenderer from '../../components/jobs-renderer';
 import JobContext from '../../contexts/JobContext';
 import JobCard from '../../components/job-card';
 import JobsOptions from '../../components/jobs-options';
+import HeaderLink from '../../components/header-link';
+import UserContext from '../../contexts/UserContext';
+import { useParams, useHistory } from 'react-router-dom';
 
 const Jobs = () => {
     const configContext = useContext(ConfigContext);
-    const jobContext = useContext(JobContext);
+    const userContex = useContext(UserContext);
+    const jobContex = useContext(JobContext);
+
+    const params = useParams();
+    const history = useHistory();
 
     const [selectedJob, setSelectedJob] = useState(null);
     const [selectedJobAuthorUsername, setSelectedJobAuthorUsername] = useState('');
@@ -27,6 +34,23 @@ const Jobs = () => {
             }
         }).then(promise => promise.json()).then(response => {
             setJobs(response);
+
+            if (params.id !== undefined && selectedJob === null && selectedJobAuthorUsername === '') {
+                const job = response.find(j => j._id === params.id);
+
+                if (!job) history.push('/404');
+
+                fetch(`${configContext.restApiUrl}/auth/u/${job.authorId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(promise => promise.json()).then(response => {
+                    setSelectedJob(job);
+                    setSelectedJobAuthorUsername(response.username);
+                });
+            }
+
             setEnded(true);
         });
     });
@@ -42,7 +66,12 @@ const Jobs = () => {
     return (
         <Layout>
             <JobContext.Provider value={{ job: selectedJob, username: selectedJobAuthorUsername }}>
-                <PageDiv><h1>Jobs</h1></PageDiv>
+                <PageDiv>
+                    <div style={{ marginBottom: '2%' }}>
+                        <h1>Jobs</h1>
+                        {userContex.user.loggedIn ? <HeaderLink to='/jobs/create'>Create a Job</HeaderLink> : ''}
+                    </div>
+                </PageDiv>
 
                 <Grid container direction='row' justify='center' alignItems='flex-start' spacing={2}>
                     <Grid item xs={2}><JobsOptions jobs={jobs} setRenderJobs={setRenderJobs} /></Grid>

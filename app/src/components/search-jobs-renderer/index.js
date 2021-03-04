@@ -30,7 +30,7 @@ const SearchJobsRenderer = props => {
     const renderer = useMemo(() => {
         return jobs.map((job, index) => {
             return (
-                <RendererJobCard key={job._id} index={index} job={job} setJob={(job) => { history.push(`/jobs/${job._id}`) }} setUsername={(username) => { }} />
+                <RendererJobCard key={job._id} index={index} job={job} setJob={(job) => { history.push(`/jobs/j/${job._id}`) }} setUsername={(username) => { }} />
             );
         });
     }, [jobs]);

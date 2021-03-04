@@ -115,7 +115,7 @@ const EditProjectDialog = props => {
         if (!response.status && response.err) {
             setProjectUrlErr(response.err);
         } else if (!response.status) {
-            history.push('/505');
+            history.push('/500');
         } else {
             onClearClose();
 

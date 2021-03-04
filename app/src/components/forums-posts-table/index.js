@@ -21,7 +21,7 @@ const ForumsPostsTable = props => {
                 'Content-Type': 'application/json'
             }
         }).then(promise => promise.json()).then(response => {
-            if (!response.status) history.push('/505');
+            if (!response.status) history.push('/500');
 
             setPosts(response.posts);
         });

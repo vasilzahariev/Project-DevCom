@@ -15,7 +15,7 @@ const DevLogs = props => {
         if (!userContext.user || !userContext.user.loggedIn) return false;
 
         for (const member of props.members) {
-            if (member._id === props.project.ownerId) return true;
+            if (member._id === userContext.user._id) return true;
         }
 
         return false;

@@ -12,6 +12,7 @@ const feedRouter = require('./routers/feedRouter');
 const projectRouter = require('./routers/projectRouter');
 const chatRouter = require('./routers/chatRouter');
 const forumRouter = require('./routers/forumRouter');
+const imgRouter = require('./routers/imgRouter');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use('/feed', feedRouter);
 app.use('/project', projectRouter);
 app.use('/chat', chatRouter);
 app.use('/forum', forumRouter);
+app.use('/img', imgRouter);
 
 // Binds and listens for connections on the specific port
 app.listen(config.PORT, console.log(`REST API is listening on http://localhost:${config.PORT}`));

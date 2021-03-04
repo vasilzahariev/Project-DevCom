@@ -14,11 +14,7 @@ const JobRow = props => {
     const history = useHistory();
 
     const onViewClick = e => {
-        history.push(`/jobs/${props.job._id}`);
-    }
-
-    const onEditClick = e => {
-        history.push(`/jobs/edit/${props.job._id}`);
+        history.push(`/jobs/j/${props.job._id}`);
     }
 
     const onOpenClick = async e => {
@@ -31,7 +27,7 @@ const JobRow = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     const onCloseClick = async e => {
@@ -44,7 +40,7 @@ const JobRow = props => {
 
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     const onDeleteClick = async e => {
@@ -58,7 +54,7 @@ const JobRow = props => {
         });
         const response = await promise.json();
 
-        if (!response.status) history.push('/505');
+        if (!response.status) history.push('/500');
     }
 
     return (
@@ -74,9 +70,7 @@ const JobRow = props => {
                     <div className={styles.btn}>
                         <SubmitBtn color='blue' onClick={onViewClick}>View</SubmitBtn>
                     </div>
-                    <div className={styles.btn}>
-                        <SubmitBtn color='yellow' onClick={onEditClick}>Edit</SubmitBtn>
-                    </div>
+                    {/*<div className={styles.btn}><SubmitBtn color='yellow' onClick={onEditClick}>Edit</SubmitBtn></div>*/}
                     <div className={styles.btn}>
                         {props.job.isClosed ? <SubmitBtn color='green' onClick={onOpenClick}>Open</SubmitBtn> : <SubmitBtn color='red' onClick={onCloseClick}>Close</SubmitBtn>}
                     </div>

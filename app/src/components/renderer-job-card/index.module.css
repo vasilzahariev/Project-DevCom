@@ -3,10 +3,13 @@
     border-radius: 15px;
     background-color: #4a515d73;
     padding: 0px 20px;
+    
+    transition: .5s all;
 }
 
 .card:hover {
     cursor: pointer;
+    background-color: #586379b4;
 }
 
 .type {

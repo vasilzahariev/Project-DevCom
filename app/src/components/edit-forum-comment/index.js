@@ -56,7 +56,7 @@ const EditFourmComment = props => {
         if (response.status) {
             close();
         } else {
-            history.push('/505');
+            history.push('/500');
         }
     }
 

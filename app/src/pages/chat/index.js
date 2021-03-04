@@ -4,7 +4,7 @@ import { useState, useEffect, useContext, useMemo } from 'react';
 import { Backdrop, CircularProgress, Grid } from '@material-ui/core';
 import ConfigContext from '../../contexts/ConfigContext';
 import UserContext from '../../contexts/UserContext';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import SimpleTextBtn from '../../components/simple-text-btn';
 import SubmitBtn from '../../components/submit-btn';
 import StartAConversationDialog from '../../components/start-a-conversation-dialog';
@@ -14,6 +14,7 @@ const Chat = () => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
 
+    const params = useParams();
     const history = useHistory();
 
     const [ended, setEnded] = useState(false);
@@ -29,9 +30,14 @@ const Chat = () => {
             }
         }).then(promise => promise.json()).then(response => {
             if (!response.status) {
-                history.push('/505');
+                history.push('/500');
             } else {
                 setChats(response.chats);
+                
+                if (params.id && selectedChatId === null && response.chats.find(chat => chat._id === params.id)) {
+                    setSelectedChatId(params.id);
+                }
+                
                 setEnded(true);
             }
         });
@@ -68,7 +74,7 @@ const Chat = () => {
             return (
                 <Grid key={chat._id} index={index} item xs={12}>
                     <div className={styles.convo} onClick={() => { setSelectedChatId(chat._id) }}>
-                        <p>{chat.name ? (chat.name.length > 30 ? `${String(chat.name).substring(0, 29).trim()}...` : chat.name) : (getChatNameFromUsers(chat.users).length > 30 ? `${String(getChatNameFromUsers(chat.users)).substring(0, 29).trim()}...` : getChatNameFromUsers(chat.users))}</p>
+                        <p>{chat.name ? (chat.name.length > 30 ? `${String(chat.name).substring(0, 29).trim()}...` : chat.name) : (getChatNameFromUsers(chat.users).length > 30 ? `${String(getChatNameFromUsers(chat.users)).substring(0, 29).trim()}...` : getChatNameFromUsers(chat.users))}{chat.unread === 0 ? '' : ` (${chat.unread})`}</p>
                     </div>
                 </Grid>
             );
