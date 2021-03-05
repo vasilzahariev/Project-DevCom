@@ -60,6 +60,8 @@ const like = async body => {
         postId
     } = body;
 
+    if (!userId || !postId) return;
+
     const post = await FeedPost.findById(postId);
 
     if (post.likes.includes(userId)) {

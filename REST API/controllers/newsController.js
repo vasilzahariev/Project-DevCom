@@ -76,7 +76,7 @@ const createArticle = async req => {
             lastEditedDate: publishedDate
         });
 
-        article.save();
+        await article.save();
 
         return { path };
 

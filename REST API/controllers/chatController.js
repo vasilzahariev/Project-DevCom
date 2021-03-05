@@ -115,6 +115,8 @@ const create = async body => {
     } = body;
 
     try {
+        if (!creatorId || !usernames) return { status: false };
+
         const users = await Promise.all(usernames.map(async username => {
             return await getUserIdByUsername(username);
         }));
@@ -148,6 +150,8 @@ const send = async body => {
     } = body;
 
     try {
+        if (!conversationId || !content || !userId) return { status: false };
+
         const message = new Message({
             conversationId,
             content,
@@ -212,7 +216,7 @@ const startANewChat = async body => {
                     content: message,
                     userId: users[0]
                 });
-                
+
                 return {
                     status: resObj.status,
                     id: convo._id

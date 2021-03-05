@@ -12,7 +12,12 @@ const createJob = async body => {
         salary
     } = body;
 
-    // TODO: do a swap if the first salary value is bigger than the second one
+    if (!negotiableSalary && salary[0] < salary[1]) {
+        const temp = salary[0];
+
+        salary[0] = salary[1];
+        salary[1] = temp;
+    }
 
     const job = new Job({
         authorId,
