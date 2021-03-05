@@ -11,18 +11,20 @@ const UserAvatar = props => {
             height: theme.spacing(props.size ? props.size : 10)
         },
         badge: {
-            width: props.size ? props.size * 3.5 : 44,
-            height: props.size ? props.size * 3.5 : 44,
-            color: '#059dc7',
-            // backgroundColor: 'white',
-            // borderRadius: '100%',
+            width: props.size ? props.size * 2.5 : 44,
+            height: props.size ? props.size * 2.5 : 44,
         }
     }))();
 
     return (
         <Grid container justify="center" alignItems="center">
             <Grid item>
-                <Avatar src={props.user.profilePictureUrl} className={classes.icon} />
+                <Badge anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }} badgeContent={<p>{props.user.isAdmin ? <SupervisedUserCircleIcon style={{ color: '#61dafb' }} className={classes.badge} /> : (props.user.isJournalist ? <AssignmentIndIcon style={{ color: '#ce35ce' }} className={classes.badge} /> : (props.user.isVerified ? <VerifiedUserIcon style={{ color: '#FFD700' }} className={classes.badge} /> : ''))}</p>}>
+                    <Avatar src={props.user.profilePictureUrl} className={classes.icon} />
+                </Badge>
             </Grid>
         </Grid>
     );

@@ -6,7 +6,8 @@ const {
     send,
     getMessages,
     getUnreadCount,
-    startANewChat
+    startANewChat,
+    leaveChat
 } = require('../controllers/chatController');
 
 const router = express();
@@ -53,6 +54,12 @@ router.get('/getUnreadCount/:userId', async (req, res) => {
 
 router.post('/startANewChat', async (req, res) => {
     const result = await startANewChat(req.body);
+
+    res.send(result);
+});
+
+router.post('/leaveChat', async (req, res) => {
+    const result = await leaveChat(req.body);
 
     res.send(result);
 });

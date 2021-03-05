@@ -66,6 +66,7 @@ const FeedPostCard = (props) => {
                         </Grid>
                     </Grid>
                 </div>
+                {props.post.imageUrl ? <div style={{ display: 'block', margin: '0 auto', textAlign: 'center' }}><img style={{ maxWidth: '90%', maxHeight: '300px' }} src={props.post.imageUrl} alt='Image' /></div> : ''}
                 <div className={styles.contentBlock} ref={contentDiv}></div>
                 <div>{}</div>
                 <div className={styles.btns}>

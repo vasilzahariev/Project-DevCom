@@ -69,7 +69,7 @@ const JobCard = (props) => {
     }
 
     const apply = async e => {
-        if (!userContext.user.loggedIn) history.push('/auth/login');
+        if (!userContext.user.loggedIn) { history.push('/auth/login'); return; }
         if (userContext.user.username === jobContext.username) return;
 
         const href = `/jobs/j/${jobContext.job._id}`;

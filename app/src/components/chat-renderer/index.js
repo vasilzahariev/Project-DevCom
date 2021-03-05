@@ -17,6 +17,8 @@ import SimpleTextBtn from '../simple-text-btn';
 import CancelIcon from '@material-ui/icons/Cancel';
 import MessagesRenderer from '../messages-renderer';
 import HeaderLink from '../header-link';
+import DialogWindow from '../dialog-window';
+import ImageInput from '../image-input';
 
 const ChatRenderer = props => {
     const configContext = useContext(ConfigContext);
@@ -28,6 +30,7 @@ const ChatRenderer = props => {
     const [chat, setChat] = useState(null);
     const [users, setUsers] = useState([]);
     const [showMembers, setShowMembers] = useState(false);
+    const [uploadImgOpen, setUploadImgOpen] = useState(false);
 
     const [message, setMessage] = useState('');
 
@@ -127,6 +130,59 @@ const ChatRenderer = props => {
         }
     }
 
+    const sendImg = async url => {
+        const body = {
+            conversationId: chat._id,
+            content: `<img style='max-width: 50%; max-height: 250px' src='${url}' alt='image' />`,
+            userId: userContext.user._id,
+            username: userContext.user.username
+        };
+
+        const promise = await fetch(`${configContext.restApiUrl}/chat/send`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        const response = await promise.json();
+
+        if (!response.status) {
+            history.push('/500');
+        } else {
+            setMessage('');
+            setUploadImgOpen(false);
+        }
+    }
+
+    const leaveChat = async e => {
+        if (!window.confirm('Are you sure you want to leave this conversation?')) return;
+
+        const body = {
+            userId: userContext.user._id,
+            conversationId: chat._id
+        }
+
+        const promise = await fetch(`${configContext.restApiUrl}/chat/leaveChat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        const response = await promise.json();
+
+        if (!response.status) {
+            history.push('/500');
+            
+            return;
+        }
+
+        history.push('/chat');
+    }
+
     if (!props.chatId) {
         return (<div></div>);
     }
@@ -147,7 +203,13 @@ const ChatRenderer = props => {
                 </div>
                 <div className={styles.input}>
                     <Grid container justify='center' alignItems='center' spacing={1}>
-                        <Grid className={styles.cool} item xs={1}><SubmitBtn title='Upload Image' padding='10% 15%' color='blue'><ImageIcon /></SubmitBtn></Grid>
+                        <Grid className={styles.cool} item xs={1}>
+                            <SubmitBtn title='Upload Image' padding='10% 15%' color='blue' onClick={() => { setUploadImgOpen(true) }}><ImageIcon /></SubmitBtn>
+                            {uploadImgOpen ?
+                                <DialogWindow open={uploadImgOpen} onClearClose={() => { setUploadImgOpen(false) }} title='Upload Image'>
+                                    <ImageInput setUrl={url => sendImg(url)} />
+                                </DialogWindow> : ''}
+                        </Grid>
                         <Grid className={styles.cool} item xs={10}><TextArea placeholder='Aa' height={25} value={message} onChange={onMessageChange} /></Grid>
                         <Grid className={styles.cool} item xs={1}><div className={styles.send}><SubmitBtn title='Send' padding='10% 15%' color='blue' onClick={send}><SendIcon /></SubmitBtn></div></Grid>
                     </Grid>
@@ -168,9 +230,9 @@ const ChatRenderer = props => {
                                 </Grid>
                             </div>
                         </Collapse>
-                        <div style={{ marginTop: '5%', textAlign: 'right' }}>
-                            <SubmitBtn color='red'>Leave Chat</SubmitBtn>
-                        </div>
+                        {chat.creatorId !== userContext.user._id ? <div style={{ marginTop: '5%', textAlign: 'right' }}>
+                            <SubmitBtn color='red' onClick={leaveChat}>Leave Chat</SubmitBtn>
+                        </div> : ''}
                     </div>
                 </div>
             </Grid>

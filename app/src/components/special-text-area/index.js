@@ -20,6 +20,7 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import LinkIcon from '@material-ui/icons/Link';
 import LinkOffIcon from '@material-ui/icons/LinkOff';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
+import ImageIcon from '@material-ui/icons/Image';
 
 const SpecialTextArea = (props) => {
     const articleContext = useContext(ArticleContext);
@@ -45,6 +46,20 @@ const SpecialTextArea = (props) => {
             return;
         else
             iFrameNode.contentWindow.document.execCommand(cmd, false, linkVal);
+
+        const body = iFrameNode.contentWindow.document.body.innerHTML;
+
+        props.updateBody(body);
+    }
+
+    const onCmdWithImageWindow = (e, cmd) => {
+        e.preventDefault();
+
+        const url = prompt('Please enter image link here:', '');
+
+        if (!url && !url.match(/\.(jpeg|jpg|gif|png)$/)) return;
+
+        iFrameNode.contentWindow.document.execCommand(cmd, false, url);
 
         const body = iFrameNode.contentWindow.document.body.innerHTML;
 
@@ -84,6 +99,7 @@ const SpecialTextArea = (props) => {
                         <button title='Underline' onClick={e => onCmd(e, 'underline')}><FormatUnderlinedIcon /></button>
                         <button title='Strikethrough' onClick={e => onCmd(e, 'strikethrough')}><StrikethroughSIcon /></button>
                         <button title='Link' onClick={e => onCmdWithWindow(e, 'createLink')}><LinkIcon /></button>
+                        {/* <button title='Image' onClick={e => onCmdWithImageWindow(e, 'insertImage')}><ImageIcon /></button> */}
                         <button title='Unlink' onClick={e => onCmd(e, 'unlink')}><LinkOffIcon /></button>
                         <button title='Font Size' onClick={e => onCmdWithWindow(e, 'fontSize')}><TextFieldsIcon /></button>
                         <button title='Justify Left' onClick={e => onCmd(e, 'justifyLeft')}><FormatAlignLeftIcon /></button>

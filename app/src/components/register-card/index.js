@@ -32,10 +32,11 @@ const RegisterCard = () => {
 
         const val = String(e.target.value);
 
-        // TODO: Make sure there are no spaces and other symbols
-
         if (val.length === 0)
             setUsernameErr(`Username is required!`);
+        else if (val.match(/[ `!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?~]/g)) {
+            setUsernameErr(`Invalid symbols detected`);
+        }
         else
             setUsernameErr('');
 
@@ -60,12 +61,13 @@ const RegisterCard = () => {
 
         const val = String(e.target.value);
 
-        // TODO: Make sure there are no spaces and harmful symbols
-
         if (val.length === 0)
             setPasswordErr('Password is required!')
         else if (val.length < 6)
             setPasswordErr('Password should be at least 6 characters long');
+        else if (val.match(/[ `!^*()\=\[\]{};':"\\|,.<>\/?~]/g)) {
+            setPasswordErr(`Invalid symbols detected`);
+        }
         else
             setPasswordErr('');
 
@@ -87,12 +89,58 @@ const RegisterCard = () => {
         setEmail(val);
     }
 
+    const checkForErrs = () => {
+        let areThereErrs = false;
+
+        if (username.length === 0) {
+            setUsernameErr(`Username is required!`);
+
+            areThereErrs = true;
+        } else if (username.match(/[ `!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?~]/g)) {
+            setUsernameErr(`Invalid symbols detected`);
+
+            areThereErrs = true;
+        }
+
+        if (fullName.length === 0) {
+            setFullNameErr(`Full name should be at least 1 character long`);
+
+            areThereErrs = true;
+        }
+
+        if (password.length === 0) {
+            setPasswordErr('Password is required!');
+
+            areThereErrs = true;
+        } else if (password.length < 6) {
+            setPasswordErr('Password should be at least 6 characters long');
+
+            areThereErrs = true;
+        }
+        else if (password.match(/[ `!^*()\=\[\]{};':"\\|,.<>\/?~]/g)) {
+            setPasswordErr(`Invalid symbols detected`);
+
+            areThereErrs = true;
+        }
+
+        if (email.length === 0) {
+            setEmailErr('Email is required!');
+
+            areThereErrs = true;
+        }
+        else if (!email.match(/^(([^<>()\[\]\\\\.,;:\s@"]+(\.[^<>()\[\]\\\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+            setEmailErr('Email should be like this: email@domain.com');
+
+            areThereErrs = true;
+        }
+
+        return areThereErrs;
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        // TODO: Upgrade the validation for submition
-
-        if (usernameErr || passwordErr || emailErr)
+        if (checkForErrs())
             return;
 
         const body = {

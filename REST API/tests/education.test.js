@@ -5,7 +5,8 @@
 const mongoose = require('mongoose');
 const {
     addEducation,
-    getEducations
+    getEducations,
+    deleteEducation
 } = require('../controllers/educationController');
 const Education = require('../models/Education');
 const { register } = require('../controllers/authController');
@@ -99,6 +100,31 @@ describe('education', () => {
         const educations = await getEducations(user.username);
 
         expect(educations.length).toBe(2);
+    });
+
+    it(`should delete education`, async () => {
+        const { user } = await register({
+            username: 'username',
+            email: 'email@em.com',
+            fullName: 'fullName',
+            password: 'password'
+        });
+
+        await addEducation({
+            userId: user._id,
+            school: 'school',
+            schoolLink: 'schoolLink',
+            degree: 'degree',
+            specialization: 'specialization',
+            from: 2015,
+            to: 2020
+        });
+
+        const educations = await Education.find();
+        
+        const { status } = await deleteEducation(educations[0]._id);
+
+        expect(status).toBeTruthy();
     });
 });
 

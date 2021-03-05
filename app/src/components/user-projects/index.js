@@ -37,10 +37,10 @@ const UserProjects = props => {
         <div>
             <PageDiv>
                 <div>
-                    {userContext.user && userContext.user.loggedIn && userContext.user.username ? <SimpleTextBtn onClick={() => setOpen(true)}>Add Project</SimpleTextBtn> : ''}
+                    {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <SimpleTextBtn onClick={() => setOpen(true)}>Add Project</SimpleTextBtn> : ''}
                 </div>
 
-                {userContext.user && userContext.user.loggedIn && userContext.user.username ? <CreateProjectDialog username={props.username} open={open} setOpen={setOpen} /> : ''}
+                {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <CreateProjectDialog username={props.username} open={open} setOpen={setOpen} /> : ''}
 
             </PageDiv>
 

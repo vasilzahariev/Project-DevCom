@@ -35,7 +35,11 @@ const UserPart = (props) => {
     const chat = async e => {
         e.preventDefault();
 
-        if (!userContext.user.loggedIn) history.push('/auth/login');
+        if (!userContext.user.loggedIn) {
+            history.push('/auth/login');
+
+            return;
+        }
 
         const body = {
             usernames: [userContext.user.username, props.username],

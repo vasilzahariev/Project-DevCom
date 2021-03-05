@@ -256,6 +256,27 @@ const startANewChat = async body => {
     }
 }
 
+const leaveChat = async body => {
+    try {
+        const {
+            userId,
+            conversationId
+        } = body;
+
+        await Conversation.findByIdAndUpdate(conversationId, { $pull: { users: userId } });
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     getChats,
     create,
@@ -263,5 +284,6 @@ module.exports = {
     send,
     getMessages,
     getUnreadCount,
-    startANewChat
+    startANewChat,
+    leaveChat
 }

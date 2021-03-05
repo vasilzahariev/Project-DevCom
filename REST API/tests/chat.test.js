@@ -9,10 +9,12 @@ const {
     getChat,
     send,
     getMessages,
+    leaveChat
 } = require('../controllers/chatController');
 const { register } = require('../controllers/authController');
 const Message = require('../models/Message');
 const ReadMessage = require('../models/ReadMessage');
+const Conversation = require('../models/Conversation');
 
 describe('chat', () => {
     beforeAll(async () => {
@@ -290,6 +292,36 @@ describe('chat', () => {
         expect(userChats.length).toBe(2);
     });
 
+    it(`should leave chat`, async () => {
+        const { user } = await register({
+            username: 'username',
+            fullName: 'fullName',
+            email: 'email@email.com',
+            password: 'password'
+        });
+        const { user: user2 } = await register({
+            username: 'username2',
+            fullName: 'fullName2',
+            email: 'email2@email.com',
+            password: 'password2'
+        });
+
+        const { chatId } = await create({
+            creatorId: user._id,
+            name: 'Group',
+            usernames: [user.username, user2.username]
+        });
+
+        const { status } = await leaveChat({
+            userId: user2._id,
+            conversationId: chatId
+        });
+
+        const chat = await Conversation.findById(chatId);
+
+        expect(status).toBeTruthy();
+        expect(chat.users.length).toBe(1);
+    });
 });
 
 /*

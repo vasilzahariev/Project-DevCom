@@ -52,7 +52,26 @@ const getEducations = async username => {
     return await Promise.all(edus.map(async edu => await getEducation(edu.educationId)));
 }
 
+const deleteEducation = async id => {
+    try {
+        await UserEducation.findOneAndDelete({ educationId: id });
+        await Education.findByIdAndDelete(id);
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     addEducation,
-    getEducations
+    getEducations,
+    deleteEducation,
+    deleteEducation
 }

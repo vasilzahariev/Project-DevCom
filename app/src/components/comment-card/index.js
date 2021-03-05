@@ -120,7 +120,7 @@ const CommentCard = props => {
                         </Grid>
                         <div>
                             <div className={styles.btns}>
-                                {userContext.user.loggedIn && (userContext.user._id === props.comment.userId || checkIfUserIsModOrOwner()) ? <div className={styles.btn}><SubmitBtn color='red' borderRadius='100%' onClick={deleteComment}><DeleteIcon /></SubmitBtn></div> : ''}
+                                {userContext.user.loggedIn && (userContext.user._id === props.comment.userId || checkIfUserIsModOrOwner() || userContext.user.isAdmin) ? <div className={styles.btn}><SubmitBtn color='red' borderRadius='100%' onClick={deleteComment}><DeleteIcon /></SubmitBtn></div> : ''}
                                 {userContext.user.loggedIn && userContext.user._id === props.comment.userId ? <div className={styles.btn}><SubmitBtn color='yellow' borderRadius='100%' onClick={() => { setEditOpen(true) }}><EditIcon /></SubmitBtn></div> : ''}
                                 {userContext.user.loggedIn && userContext.user._id === props.post.authorId ?
                                     (props.comment.answer ?

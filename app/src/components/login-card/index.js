@@ -23,6 +23,9 @@ const LoginCard = () => {
     const usernameValidation = val => {
         if (val.length < 1)
             setUsernameErr('Username must be at least 1 character long');
+        else if (val.match(/[ `!@#$%^&*()+\=\[\]{};':"\\|,.<>\/?~]/g)) {
+            setUsernameErr(`Invalid symbols detected`);
+        }
         else
             setUsernameErr('');
     }
@@ -39,6 +42,9 @@ const LoginCard = () => {
     const passwordValidation = val => {
         if (val.length < 6)
             setPasswordErr('Password must be at least 6 characters long');
+        else if (val.match(/[ `!^*()\=\[\]{};':"\\|,.<>\/?~]/g)) {
+            setPasswordErr(`Invalid symbols detected`);
+        }
         else
             setPasswordErr('');
     }
@@ -60,7 +66,7 @@ const LoginCard = () => {
 
         if (usernameErr || passwordErr || username.length === 0 || password.length === 0)
             return;
-        
+
         const body = {
             username,
             password
@@ -79,7 +85,7 @@ const LoginCard = () => {
         if (response.error) {
             if (String(response.error).includes('username')) {
                 setUsernameErr(response.error);
-                
+
                 return;
             } else if (String(response.error).includes('password')) {
                 setPasswordErr(response.error);

@@ -7,7 +7,7 @@ const NewsTagsRenderer = (props) => {
         return props.tags.map((tag, index) => {
             return (
                 <div key={tag} index={index} className={styles.link}>
-                    <HeaderLink to={`/search?q=%23${tag}`}>#{tag}</HeaderLink>
+                    <HeaderLink to={`/search/news/${tag}`}>#{tag}</HeaderLink>
                 </div>
             );
         })
