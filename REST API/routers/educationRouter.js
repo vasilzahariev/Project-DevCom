@@ -2,7 +2,8 @@ const express = require('express');
 const {
     addEducation,
     getEducations,
-    deleteEducation
+    deleteEducation,
+    editEducation
 } = require('../controllers/educationController');
 
 const router = express();
@@ -22,6 +23,12 @@ router.post('/add', async (req, res) => {
 
 router.post('/deleteEducation/:id', async (req, res) => {
     const result = await deleteEducation(req.params.id);
+
+    res.send(result);
+})
+
+router.post('/edit', async (req, res) => {
+    const result = await editEducation(req.body);
 
     res.send(result);
 })
