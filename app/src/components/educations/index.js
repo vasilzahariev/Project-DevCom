@@ -37,7 +37,7 @@ const Educations = (props) => {
             setEnded(true);
         });
 
-    }, []);
+    }, [educations]);
 
     if (!ended) {
         return (

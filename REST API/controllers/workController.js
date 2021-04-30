@@ -62,7 +62,58 @@ const getWorkExperiences = async username => {
     }
 }
 
+const deleteWork = async id => {
+    try {
+        await UserWorkExperience.findOneAndDelete({ workId: id });
+        await Work.findByIdAndDelete(id);
+
+        return {
+            status: true
+        };
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        };
+    }
+}
+
+const editWork = async body => {
+    try {
+        const {
+            id,
+            company,
+            companyUrl,
+            position,
+            info,
+            from,
+            to
+        } = body;
+
+        await Work.findByIdAndUpdate(id, {
+            company: company,
+            companyUrl: companyUrl,
+            position: position,
+            info: info
+            // TODO: Add Years
+        });
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     addWork,
-    getWorkExperiences
+    getWorkExperiences,
+    deleteWork,
+    editWork
 }

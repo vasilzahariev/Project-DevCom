@@ -69,9 +69,41 @@ const deleteEducation = async id => {
     }
 }
 
+const editEducation = async body => {
+    const {
+        id,
+        school,
+        schoolLink,
+        specialization,
+        degree,
+        from,
+        to
+    } = body;
+
+    try {
+        await Education.findByIdAndUpdate(id, {
+            school: school,
+            schoolLink: schoolLink,
+            specialization: specialization,
+            degree: degree
+            // TODO: Add years
+        });
+
+        return {
+            status: true
+        }
+    } catch (err) {
+        console.log(err);
+
+        return {
+            status: false
+        }
+    }
+}
+
 module.exports = {
     addEducation,
     getEducations,
     deleteEducation,
-    deleteEducation
+    editEducation
 }

@@ -19,7 +19,7 @@ const WorkExperience = props => {
     const [workExperiences, setWorkExperiences] = useState([]);
 
     useEffect(() => {
-        fetch(`${configContext.restApiUrl}/work/${props.username}`, {
+        fetch(`${configContext.restApiUrl}/work/u/${props.username}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
