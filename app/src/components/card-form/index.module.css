@@ -1,13 +1,28 @@
+@media screen and (max-width: 1224px) {
+    .card {
+        width: 85%;
+    }
+
+    .bigCard {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .card {
+        width: 35%;
+    }
+
+    .bigCard {
+        width: 50%;
+    }
+}
+
 .card {
     border: 1px solid #586379b4;
     /* border: 3px solid #586379b4; Bright */
     border-radius: 10px;
     margin: 0 auto;
-    width: 35%;
     background-color: #4a515d73;
     padding-bottom: 2%;
-}
-
-.bigCard {
-    width: 50%;
 }

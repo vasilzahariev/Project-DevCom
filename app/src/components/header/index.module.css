@@ -1,3 +1,15 @@
-.header {
-    margin-top: .19%;
+@media screen and (max-width: 1224px) {
+    .header {
+        margin-top: .19%;
+    }
+
+    .loggedIn {
+        margin-top: 1.5%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .header {
+        margin-top: .19%;
+    }
 }

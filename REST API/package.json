@@ -16,6 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.1",
     "qs": "^6.9.4",
+    "react-responsive": "^8.2.0",
     "sinon": "^9.2.4"
   },
   "devDependencies": {

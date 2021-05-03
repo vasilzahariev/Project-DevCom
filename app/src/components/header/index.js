@@ -7,12 +7,15 @@ import HeaderUser from '../header-user';
 import HeaderSearch from '../header-search';
 import { useContext } from 'react';
 import UserContext from '../../contexts/UserContext';
+import { useMediaQuery } from 'react-responsive';
 
 const Header = () => {
     const userContext = useContext(UserContext);
 
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
     return (
-        <header className={ userContext.user.loggedIn ? '' : styles.header }>
+        <header className={userContext.user.loggedIn ? styles.loggedIn : styles.header}>
             <Grid container justify='space-between' alignItems='center'>
                 <Grid item xs={3}>
                     <HeaderBase />
@@ -21,7 +24,7 @@ const Header = () => {
                     <HeaderSearch />
                 </Grid>
                 <Grid item xs={3}>
-                    { userContext.user.loggedIn ? <HeaderUser /> : <HeaderUserGuest /> }
+                    {userContext.user.loggedIn ? <HeaderUser /> : <HeaderUserGuest />}
                 </Grid>
             </Grid>
         </header>

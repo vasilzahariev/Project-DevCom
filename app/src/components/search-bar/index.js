@@ -1,6 +1,7 @@
 import styles from './index.module.css';
 import { TextField, InputAdornment, ThemeProvider, withStyles } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
+import { useMediaQuery } from 'react-responsive';
 
 const CssTextField = withStyles({
     root: {
@@ -39,6 +40,8 @@ const CssTextField = withStyles({
 })(TextField);
 
 const SearchBar = (props) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
     const onChange = (e) => {
         e.preventDefault();
 
@@ -46,12 +49,13 @@ const SearchBar = (props) => {
     }
 
     return (
-        <CssTextField id="custom-css-standard-input" label="Search" fullWidth={true} onChange={onChange} autoComplete='off' InputProps={{
+        <CssTextField id="custom-css-standard-input" label={isMobile ? '' : "Search"} fullWidth={true} onChange={onChange} autoComplete='off' InputProps={{
             startAdornment: (
                 <InputAdornment position="start">
                     <SearchIcon />
                 </InputAdornment>
             ),
+            placeholder: isMobile ? 'Search' : ''
         }} />
     );
 }

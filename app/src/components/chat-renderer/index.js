@@ -19,10 +19,13 @@ import MessagesRenderer from '../messages-renderer';
 import HeaderLink from '../header-link';
 import DialogWindow from '../dialog-window';
 import ImageInput from '../image-input';
+import { useMediaQuery } from 'react-responsive';
 
 const ChatRenderer = props => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -176,7 +179,7 @@ const ChatRenderer = props => {
 
         if (!response.status) {
             history.push('/500');
-            
+
             return;
         }
 
@@ -196,47 +199,70 @@ const ChatRenderer = props => {
     }
 
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={9}>
-                <div className={styles.chatBlock}>
-                    <MessagesRenderer id={chat._id} />
-                </div>
-                <div className={styles.input}>
-                    <Grid container justify='center' alignItems='center' spacing={1}>
-                        <Grid className={styles.cool} item xs={1}>
-                            <SubmitBtn title='Upload Image' padding='10% 15%' color='blue' onClick={() => { setUploadImgOpen(true) }}><ImageIcon /></SubmitBtn>
-                            {uploadImgOpen ?
-                                <DialogWindow open={uploadImgOpen} onClearClose={() => { setUploadImgOpen(false) }} title='Upload Image'>
-                                    <ImageInput setUrl={url => sendImg(url)} />
-                                </DialogWindow> : ''}
+        <div>
+            {isMobile ?
+                <div>
+                    <div className={styles.chatBlock}>
+                        <MessagesRenderer id={chat._id} />
+                    </div>
+                    <div className={styles.input}>
+                        <Grid container justify='center' alignItems='center' spacing={1}>
+                            <Grid className={styles.cool} item xs={2}>
+                                <SubmitBtn title='Upload Image' padding='10% 15%' color='blue' onClick={() => { setUploadImgOpen(true) }}><ImageIcon /></SubmitBtn>
+                                {uploadImgOpen ?
+                                    <DialogWindow open={uploadImgOpen} onClearClose={() => { setUploadImgOpen(false) }} title='Upload Image'>
+                                        <ImageInput setUrl={url => sendImg(url)} />
+                                    </DialogWindow> : ''}
+                            </Grid>
+                            <Grid className={styles.cool} item xs={8}><Input placeholder='Aa' height={25} value={message} onChange={onMessageChange} /></Grid>
+                            <Grid className={styles.cool} item xs={2}><div className={styles.send}><SubmitBtn title='Send' padding='10% 15%' color='blue' onClick={send}><SendIcon /></SubmitBtn></div></Grid>
                         </Grid>
-                        <Grid className={styles.cool} item xs={10}><TextArea placeholder='Aa' height={25} value={message} onChange={onMessageChange} /></Grid>
-                        <Grid className={styles.cool} item xs={1}><div className={styles.send}><SubmitBtn title='Send' padding='10% 15%' color='blue' onClick={send}><SendIcon /></SubmitBtn></div></Grid>
-                    </Grid>
-                </div>
-            </Grid>
-            <Grid item xs={3}>
-                <div className={styles.card}>
-                    <div className={styles.center}><b><EpicProgrammer>{chat.name ? chat.name : getChatNameFromUsers()}</EpicProgrammer></b></div>
-                    <div className={styles.members}>
-                        <Grid className={styles.membersBtn} container justify="space-between" onClick={() => { setShowMembers(!showMembers) }}>
-                            <Grid item>Chat Members</Grid>
-                            <Grid item>{showMembers ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}</Grid>
-                        </Grid>
-                        <Collapse in={showMembers}>
-                            <div className={styles.rendered}>
-                                <Grid container>
-                                    {membersRenderer}
-                                </Grid>
-                            </div>
-                        </Collapse>
-                        {chat.creatorId !== userContext.user._id ? <div style={{ marginTop: '5%', textAlign: 'right' }}>
-                            <SubmitBtn color='red' onClick={leaveChat}>Leave Chat</SubmitBtn>
-                        </div> : ''}
                     </div>
                 </div>
-            </Grid>
-        </Grid>
+                :
+                <Grid container spacing={2}>
+                    <Grid item xs={9}>
+                        <div className={styles.chatBlock}>
+                            <MessagesRenderer id={chat._id} />
+                        </div>
+                        <div className={styles.input}>
+                            <Grid container justify='center' alignItems='center' spacing={1}>
+                                <Grid className={styles.cool} item xs={1}>
+                                    <SubmitBtn title='Upload Image' padding='10% 15%' color='blue' onClick={() => { setUploadImgOpen(true) }}><ImageIcon /></SubmitBtn>
+                                    {uploadImgOpen ?
+                                        <DialogWindow open={uploadImgOpen} onClearClose={() => { setUploadImgOpen(false) }} title='Upload Image'>
+                                            <ImageInput setUrl={url => sendImg(url)} />
+                                        </DialogWindow> : ''}
+                                </Grid>
+                                <Grid className={styles.cool} item xs={10}><TextArea placeholder='Aa' height={25} value={message} onChange={onMessageChange} /></Grid>
+                                <Grid className={styles.cool} item xs={1}><div className={styles.send}><SubmitBtn title='Send' padding='10% 15%' color='blue' onClick={send}><SendIcon /></SubmitBtn></div></Grid>
+                            </Grid>
+                        </div>
+                    </Grid>
+                    <Grid item xs={3}>
+                        <div className={styles.card}>
+                            <div className={styles.center}><b><EpicProgrammer>{chat.name ? chat.name : getChatNameFromUsers()}</EpicProgrammer></b></div>
+                            <div className={styles.members}>
+                                <Grid className={styles.membersBtn} container justify="space-between" onClick={() => { setShowMembers(!showMembers) }}>
+                                    <Grid item>Chat Members</Grid>
+                                    <Grid item>{showMembers ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}</Grid>
+                                </Grid>
+                                <Collapse in={showMembers}>
+                                    <div className={styles.rendered}>
+                                        <Grid container>
+                                            {membersRenderer}
+                                        </Grid>
+                                    </div>
+                                </Collapse>
+                                {chat.creatorId !== userContext.user._id ? <div style={{ marginTop: '5%', textAlign: 'right' }}>
+                                    <SubmitBtn color='red' onClick={leaveChat}>Leave Chat</SubmitBtn>
+                                </div> : ''}
+                            </div>
+                        </div>
+                    </Grid>
+                </Grid>
+            }
+        </div>
     );
 }
 

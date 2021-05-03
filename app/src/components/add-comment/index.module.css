@@ -1,5 +1,13 @@
-.addCommentDiv {
-    width: 50%;
+@media screen and (max-width: 1224px) {
+    .addCommentDiv {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .addCommentDiv {
+        width: 50%;
+    }
 }
 
 .btn {

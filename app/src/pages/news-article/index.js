@@ -13,6 +13,7 @@ import NewsTagsRenderer from '../../components/news-tags-renderer';
 import UserAvatar from '../../components/user-avatar';
 import SubmitBtn from '../../components/submit-btn';
 import EditArticleDialog from '../../components/edit-article-dialog';
+import { useMediaQuery } from 'react-responsive'
 
 const NewsArticle = (props) => {
     const configContext = useContext(ConfigContext);
@@ -24,6 +25,8 @@ const NewsArticle = (props) => {
     const [article, setArticle] = useState(null);
     const [author, setAuthor] = useState(null);
     const [editOpen, setEditOpen] = useState(false);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' })
 
     useEffect(() => {
         const path = params.path;
@@ -77,21 +80,21 @@ const NewsArticle = (props) => {
             <br />
             <h1>{article.title}</h1>
             <div>
-                <Grid container alignItems='center'>
-                    <Grid item xs={2}>
+                <Grid container alignItems='center' spacing={isMobile ? 1 : 0}>
+                    <Grid item xs={isMobile ? 4 : 2}>
                         <Grid container alignItems='center'>
                             <Grid item>
-                                <UserAvatar user={author} size={6} />
+                                <UserAvatar user={author} size={ isMobile ? 3 : 6} />
                             </Grid>
                             <Grid item>
                                 <span className={styles.byText}><HeaderLink to={`/u/${author.username}`}>{author.fullName}</HeaderLink></span>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={isMobile ? 4 : 3}>
                         <span className={styles.published}>Published: {`${article.publishedDate.split('T')[0]} ${article.publishedDate.split('.')[0].split('T')[1]}`}</span>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item xs={isMobile ? 4 : 7}>
                         {article.publishedDate !== article.lastEditedDate ? <span className={styles.published}>Last Edited: {`${article.lastEditedDate.split('T')[0]} ${article.lastEditedDate.split('.')[0].split('T')[1]}`}</span> : ''}
                     </Grid>
                 </Grid>

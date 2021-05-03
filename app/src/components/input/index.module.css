@@ -1,3 +1,23 @@
+@media screen and (max-width: 1224px) {
+    .text {
+        width: 90%;
+    }
+
+    .password {
+        width: 69%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .text {
+        width: 50%;
+    }
+
+    .password {
+        width: 39%;
+    }
+}
+
 .input {
     display: inline-block;
     margin: 0 auto;
@@ -13,14 +33,6 @@
 .input::placeholder {
     color: gray;
     /* color: rgb(224, 215, 215); Bright */
-}
-
-.text {
-    width: 50%;
-}
-
-.password {
-    width: 39%;
 }
 
 .clearInputField {

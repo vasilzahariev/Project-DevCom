@@ -1,0 +1,14 @@
+.menuIcon {
+    color: #61dafb;
+
+    transition: .5s all;
+}
+
+.menuIcon:hover {
+    color: #059dc7;
+}
+
+.drawer {
+    background-color: #282c34;
+    padding: 3% 0;
+}

@@ -5,9 +5,12 @@ import { useState, useContext } from 'react';
 import SpecialTextArea from '../special-text-area';
 import ConfigContext from '../../contexts/ConfigContext';
 import { useHistory } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const WorkCreateCard = (props) => {
     const configContext = useContext(ConfigContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -139,7 +142,7 @@ const WorkCreateCard = (props) => {
     }
 
     return (
-        <Dialog open={props.open} scroll='paper' fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
+        <Dialog open={props.open} scroll='paper' fullScreen={isMobile} fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
             <DialogTitle className={styles.title} id='form-dialog-title'>Add Work Experience</DialogTitle>
             <DialogContent className={styles.dialog}>
                 <Input label='Company' type='text' placeholder="Company's Name" value={company} onChange={onCompanyChange} err={companyErr} />

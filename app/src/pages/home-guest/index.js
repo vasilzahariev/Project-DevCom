@@ -20,11 +20,14 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import ALink from '../../components/link';
 import UserContext from '../../contexts/UserContext';
 import { useContext } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 const HomeGuest = () => {
     const userContext = useContext(UserContext);
 
     const history = useHistory();
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' })
 
     return (
         <Layout>
@@ -35,8 +38,8 @@ const HomeGuest = () => {
                         <p className={styles.underImgText}>A platform for <EpicProgrammer><b>programmers</b></EpicProgrammer> and <EpicProgrammer><b>developers</b></EpicProgrammer> from all area and angles in the <EpicProgrammer><b>world of programming</b></EpicProgrammer></p>
                         {userContext.user.loggedIn ? '' :
                             <div>
-                                <div style={{ display: 'inline', marginRight: '2%' }}><SubmitBtn color='green' fontSize='1.8rem' onClick={() => { history.push('/auth/register') }}>JOIN US NOW</SubmitBtn></div>
-                                <div style={{ display: 'inline' }} onClick={() => { history.push('/auth/login') }}><SubmitBtn color='blue' fontSize='1.8rem'>LOG IN</SubmitBtn></div>
+                                <div style={{ display: 'inline', marginRight: '2%' }}><SubmitBtn color='green' fontSize={isMobile ? '1.2rem' : '1.8rem'} onClick={() => { history.push('/auth/register') }}>JOIN US NOW</SubmitBtn></div>
+                                <div style={{ display: 'inline' }} onClick={() => { history.push('/auth/login') }}><SubmitBtn color='blue' fontSize={isMobile ? '1.2rem' : '1.8rem'}>LOG IN</SubmitBtn></div>
                             </div>}
                     </div>
                     <br />
@@ -46,11 +49,11 @@ const HomeGuest = () => {
                 <Grid item xs={12}>
                     <div className={styles.functionalities}>
                         <h1>Functionalities</h1>
-                        <Grid style={{ fontSize: '1.3rem' }} container justify='center' alignItems='center' spacing={5}>
+                        <Grid style={{ fontSize: isMobile ? '.9rem' : '1.3rem' }} container justify='center' alignItems='center' spacing={5}>
                             <Grid item>
                                 <HeaderLink to='/news'>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><DescriptionIcon fontSize='large' /></Grid>
+                                        <Grid item><DescriptionIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Latest News in the Programming World</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -58,7 +61,7 @@ const HomeGuest = () => {
                             <Grid item>
                                 <HeaderLink to='/forum'>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><ForumIcon fontSize='large' /></Grid>
+                                        <Grid item><ForumIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Forums and Communities</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -66,7 +69,7 @@ const HomeGuest = () => {
                             <Grid item>
                                 <HeaderLink to='/jobs'>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><WorkIcon fontSize='large' /></Grid>
+                                        <Grid item><WorkIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Find Jobs</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -74,7 +77,7 @@ const HomeGuest = () => {
                             <Grid item>
                                 <HeaderLink to={userContext.user.loggedIn ? `/u/${userContext.user.username}` : '/auth/register'}>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><BookIcon fontSize='large' /></Grid>
+                                        <Grid item><BookIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Personal Blogs</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -82,7 +85,7 @@ const HomeGuest = () => {
                             <Grid item>
                                 <HeaderLink to={userContext.user.loggedIn ? `/u/${userContext.user.username}` : '/auth/register'}>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><SchoolIcon fontSize='large' /></Grid>
+                                        <Grid item><SchoolIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Add Your Educations</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -90,7 +93,7 @@ const HomeGuest = () => {
                             <Grid item>
                                 <HeaderLink to={userContext.user.loggedIn ? `/u/${userContext.user.username}` : '/auth/register'}>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><WorkIcon fontSize='large' /></Grid>
+                                        <Grid item><WorkIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Add Your Work Experiences</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -98,7 +101,7 @@ const HomeGuest = () => {
                             <Grid item>
                                 <HeaderLink to={userContext.user.loggedIn ? `/u/${userContext.user.username}` : '/auth/register'}>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><CodeIcon fontSize='large' /></Grid>
+                                        <Grid item><CodeIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Document Your Projects</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -106,7 +109,7 @@ const HomeGuest = () => {
                             <Grid item>
                                 <HeaderLink to={userContext.user.loggedIn ? `/chat` : '/auth/register'}>
                                     <Grid container alignItems='center' spacing={2}>
-                                        <Grid item><ChatIcon fontSize='large' /></Grid>
+                                        <Grid item><ChatIcon fontSize={isMobile ? 'default' : 'large'} /></Grid>
                                         <Grid item>Chat</Grid>
                                     </Grid>
                                 </HeaderLink>
@@ -121,10 +124,10 @@ const HomeGuest = () => {
                     <div className={styles.functionalities}>
                         <h1>Contacts</h1>
                         <Grid container justify='center' alignItems='center' spacing={5}>
-                            <Grid style={{ fontSize: '1.7rem' }} item xs={12}><ALink to='mailto:vasilzahariev1707@abv.bg'>vasilzahariev1707@abv.bg</ALink></Grid>
-                            <Grid item><ALink to='https://www.facebook.com/DevCom-108732774604083'><FacebookIcon style={{ fontSize: 50 }} /></ALink></Grid>
-                            <Grid item><ALink to='https://twitter.com/PDevcom'><TwitterIcon style={{ fontSize: 50 }} /></ALink></Grid>
-                            <Grid item><ALink to='https://www.instagram.com/project_devcom/'><InstagramIcon style={{ fontSize: 50 }} /></ALink></Grid>
+                            <Grid style={{ fontSize: isMobile ? '1.2rem' : '1.7rem' }} item xs={12}><ALink to='mailto:vasilzahariev1707@abv.bg'>vasilzahariev1707@abv.bg</ALink></Grid>
+                            <Grid item><ALink to='https://www.facebook.com/DevCom-108732774604083'><FacebookIcon style={{ fontSize: isMobile ? 40 : 50 }} /></ALink></Grid>
+                            <Grid item><ALink to='https://twitter.com/PDevcom'><TwitterIcon style={{ fontSize: isMobile ? 40 : 50 }} /></ALink></Grid>
+                            <Grid item><ALink to='https://www.instagram.com/project_devcom/'><InstagramIcon style={{ fontSize: isMobile ? 40 : 50 }} /></ALink></Grid>
                         </Grid>
                     </div>
                     <br />
@@ -133,7 +136,7 @@ const HomeGuest = () => {
                 </Grid>
                 <Grid style={{ textAlign: 'center' }} item xs={12}>
                     <h1>GitHub</h1>
-                    <ALink to='https://github.com/vasilzahariev/Project-DevCom'><GitHubIcon style={{ fontSize: 50 }} /></ALink>
+                    <ALink to='https://github.com/vasilzahariev/Project-DevCom'><GitHubIcon style={{ fontSize: isMobile ? 40 : 50 }} /></ALink>
                 </Grid>
             </Grid>
         </Layout>

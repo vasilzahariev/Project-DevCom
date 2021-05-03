@@ -8,10 +8,13 @@ import { Grid, Backdrop, CircularProgress } from '@material-ui/core';
 import PageDiv from '../../components/page-div';
 import ForumInfo from '../../components/forum-info';
 import ForumPosts from '../../components/forum-posts';
+import { useMediaQuery } from 'react-responsive';
 
 const Forum = props => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const params = useParams();
     const history = useHistory();
@@ -50,16 +53,22 @@ const Forum = props => {
     return (
         <Layout>
             <div style={{ marginTop: '2.5%' }}>
-                <Grid container>
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={6}>
-                        <ForumPosts forum={forum} posts={posts} />
-                    </Grid>
-                    <Grid item xs={3}>
+                {isMobile ?
+                    <div>
                         <ForumInfo forum={forum} moderators={moderators} showMods={true} members={members} />
-                    </Grid>
-                    <Grid item xs={1}></Grid>
-                </Grid>
+                        <ForumPosts forum={forum} posts={posts} />
+                    </div>
+                    :
+                    <Grid container>
+                        <Grid item xs={2}></Grid>
+                        <Grid item xs={6}>
+                            <ForumPosts forum={forum} posts={posts} />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <ForumInfo forum={forum} moderators={moderators} showMods={true} members={members} />
+                        </Grid>
+                        <Grid item xs={1}></Grid>
+                    </Grid>}
             </div>
         </Layout>
     );

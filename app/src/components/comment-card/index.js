@@ -16,10 +16,13 @@ import ForumDislikeBtn from '../forum-dislike-btn';
 import EpicProgrammer from '../epic-programmer';
 import EditFourmComment from '../edit-forum-comment';
 import HeaderLink from '../header-link';
+import { useMediaQuery } from 'react-responsive';
 
 const CommentCard = props => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const date = new Date(Date.parse(`${props.comment.date}`));
     const commentRef = useRef(null);
@@ -90,7 +93,7 @@ const CommentCard = props => {
         <Grid item xs={12}>
             <div className={`${styles.card} ${props.comment.answer ? styles.answer : styles.normal}`}>
                 <Grid container alignItems='center'>
-                    <Grid item xs={1}>
+                    <Grid item xs={isMobile ? 2 : 1}>
                         <Grid container direction='column' justify='center' alignItems='center' spacing={1}>
                             <Grid item>
                                 <ForumLikeButton likes={props.comment.likes} fetchUrl={`${configContext.restApiUrl}/forum/likeComment/${props.comment._id}`} />
@@ -103,7 +106,7 @@ const CommentCard = props => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={11}>
+                    <Grid item xs={isMobile ? 10 : 11}>
                         {props.comment.answer ? <div style={{ marginBottom: '2%' }}><EpicProgrammer><b>Answer</b></EpicProgrammer></div> : ''}
                         <div className={styles.comment} ref={commentRef}>
                         </div>

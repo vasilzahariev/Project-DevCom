@@ -7,10 +7,13 @@ import TextArea from '../text-area';
 import ConfigContext from '../../contexts/ConfigContext';
 import UserContext from '../../contexts/UserContext';
 import SpecialTextArea from '../special-text-area';
+import { useMediaQuery } from 'react-responsive';
 
 const CreateProjectDialog = props => {
     const userContext = useContext(UserContext);
     const configContext = useContext(ConfigContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -133,7 +136,7 @@ const CreateProjectDialog = props => {
     }
 
     return (
-        <Dialog open={props.open} scroll='paper' fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
+        <Dialog open={props.open} scroll='paper' fullScreen={isMobile} fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
             <DialogTitle className={styles.title} id='form-dialog-title'>Create a Project</DialogTitle>
             <DialogContent className={styles.dialog}>
                 <Input label='Name' placeholder="Project Name" value={name} onChange={onNameChange} err={nameErr} />

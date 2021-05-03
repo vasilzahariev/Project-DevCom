@@ -5,9 +5,12 @@ import RenderedDevlogCard from '../rendered-devlog-card';
 import SubmitBtn from '../submit-btn';
 import UserContext from '../../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const DevLogs = props => {
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -37,9 +40,9 @@ const DevLogs = props => {
         <div>
             <div>
                 <Grid container justify="center">
-                    <Grid item xs={2}><div style={{ fontSize: '1.5rem' }}>DevLogs</div></Grid>
+                    <Grid item xs={isMobile ? 4 : 2}><div style={{ fontSize: '1.5rem' }}>DevLogs</div></Grid>
                     <Grid item xs={5}>{checkIfUserIsMember() ? <SubmitBtn color='blue' onClick={onAddClick}>Add Devlog</SubmitBtn> : ''}</Grid>
-                    <Grid item xs={5}></Grid>
+                    <Grid item xs={isMobile ? 3 : 5}></Grid>
                 </Grid>
             </div>
             <div className={styles.devlogs}>

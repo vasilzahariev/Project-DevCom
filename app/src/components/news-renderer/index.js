@@ -2,8 +2,11 @@ import styles from './index.module.css';
 import { Grid } from '@material-ui/core';
 import { useMemo } from 'react';
 import NewsCard from '../news-card';
+import { useMediaQuery } from 'react-responsive';
 
 const NewsRenderer = (props) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
     const sortNews = (a, b) => {
         const date1 = new Date(Date.parse(a.publishedDate));
         const date2 = new Date(Date.parse(b.publishedDate));
@@ -23,7 +26,7 @@ const NewsRenderer = (props) => {
     }, [props.news]);
 
     return (
-        <div style={{ width: '50%', margin: '0 auto' }}>
+        <div style={{ width: isMobile ? '90%' : '50%', margin: '0 auto' }}>
             <br />
             <Grid container direction='row' justify='center' alignItems='center' spacing={2}>
                 {renderer}

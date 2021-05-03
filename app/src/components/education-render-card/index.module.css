@@ -1,8 +1,19 @@
+@media screen and (max-width: 1224px) {
+    .card {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .card {
+        width: 50%;
+    }
+}
+
 .card {
     border: 1px solid #586379b4;
     border-radius: 10px;
     margin: 0 auto;
     background-color: #4a515d73;
-    width: 50%;
     padding: 2% 3%;
 }

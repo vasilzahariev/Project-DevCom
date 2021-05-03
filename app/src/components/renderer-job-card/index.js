@@ -4,10 +4,14 @@ import { useState, useContext, useEffect } from 'react';
 import ConfigContext from '../../contexts/ConfigContext';
 import HeaderLink from '../header-link';
 import JobContext from '../../contexts/JobContext';
+import { useMediaQuery } from 'react-responsive';
+import JobCard from '../job-card';
 
 const RendererJobCard = (props) => {
     const jobContext = useContext(JobContext);
     const configContext = useContext(ConfigContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const jobType = props.job.type === 'freelance' ? 'Freelance' : (props.job.type === 'fullTime' ? 'Full Time' : (props.job.type === 'partTime' ? 'Part Time' : ''));
     const publishedDate = new Date(Date.parse(`${props.job.publishDate}`));
@@ -63,6 +67,8 @@ const RendererJobCard = (props) => {
                     </Grid>
                 </Grid>
             </div>
+
+            {isMobile && props.selectedJob === props.job ? <div style={{ marginTop: '2%' }}><JobCard /></div> : ''}
         </Grid>
     );
 }

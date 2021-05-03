@@ -11,9 +11,12 @@ import HeaderLinkBadge from '../header-link-badge';
 import UserContext from '../../contexts/UserContext';
 import ConfigContext from '../../contexts/ConfigContext';
 
+import { useMediaQuery } from 'react-responsive';
 const HeaderUser = () => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -40,19 +43,20 @@ const HeaderUser = () => {
 
     return (
         <Grid container justify='flex-end' alignItems='center' spacing={3}>
-            <Grid item>
-                <HeaderLinkBadge to='/chat' icon={ChatBubbleOutlineIcon} badgeContent={unreadMessages} />
-            </Grid>
+            {isMobile ? '' :
+                <Grid item>
+                    <HeaderLinkBadge to='/chat' icon={ChatBubbleOutlineIcon} badgeContent={unreadMessages} />
+                </Grid>}
             <Grid item>
                 <HeaderUserAvatar>
-                    {/* TODO: Once proper authentication is added change the link */}
                     <HeaderUserMenuItem to={`/u/${userContext.user.username}`}>Profile</HeaderUserMenuItem>
+                    {isMobile ? <HeaderUserMenuItem to={`/chat`}>Chat ({unreadMessages})</HeaderUserMenuItem> : ''}
                     <HeaderUserMenuItem to={`/u/${userContext.user.username}/settings`}>Settings</HeaderUserMenuItem>
                     {userContext.user.isAdmin || userContext.user.isOwner ? <HeaderUserMenuItem to='/admin'>Admin</HeaderUserMenuItem> : ''}
                     <HeaderUserMenuItem onClick={onLogoutClick} to='/auth/logout'>Log out</HeaderUserMenuItem>
                 </HeaderUserAvatar>
             </Grid>
-        </Grid >
+        </Grid>
     );
 }
 

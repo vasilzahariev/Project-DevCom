@@ -1,9 +1,35 @@
+@media screen and (max-width: 1224px) {
+    .links {
+        margin-top: 3%;
+    }
+
+    .bio {
+        background-color: #2e3035;
+        border: 1px solid #586379b4;
+        border-radius: 10px;
+        padding: 1%;
+    }
+
+    .card {
+        padding: 2%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .links {
+        margin-top: 1.5%;
+    }
+
+    .card {
+        padding: 1%;
+    }
+}
+
 .card {
     margin-top: 2.5%;
     border: 1px solid #586379b4;
     background-color: #4a515d73;
     border-radius: 15px;
-    padding: 1%;
 }
 
 .ppf {
@@ -12,8 +38,4 @@
 
 .bio {
     text-align: center;
-}
-
-.links {
-    margin-top: 1.5%;
 }
