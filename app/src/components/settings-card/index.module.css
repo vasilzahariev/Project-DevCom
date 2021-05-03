@@ -1,6 +1,15 @@
-.bioDiv {
-    width: 52%;
-    margin: 0 auto;
+@media screen and (max-width: 1224px) {
+    .bioDiv {
+        width: 92%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .bioDiv {
+        width: 52%;
+        margin: 0 auto;
+    }
 }
 
 .btns {

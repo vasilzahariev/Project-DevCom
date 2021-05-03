@@ -11,11 +11,14 @@ import JobsOptions from '../../components/jobs-options';
 import HeaderLink from '../../components/header-link';
 import UserContext from '../../contexts/UserContext';
 import { useParams, useHistory } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const Jobs = () => {
     const configContext = useContext(ConfigContext);
     const userContex = useContext(UserContext);
     const jobContex = useContext(JobContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const params = useParams();
     const history = useHistory();
@@ -73,11 +76,18 @@ const Jobs = () => {
                     </div>
                 </PageDiv>
 
-                <Grid container direction='row' justify='center' alignItems='flex-start' spacing={2}>
-                    <Grid item xs={2}><JobsOptions jobs={jobs} setRenderJobs={setRenderJobs} /></Grid>
-                    <Grid item xs={4}><JobsRenderer setJob={setSelectedJob} setUsername={setSelectedJobAuthorUsername} jobs={renderJobs} /></Grid>
-                    <Grid item xs={6}><JobCard /></Grid>
-                </Grid>
+                {isMobile ?
+                    <div>
+                        <JobsRenderer setJob={setSelectedJob} setUsername={setSelectedJobAuthorUsername} jobs={renderJobs} />
+                    </div>
+                    :
+                    <Grid container direction='row' justify='center' alignItems='flex-start' spacing={2}>
+                        <Grid item xs={2}><JobsOptions jobs={jobs} setRenderJobs={setRenderJobs} /></Grid>
+                        <Grid item xs={4}><JobsRenderer setJob={setSelectedJob} setUsername={setSelectedJobAuthorUsername} jobs={renderJobs} /></Grid>
+                        <Grid item xs={6}><JobCard /></Grid>
+                    </Grid>
+                }
+
             </JobContext.Provider>
         </Layout>
     );

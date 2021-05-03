@@ -5,10 +5,14 @@ import TextArea from '../text-area';
 import ConfigContext from '../../contexts/ConfigContext';
 import UserContext from '../../contexts/UserContext';
 import FeedPostRepliesRenderer from '../feed-post-replies-renderer';
+import { useMediaQuery } from 'react-responsive';
+
 
 const FeedPostCommentDialog = (props) => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+    
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const [ended, setEnded] = useState(false);
     const [comments, setComments] = useState([]);
@@ -64,7 +68,7 @@ const FeedPostCommentDialog = (props) => {
     }
 
     return (
-        <Dialog open={props.open} scroll='paper' fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
+        <Dialog open={props.open} scroll='paper' fullScreen={isMobile} fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
             <DialogTitle className={styles.title} id='form-dialog-title'>
                 {ended ? <FeedPostRepliesRenderer comments={comments} /> : <CircularProgress color='inherit' />}
             </DialogTitle>

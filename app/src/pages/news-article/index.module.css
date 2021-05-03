@@ -1,11 +1,29 @@
-.bodyDiv {
-    padding-left: 5%;
-    padding-right: 25%;
+@media screen and (max-width: 1224px) {
+    .bodyDiv {
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+    }
+
+    .published {
+        font-size: .7rem;
+    }
+
+    .btns {
+        width: 100%;
+        margin-top: 2.5%;
+    }
 }
 
-.btns {
-    width: 25%;
-    margin-top: 1%;
+@media screen and (min-width: 1224px) {
+    .bodyDiv {
+        padding-left: 5%;
+        padding-right: 25%;
+    }
+
+    .btns {
+        width: 25%;
+        margin-top: 1%;
+    }
 }
 
 .btn {

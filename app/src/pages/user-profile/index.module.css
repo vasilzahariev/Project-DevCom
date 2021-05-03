@@ -1,3 +1,15 @@
+@media screen and (max-width: 1224px) {
+    .btn {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .btn {
+        font-size: 1.3rem;
+    }
+}
+
 .btns {
     text-align: center;
     margin-top: 1%;
@@ -7,7 +19,6 @@
     border: none;
     background-color: transparent;
     color: white;
-    font-size: 1.3rem;
     padding: 0 1%;
 
     transition: .5s all;

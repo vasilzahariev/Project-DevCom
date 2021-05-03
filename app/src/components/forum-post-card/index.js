@@ -14,10 +14,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
 import EditForumPostDialog from '../edit-forum-post-dialog';
 import HeaderLink from '../header-link';
+import { useMediaQuery } from 'react-responsive';
 
 const ForumPostCard = props => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const date = new Date(Date.parse(`${props.post.publishedDate}`));
 
@@ -76,7 +79,16 @@ const ForumPostCard = props => {
         <div>
             <div>
                 <Grid container justify='space-between' alignItems='center'>
-                    <Grid item xs={12}><h2>{props.post.title}</h2></Grid>
+                    <Grid item xs={12}>
+                        <Grid container justify='space-between' alignItems='center'>
+                            <Grid item>
+                                <h2>{props.post.title}</h2>
+                            </Grid>
+                            <Grid item>
+                                <h2>{isMobile ? <HeaderLink to={`/forum/f/${props.forum.name}`}><i>/f/{props.forum.name}</i></HeaderLink> : ''}</h2>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                     <Grid item>
                         <Grid container alignItems='center' spacing={1}>
                             <Grid item><UserAvatar user={props.user} size={6} /></Grid>
@@ -121,11 +133,11 @@ const ForumPostCard = props => {
                         {userContext.user.loggedIn && (userContext.user._id === props.post.authorId || checkIfUserIsModOrOwner()) ?
                             <Grid item>
                                 <Grid container alignItems='center' spacing={4}>
-                                    {userContext.user._id !== props.post.authorId  ? '' : <Grid item>
-                                        <SubmitBtn color='yellow' padding='25% 30% 20% 30%' borderRadius='100%' onClick={() => { setEditOpen(true) }}><EditIcon style={{ fontSize: '2rem' }} /></SubmitBtn>
+                                    {userContext.user._id !== props.post.authorId ? '' : <Grid item>
+                                        <SubmitBtn color='yellow' padding={isMobile ? '15% 20% 10% 20%' : '25% 30% 20% 30%'} borderRadius='100%' onClick={() => { setEditOpen(true) }}><EditIcon style={{ fontSize: '2rem' }} /></SubmitBtn>
                                     </Grid>}
                                     <Grid item>
-                                        <SubmitBtn color='red' padding='25% 30% 20% 30%' borderRadius='100%' onClick={deletePost}><DeleteIcon style={{ fontSize: '2rem' }} /></SubmitBtn>
+                                        <SubmitBtn color='red' padding={isMobile ? '15% 20% 10% 20%' : '25% 30% 20% 30%'} borderRadius='100%' onClick={deletePost}><DeleteIcon style={{ fontSize: '2rem' }} /></SubmitBtn>
                                     </Grid>
                                 </Grid>
                                 <EditForumPostDialog open={editOpen} setOpen={setEditOpen} post={props.post} forumTitle={props.forum.title} forumName={props.forum.name} />

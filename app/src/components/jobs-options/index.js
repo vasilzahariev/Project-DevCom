@@ -1,8 +1,11 @@
 import styles from './index.module.css';
 import SimpleCheckbox from '../simple-checkbox';
 import { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 const JobsOptions = (props) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
     const [fullTime, setFullTime] = useState(true);
     const [partTime, setPartTime] = useState(true);
     const [freelance, setFreelance] = useState(true);

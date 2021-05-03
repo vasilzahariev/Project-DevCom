@@ -6,10 +6,14 @@ import Input from '../input';
 import ConfigContext from '../../contexts/ConfigContext';
 import UserContext from '../../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+
 
 const CreateFeedPostCard = (props) => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -91,7 +95,7 @@ const CreateFeedPostCard = (props) => {
     }
 
     return (
-        <Dialog open={props.open} scroll='paper' fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
+        <Dialog open={props.open} scroll='paper' fullScreen={isMobile} fullWidth={true} maxWidth='md' onClose={onClearClose} aria-labelledby="form-dialog-title">
             <DialogTitle className={styles.title} id='form-dialog-title'>Create a Post</DialogTitle>
             <DialogContent className={styles.dialog}>
                 <SpecialTextArea label='Content' placeholder='Content' value={content} updateBody={onContentChange} err={contentErr} />

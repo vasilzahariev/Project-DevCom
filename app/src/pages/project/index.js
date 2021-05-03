@@ -6,9 +6,12 @@ import { Backdrop, CircularProgress, Grid } from '@material-ui/core';
 import ConfigContext from '../../contexts/ConfigContext';
 import ProjectInfo from '../../components/project-info';
 import DevLogs from '../../components/devlogs';
+import { useMediaQuery } from 'react-responsive';
 
 const Project = () => {
     const configContext = useContext(ConfigContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const params = useParams();
     const history = useHistory();
@@ -49,14 +52,19 @@ const Project = () => {
     return (
         <Layout>
             <div className={styles.project}>
-                <Grid container alignItems="flex-start" spacing={2}>
-                    <Grid item xs={8}>
-                        <DevLogs project={project} devlogs={devLogs} members={members} selectedDevlogId={params.selectedDevlogId} />
-                    </Grid>
-                    <Grid item xs={4}>
+                {isMobile ?
+                    <div>
                         <ProjectInfo project={project} devLogs={devLogs.length} members={members} />
-                    </Grid>
-                </Grid>
+                        <DevLogs project={project} devlogs={devLogs} members={members} selectedDevlogId={params.selectedDevlogId} />
+                    </div> :
+                    <Grid container alignItems="flex-start" spacing={2}>
+                        <Grid item xs={8}>
+                            <DevLogs project={project} devlogs={devLogs} members={members} selectedDevlogId={params.selectedDevlogId} />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <ProjectInfo project={project} devLogs={devLogs.length} members={members} />
+                        </Grid>
+                    </Grid>}
             </div>
         </Layout>
     );

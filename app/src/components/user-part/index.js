@@ -8,10 +8,13 @@ import HeaderLink from '../header-link';
 import UserAvatar from '../user-avatar';
 import SubmitBtn from '../submit-btn';
 import { useHistory } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const UserPart = (props) => {
     const userContext = useContext(UserContext);
     const configContext = useContext(ConfigContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -71,29 +74,53 @@ const UserPart = (props) => {
     }
 
     return (
-        <div className={styles.card}>
-            <Grid container alignItems='center'>
-                <Grid item xs={1}>
-                    <UserAvatar user={user} size={10} />
-                </Grid>
-                <Grid item xs={2}>
-                    <Grid container direction='column' justify='center' alignItems='center'>
-                        <Grid item><HeaderLink to={`/u/${user.username}`}>@{user.username}</HeaderLink></Grid>
-                        <Grid item>{user.fullName}</Grid>
-                        <Grid item>{user.email}</Grid>
+        <div>
+            {isMobile ?
+                <div className={styles.card}>
+                    <Grid style={{ marginBottom: user.bio ? '0' : '5%' }} container alignItems='center'>
+                        <Grid item xs={2}>
+                            <UserAvatar user={user} size={5} />
+                        </Grid>
+                        <Grid item xs={8}>
+                            {user.fullName} (<HeaderLink to={`/u/${user.username}`}>@{user.username}</HeaderLink>)
+                        </Grid>
+                        <Grid item xs={2}>
+                            {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <HeaderLink to={`/u/${props.username}/settings`}>Edit Profile</HeaderLink> : <SubmitBtn color='blue' padding='5% 10%' onClick={chat}>Chat</SubmitBtn>}
+                        </Grid>
                     </Grid>
-                </Grid>
-                <Grid item xs={6}>
-                    <p className={styles.bio}>{user.bio ? user.bio : 'No bio...'}</p>
-                </Grid>
-                <Grid item xs={2}></Grid>
-                <Grid item xs={1}>
-                    {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <HeaderLink to={`/u/${props.username}/settings`}>Edit Profile</HeaderLink> : <SubmitBtn color='blue' padding='5% 10%' onClick={chat}>Chat</SubmitBtn>}
-                </Grid>
-            </Grid>
-            <div className={styles.links}>
-                <UserLinks userLinks={userLinks} />
-            </div>
+
+                    {user.bio ? <p className={styles.bio}>{user.bio ? user.bio : 'No bio...'}</p> : ''}
+
+                    <div className={styles.links}>
+                        <UserLinks userLinks={userLinks} />
+                    </div>
+                </div>
+                :
+                <div className={styles.card}>
+                    <Grid container alignItems='center'>
+                        <Grid item xs={isMobile ? 2 : 1}>
+                            <UserAvatar user={user} size={isMobile ? 5 : 10} />
+                        </Grid>
+                        <Grid item xs={2}>
+                            <Grid container direction='column' justify='center' alignItems='center'>
+                                <Grid item><HeaderLink to={`/u/${user.username}`}>@{user.username}</HeaderLink></Grid>
+                                <Grid item>{user.fullName}</Grid>
+                                <Grid item>{user.email}</Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={6}>
+                            {user.bio ? <p className={styles.bio}>{user.bio ? user.bio : 'No bio...'}</p> : ''}
+                        </Grid>
+                        <Grid item xs={isMobile ? 0 : 2}></Grid>
+                        <Grid item xs={isMobile ? 2 : 1}>
+                            {userContext.user && userContext.user.loggedIn && userContext.user.username === props.username ? <HeaderLink to={`/u/${props.username}/settings`}>Edit Profile</HeaderLink> : <SubmitBtn color='blue' padding='5% 10%' onClick={chat}>Chat</SubmitBtn>}
+                        </Grid>
+                    </Grid>
+                    <div className={styles.links}>
+                        <UserLinks userLinks={userLinks} />
+                    </div>
+                </div>
+            }
         </div>
     );
 }

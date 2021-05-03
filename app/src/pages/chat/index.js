@@ -9,10 +9,13 @@ import SimpleTextBtn from '../../components/simple-text-btn';
 import SubmitBtn from '../../components/submit-btn';
 import StartAConversationDialog from '../../components/start-a-conversation-dialog';
 import ChatRenderer from '../../components/chat-renderer';
+import { useMediaQuery } from 'react-responsive';
 
 const Chat = () => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const params = useParams();
     const history = useHistory();
@@ -33,11 +36,11 @@ const Chat = () => {
                 history.push('/500');
             } else {
                 setChats(response.chats);
-                
+
                 if (params.id && selectedChatId === null && response.chats.find(chat => chat._id === params.id)) {
                     setSelectedChatId(params.id);
                 }
-                
+
                 setEnded(true);
             }
         });
@@ -76,6 +79,12 @@ const Chat = () => {
                     <div className={styles.convo} onClick={() => { setSelectedChatId(chat._id) }}>
                         <p>{chat.name ? (chat.name.length > 30 ? `${String(chat.name).substring(0, 29).trim()}...` : chat.name) : (getChatNameFromUsers(chat.users).length > 30 ? `${String(getChatNameFromUsers(chat.users)).substring(0, 29).trim()}...` : getChatNameFromUsers(chat.users))}{chat.unread === 0 ? '' : ` (${chat.unread})`}</p>
                     </div>
+
+                    {isMobile && selectedChatId === chat._id ?
+                        <ChatRenderer chatId={selectedChatId} />
+                        :
+                        ''
+                    }
                 </Grid>
             );
         })
@@ -90,20 +99,33 @@ const Chat = () => {
     return (
         <Layout>
             <div className={styles.page}>
-                <Grid container spacing={5}>
-                    <Grid item xs={2}>
+                {isMobile ?
+                    <div>
                         <SubmitBtn color='blue' borderRadius='7.5px' onClick={() => { setOpen(true) }}>Start a Conversation</SubmitBtn>
                         <StartAConversationDialog open={open} setOpen={setOpen} setSelectedChatId={setSelectedChatId} />
+
                         <div className={styles.convos}>
                             <Grid container spacing={1}>
                                 {renderer}
                             </Grid>
                         </div>
+                    </div>
+                    :
+                    <Grid container spacing={5}>
+                        <Grid item xs={2}>
+                            <SubmitBtn color='blue' borderRadius='7.5px' onClick={() => { setOpen(true) }}>Start a Conversation</SubmitBtn>
+                            <StartAConversationDialog open={open} setOpen={setOpen} setSelectedChatId={setSelectedChatId} />
+                            <div className={styles.convos}>
+                                <Grid container spacing={1}>
+                                    {renderer}
+                                </Grid>
+                            </div>
+                        </Grid>
+                        <Grid item xs={10}>
+                            <ChatRenderer chatId={selectedChatId} />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={10}>
-                        <ChatRenderer chatId={selectedChatId}/>
-                    </Grid>
-                </Grid>
+                }
             </div>
         </Layout>
     );

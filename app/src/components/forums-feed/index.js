@@ -5,10 +5,13 @@ import UserContext from '../../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
 import { Grid, CircularProgress } from '@material-ui/core';
 import RenderedForumPostCard from '../rendered-forum-post-card';
+import { useMediaQuery } from 'react-responsive';
 
 const ForumsFeed = props => {
     const configContext = useContext(ConfigContext);
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const history = useHistory();
 
@@ -45,7 +48,7 @@ const ForumsFeed = props => {
 
     return (
         <div>
-            <Grid container spacing={1}>
+            <Grid container spacing={isMobile ? 2 : 1}>
                 {posts.length === 0 ? 'Nothing to show yet. Join a community' : renderer}
             </Grid>
         </div>

@@ -1,3 +1,15 @@
+@media screen and (max-width: 1224px) {
+    .convo {
+        padding: 2% 0.5%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .convo {
+        padding: 2% 5%;
+    }
+}
+
 .page {
     margin-top: 2.5%;
 }
@@ -11,7 +23,6 @@
     background-color: #4a515d73;
     border-radius: 10px;
     width: 100%;
-    padding: 2% 5%;
 }
 
 .convo:hover {

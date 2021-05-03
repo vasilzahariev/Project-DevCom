@@ -7,15 +7,30 @@
     padding-bottom: 2%;
 }
 
-.img {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    width: 50%;
+@media screen and (max-width: 1224px) {
+    .img {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        width: 90%;
+    }
+
+    .underImgText {
+        font-size: 1.2rem;
+    }
 }
 
-.underImgText {
-    font-size: 2rem;
+@media only screen and (min-width: 1224px) {
+    .img {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        width: 50%;
+    }
+
+    .underImgText {
+        font-size: 2rem;
+    }
 }
 
 .functionalities {

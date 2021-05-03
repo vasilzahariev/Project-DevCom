@@ -10,10 +10,13 @@ import CommentIcon from '@material-ui/icons/Comment';
 import FeedPostCommentDialog from '../feed-post-comment-dialog';
 import { Link } from 'react-router-dom';
 import UserAvatar from '../user-avatar';
+import { useMediaQuery } from 'react-responsive';
 
 const FeedPostCard = (props) => {
     const userContext = useContext(UserContext);
     const configContext = useContext(ConfigContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const contentDiv = useRef(null);
 
@@ -55,13 +58,13 @@ const FeedPostCard = (props) => {
             <div className={styles.card}>
                 <div className={styles.userPart}>
                     <Grid container justify='flex-start' alignItems='center'>
-                        <Grid item xs={1}>
-                            <HeaderLink to={`/u/${props.user.username}`}><UserAvatar user={props.user} size={6} /></HeaderLink>
+                        <Grid item xs={isMobile ? 2 : 1}>
+                            <HeaderLink to={`/u/${props.user.username}`}><UserAvatar user={props.user} size={isMobile ? 4 : 6} /></HeaderLink>
                         </Grid>
-                        <Grid item xs={9}>
+                        <Grid item xs={isMobile ? 7 : 9}>
                             <HeaderLink to={`/u/${props.user.username}`}>{props.user.fullName} <span className={styles.username}>@{props.user.username}</span></HeaderLink>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={isMobile ? 3 : 2}>
                             <p className={styles.date}>{date.toLocaleDateString()}</p>
                         </Grid>
                     </Grid>

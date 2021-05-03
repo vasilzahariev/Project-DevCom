@@ -1,5 +1,6 @@
 import styles from './index.module.css';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { useMediaQuery } from 'react-responsive';
 
 /*
 open
@@ -10,8 +11,10 @@ actionName
 */
 
 const DialogWindow = props => {
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+    
     return (
-        <Dialog open={props.open} scroll='paper' fullWidth={true} maxWidth={props.maxWidth ? props.maxWidth : 'md'} onClose={props.onClearClose} aria-labelledby="form-dialog-title">
+        <Dialog open={props.open} scroll='paper' fullScreen={isMobile} fullWidth={true} maxWidth={props.maxWidth ? props.maxWidth : 'md'} onClose={props.onClearClose} aria-labelledby="form-dialog-title">
             <DialogTitle className={styles.title} id='form-dialog-title'>{props.title}</DialogTitle>
             <DialogContent className={styles.dialog}>
                 {props.children}

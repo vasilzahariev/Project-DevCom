@@ -1,5 +1,16 @@
+@media screen and (max-width: 1224px) {
+    .block {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    .block {
+        width: 90%;
+    }
+}
+
 .block {
-    width: 90%;
     border: 1px solid #586379b4;
     background-color: rgba(128, 128, 128, 0.561);
     /* border: 1px solid #586379b4;

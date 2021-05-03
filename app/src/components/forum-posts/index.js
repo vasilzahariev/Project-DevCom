@@ -6,9 +6,12 @@ import UserContext from '../../contexts/UserContext';
 import CreateForumPostDialog from '../create-forum-post-dialog';
 import RenderedForumPostCard from '../rendered-forum-post-card';
 import SimpleTextBtn from '../simple-text-btn';
+import { useMediaQuery } from 'react-responsive';
 
 const ForumPosts = props => {
     const userContext = useContext(UserContext);
+
+    const isMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     const [createOpen, setCreateOpen] = useState(false);
     const [sort, setSort] = useState('new');
@@ -74,7 +77,7 @@ const ForumPosts = props => {
 
     return (
         <div>
-            <div>
+            <div style={{ marginTop: isMobile ? '5%' : '0' }}>
                 {userContext.user.loggedIn ? <SubmitBtn color='blue' padding='1% 2%' onClick={() => { setCreateOpen(true) }}>Create a Post</SubmitBtn> : ''}
                 {userContext.user.loggedIn ? <CreateForumPostDialog open={createOpen} setOpen={setCreateOpen} forumName={props.forum.name} forumId={props.forum._id} forumTitle={props.forum.title} /> : ''}
             </div>
@@ -83,7 +86,7 @@ const ForumPosts = props => {
                 <SimpleTextBtn color='gray' onClick={() => { setSort('trending') }}><span className={sort === 'trending' ? styles.selected : ''}>Trending</span></SimpleTextBtn>
                 <SimpleTextBtn color='gray' onClick={() => { setSort('top') }}><span className={sort === 'top' ? styles.selected : ''}>Top</span></SimpleTextBtn>
             </div>
-            <Grid style={{ marginTop: '2%' }} container spacing={1}>
+            <Grid style={{ marginTop: '2%' }} container spacing={isMobile ? 3 : 1}>
                 {renderer}
             </Grid>
         </div>
