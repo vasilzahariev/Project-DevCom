@@ -245,7 +245,7 @@ const SettingsCard = (props) => {
                 <div className={styles.bioDiv}>
                     <TextArea label='Bio' placeholder='Bio' onChange={onBioChange} value={bio} height={150} max={400} err={bioErr} />
                 </div>
-                <Input label='Prifle Picture Url' type='text' value={pfpUrl} onChange={(e) => { setPfpUrl(e.target.value) }} placeholder='Profile Picture Url' />
+                <Input label='Profle Picture Url' type='text' value={pfpUrl} onChange={(e) => { setPfpUrl(e.target.value) }} placeholder='Profile Picture Url' />
                 <ImageInput setUrl={(url) => { setPfpUrl(url) }} />
                 <Input label='GitHub Link' type='text' value={gitHubUrl} onChange={e => onLinkChange(e, 'github')} placeholder='GitHub Link' />
                 <Input label='Website Link' type='text' value={websiteUrl} onChange={e => onLinkChange(e, 'website')} placeholder='Website Link' />

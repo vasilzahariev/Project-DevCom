@@ -78,7 +78,7 @@ const Jobs = () => {
 
                 {isMobile ?
                     <div>
-                        <JobsRenderer setJob={setSelectedJob} setUsername={setSelectedJobAuthorUsername} jobs={renderJobs} />
+                        <h2>Jobs are only available on PC</h2>
                     </div>
                     :
                     <Grid container direction='row' justify='center' alignItems='flex-start' spacing={2}>
