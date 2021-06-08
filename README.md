@@ -1,2 +1,2 @@
 # Project-DevCom
-Project for NOIT 2020
+A platform for programmers and developers from all programmers
